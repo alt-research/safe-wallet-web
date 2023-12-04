@@ -20,6 +20,9 @@ export enum TX_TYPES {
   safeapps = 'safeapps',
   walletconnect = 'walletconnect',
   custom = 'custom',
+
+  // Recovery
+  recovery_attempt = 'recovery_attempt',
 }
 
 const TX_CATEGORY = 'transactions'
