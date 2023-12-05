@@ -1,5 +1,5 @@
 import { OperationType } from '@safe-global/safe-core-sdk-types'
-import { getMultiSendCallOnlyDeployment } from '@safe-global/safe-deployments'
+import { getMultiSendCallOnlyDeployment } from '@renxiaohuo/safe-deployments'
 import { hexZeroPad } from 'ethers/lib/utils'
 
 import { DelegateCallModule } from '.'

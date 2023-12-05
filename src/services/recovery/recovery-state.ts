@@ -1,6 +1,6 @@
 import { SENTINEL_ADDRESS } from '@safe-global/safe-core-sdk/dist/src/utils/constants'
 import { memoize } from 'lodash'
-import { getMultiSendCallOnlyDeployment } from '@safe-global/safe-deployments'
+import { getMultiSendCallOnlyDeployment } from '@renxiaohuo/safe-deployments'
 import { hexZeroPad } from 'ethers/lib/utils'
 import type { BigNumber } from 'ethers'
 import type { SafeInfo } from '@safe-global/safe-gateway-typescript-sdk'

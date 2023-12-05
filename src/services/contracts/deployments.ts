@@ -6,8 +6,8 @@ import {
   getFallbackHandlerDeployment,
   getProxyFactoryDeployment,
   getSignMessageLibDeployment,
-} from '@safe-global/safe-deployments'
-import type { SingletonDeployment, DeploymentFilter } from '@safe-global/safe-deployments'
+} from '@renxiaohuo/safe-deployments'
+import type { SingletonDeployment, DeploymentFilter } from '@renxiaohuo/safe-deployments'
 import type { ChainInfo, SafeInfo } from '@safe-global/safe-gateway-typescript-sdk'
 
 import { LATEST_SAFE_VERSION } from '@/config/constants'
