@@ -7,7 +7,7 @@ import {
   THRESHOLD_STORAGE_POSITION,
 } from '@/components/tx/security/tenderly/utils'
 import * as safeContracts from '@/services/contracts/safeContracts'
-import { getMultiSendCallOnlyDeployment, getSafeSingletonDeployment } from '@safe-global/safe-deployments'
+import { getMultiSendCallOnlyDeployment, getSafeSingletonDeployment } from '@renxiaohuo/safe-deployments'
 import EthSafeTransaction from '@safe-global/safe-core-sdk/dist/src/utils/transactions/SafeTransaction'
 import { ZERO_ADDRESS } from '@safe-global/safe-core-sdk/dist/src/utils/constants'
 import { generatePreValidatedSignature } from '@safe-global/safe-core-sdk/dist/src/utils/signatures'

@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker'
-import { getMultiSendCallOnlyDeployment, getSafeSingletonDeployment } from '@safe-global/safe-deployments'
+import { getMultiSendCallOnlyDeployment, getSafeSingletonDeployment } from '@renxiaohuo/safe-deployments'
 import { Interface } from 'ethers/lib/utils'
 import { SENTINEL_ADDRESS } from '@safe-global/safe-core-sdk/dist/src/utils/constants'
 import { encodeMultiSendData } from '@safe-global/safe-core-sdk/dist/src/utils/transactions/utils'
