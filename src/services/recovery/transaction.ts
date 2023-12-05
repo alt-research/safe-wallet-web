@@ -1,5 +1,5 @@
 import { Interface } from 'ethers/lib/utils'
-import { getSafeSingletonDeployment } from '@safe-global/safe-deployments'
+import { getSafeSingletonDeployment } from '@renxiaohuo/safe-deployments'
 import { SENTINEL_ADDRESS } from '@safe-global/safe-core-sdk/dist/src/utils/constants'
 import { OperationType } from '@safe-global/safe-core-sdk-types'
 import { sameAddress } from '@/utils/addresses'

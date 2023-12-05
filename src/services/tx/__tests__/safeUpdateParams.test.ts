@@ -3,7 +3,7 @@ import {
   getFallbackHandlerDeployment,
   getSafeL2SingletonDeployment,
   getSafeSingletonDeployment,
-} from '@safe-global/safe-deployments'
+} from '@renxiaohuo/safe-deployments'
 import type { ChainInfo, SafeInfo } from '@safe-global/safe-gateway-typescript-sdk'
 import { ethers } from 'ethers'
 import { createUpdateSafeTxs } from '../safeUpdateParams'
