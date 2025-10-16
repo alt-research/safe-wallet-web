@@ -53,4 +53,5 @@ yalc.lock
 /public/workbox-*.js
 /public/workbox-*.js.map
 /public/fallback*
-/public/*.js.LICENSE.txt
+/public/*.js.LICENSE.txt# Claude Code local settings
+.claude/settings.local.json

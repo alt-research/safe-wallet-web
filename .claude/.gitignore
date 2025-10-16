@@ -1,0 +1,7 @@
+# Ignore local settings but keep shared configuration
+settings.local.json
+
+# Keep these files
+!README.md
+!agents/
+!commands/
