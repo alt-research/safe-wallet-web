@@ -160,6 +160,114 @@ index 0070314..6cae548 100644
          "3": "0x59AD6735bCd8152B84860Cb256dD9e96b85F69Da",
          "4": "0x59AD6735bCd8152B84860Cb256dD9e96b85F69Da",
          "5": "0x59AD6735bCd8152B84860Cb256dD9e96b85F69Da",
+diff --git a/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/dist/assets/v1.4.1/compatibility_fallback_handler.json b/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/dist/assets/v1.4.1/compatibility_fallback_handler.json
+index 15445d9..dec62a8 100644
+--- a/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/dist/assets/v1.4.1/compatibility_fallback_handler.json
++++ b/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/dist/assets/v1.4.1/compatibility_fallback_handler.json
+@@ -6,6 +6,7 @@
+     "networkAddresses": {
+         "1": "0xfd0732Dc9E303f09fCEf3a7388Ad10A83459Ec99",
+         "100": "0xfd0732Dc9E303f09fCEf3a7388Ad10A83459Ec99",
++        "957": "0xfd0732Dc9E303f09fCEf3a7388Ad10A83459Ec99",
+         "1442": "0xfd0732Dc9E303f09fCEf3a7388Ad10A83459Ec99",
+         "80001": "0xfd0732Dc9E303f09fCEf3a7388Ad10A83459Ec99"
+     },
+diff --git a/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/dist/assets/v1.4.1/create_call.json b/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/dist/assets/v1.4.1/create_call.json
+index 24a4a71..01612fd 100644
+--- a/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/dist/assets/v1.4.1/create_call.json
++++ b/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/dist/assets/v1.4.1/create_call.json
+@@ -7,6 +7,7 @@
+         "1": "0x9b35Af71d77eaf8d7e40252370304687390A1A52",
+         "5": "0x9b35Af71d77eaf8d7e40252370304687390A1A52",
+         "56": "0x9b35Af71d77eaf8d7e40252370304687390A1A52",
++        "957": "0x9b35Af71d77eaf8d7e40252370304687390A1A52",
+         "100": "0x9b35Af71d77eaf8d7e40252370304687390A1A52",
+         "80001": "0x9b35Af71d77eaf8d7e40252370304687390A1A52"
+     },
+diff --git a/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/dist/assets/v1.4.1/multi_send.json b/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/dist/assets/v1.4.1/multi_send.json
+index fe51727..4eb9aff 100644
+--- a/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/dist/assets/v1.4.1/multi_send.json
++++ b/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/dist/assets/v1.4.1/multi_send.json
+@@ -7,6 +7,7 @@
+         "1": "0x38869bf66a61cF6bDB996A6aE40D5853Fd43B526",
+         "5": "0x38869bf66a61cF6bDB996A6aE40D5853Fd43B526",
+         "56": "0x38869bf66a61cF6bDB996A6aE40D5853Fd43B526",
++        "957": "0x38869bf66a61cF6bDB996A6aE40D5853Fd43B526",
+         "100": "0x38869bf66a61cF6bDB996A6aE40D5853Fd43B526",
+         "1442": "0x38869bf66a61cF6bDB996A6aE40D5853Fd43B526",
+         "80001": "0x38869bf66a61cF6bDB996A6aE40D5853Fd43B526"
+diff --git a/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/dist/assets/v1.4.1/multi_send_call_only.json b/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/dist/assets/v1.4.1/multi_send_call_only.json
+index f1c738e..394e914 100644
+--- a/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/dist/assets/v1.4.1/multi_send_call_only.json
++++ b/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/dist/assets/v1.4.1/multi_send_call_only.json
+@@ -7,6 +7,7 @@
+         "1": "0x9641d764fc13c8B624c04430C7356C1C7C8102e2",
+         "5": "0x9641d764fc13c8B624c04430C7356C1C7C8102e2",
+         "56": "0x9641d764fc13c8B624c04430C7356C1C7C8102e2",
++        "957": "0x9641d764fc13c8B624c04430C7356C1C7C8102e2",
+         "100": "0x9641d764fc13c8B624c04430C7356C1C7C8102e2",
+         "1442": "0x9641d764fc13c8B624c04430C7356C1C7C8102e2",
+         "80001": "0x9641d764fc13c8B624c04430C7356C1C7C8102e2"
+diff --git a/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/dist/assets/v1.4.1/safe.json b/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/dist/assets/v1.4.1/safe.json
+index b229c7f..17b30fa 100644
+--- a/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/dist/assets/v1.4.1/safe.json
++++ b/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/dist/assets/v1.4.1/safe.json
+@@ -6,6 +6,7 @@
+     "networkAddresses": {
+         "1": "0x41675C099F32341bf84BFc5382aF534df5C7461a",
+         "100": "0x41675C099F32341bf84BFc5382aF534df5C7461a",
++        "957": "0x41675C099F32341bf84BFc5382aF534df5C7461a",
+         "1442": "0x41675C099F32341bf84BFc5382aF534df5C7461a",
+         "80001": "0x41675C099F32341bf84BFc5382aF534df5C7461a"
+     },
+diff --git a/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/dist/assets/v1.4.1/safe_l2.json b/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/dist/assets/v1.4.1/safe_l2.json
+index c717d0c..b6e36f2 100644
+--- a/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/dist/assets/v1.4.1/safe_l2.json
++++ b/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/dist/assets/v1.4.1/safe_l2.json
+@@ -6,6 +6,7 @@
+     "networkAddresses": {
+         "1": "0x29fcB43b46531BcA003ddC8FCB67FFE91900C762",
+         "100": "0x29fcB43b46531BcA003ddC8FCB67FFE91900C762",
++        "957": "0x29fcB43b46531BcA003ddC8FCB67FFE91900C762",
+         "1442": "0x29fcB43b46531BcA003ddC8FCB67FFE91900C762",
+         "80001": "0x29fcB43b46531BcA003ddC8FCB67FFE91900C762"
+     },
+diff --git a/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/dist/assets/v1.4.1/safe_proxy_factory.json b/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/dist/assets/v1.4.1/safe_proxy_factory.json
+index dbbffca..00401e6 100644
+--- a/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/dist/assets/v1.4.1/safe_proxy_factory.json
++++ b/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/dist/assets/v1.4.1/safe_proxy_factory.json
+@@ -7,6 +7,7 @@
+         "1": "0x4e1DCf7AD4e460CfD30791CCC4F9c8a4f820ec67",
+         "5": "0x4e1DCf7AD4e460CfD30791CCC4F9c8a4f820ec67",
+         "56": "0x4e1DCf7AD4e460CfD30791CCC4F9c8a4f820ec67",
++        "957": "0x4e1DCf7AD4e460CfD30791CCC4F9c8a4f820ec67",
+         "100": "0x4e1DCf7AD4e460CfD30791CCC4F9c8a4f820ec67",
+         "1442": "0x4e1DCf7AD4e460CfD30791CCC4F9c8a4f820ec67",
+         "80001": "0x4e1DCf7AD4e460CfD30791CCC4F9c8a4f820ec67"
+diff --git a/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/dist/assets/v1.4.1/sign_message_lib.json b/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/dist/assets/v1.4.1/sign_message_lib.json
+index 5b1b50b..9d0bb10 100644
+--- a/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/dist/assets/v1.4.1/sign_message_lib.json
++++ b/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/dist/assets/v1.4.1/sign_message_lib.json
+@@ -6,6 +6,7 @@
+     "networkAddresses": {
+         "1": "0xd53cd0aB83D845Ac265BE939c57F53AD838012c9",
+         "100": "0xd53cd0aB83D845Ac265BE939c57F53AD838012c9",
++        "957": "0xd53cd0aB83D845Ac265BE939c57F53AD838012c9",
+         "1442": "0xd53cd0aB83D845Ac265BE939c57F53AD838012c9",
+         "80001": "0xd53cd0aB83D845Ac265BE939c57F53AD838012c9"
+     },
+diff --git a/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/dist/assets/v1.4.1/simulate_tx_accessor.json b/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/dist/assets/v1.4.1/simulate_tx_accessor.json
+index be5f531..74d544c 100644
+--- a/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/dist/assets/v1.4.1/simulate_tx_accessor.json
++++ b/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/dist/assets/v1.4.1/simulate_tx_accessor.json
+@@ -7,6 +7,7 @@
+         "1": "0x3d4BA2E0884aa488718476ca2FB8Efc291A46199",
+         "5": "0x3d4BA2E0884aa488718476ca2FB8Efc291A46199",
+         "56": "0x3d4BA2E0884aa488718476ca2FB8Efc291A46199",
++        "957": "0x3d4BA2E0884aa488718476ca2FB8Efc291A46199",
+         "100": "0x3d4BA2E0884aa488718476ca2FB8Efc291A46199",
+         "1442": "0x3d4BA2E0884aa488718476ca2FB8Efc291A46199",
+         "80001": "0x3d4BA2E0884aa488718476ca2FB8Efc291A46199"
 diff --git a/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/src/assets/v1.3.0/compatibility_fallback_handler.json b/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/src/assets/v1.3.0/compatibility_fallback_handler.json
 index 2d5f7fc..4371d3a 100644
 --- a/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/src/assets/v1.3.0/compatibility_fallback_handler.json
@@ -8453,6 +8561,5748 @@ index 82b077b..6cae548 100644
 +        "1666700000": "0x727a77a074D1E6c4530e814F89E618a3298FC044",
 +        "11297108099": "0x59AD6735bCd8152B84860Cb256dD9e96b85F69Da",
 +        "11297108109": "0x59AD6735bCd8152B84860Cb256dD9e96b85F69Da"
+     },
+-    {
+-      "inputs": [
++    "abi": [
+         {
+-          "internalType": "address",
+-          "name": "to",
+-          "type": "address"
++            "inputs": [],
++            "stateMutability": "nonpayable",
++            "type": "constructor"
+         },
+         {
+-          "internalType": "uint256",
+-          "name": "value",
+-          "type": "uint256"
+-        },
+-        {
+-          "internalType": "bytes",
+-          "name": "data",
+-          "type": "bytes"
+-        },
+-        {
+-          "internalType": "enum Enum.Operation",
+-          "name": "operation",
+-          "type": "uint8"
+-        }
+-      ],
+-      "name": "simulate",
+-      "outputs": [
+-        {
+-          "internalType": "uint256",
+-          "name": "estimate",
+-          "type": "uint256"
+-        },
+-        {
+-          "internalType": "bool",
+-          "name": "success",
+-          "type": "bool"
+-        },
+-        {
+-          "internalType": "bytes",
+-          "name": "returnData",
+-          "type": "bytes"
++            "inputs": [
++                {
++                    "internalType": "address",
++                    "name": "to",
++                    "type": "address"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "value",
++                    "type": "uint256"
++                },
++                {
++                    "internalType": "bytes",
++                    "name": "data",
++                    "type": "bytes"
++                },
++                {
++                    "internalType": "enum Enum.Operation",
++                    "name": "operation",
++                    "type": "uint8"
++                }
++            ],
++            "name": "simulate",
++            "outputs": [
++                {
++                    "internalType": "uint256",
++                    "name": "estimate",
++                    "type": "uint256"
++                },
++                {
++                    "internalType": "bool",
++                    "name": "success",
++                    "type": "bool"
++                },
++                {
++                    "internalType": "bytes",
++                    "name": "returnData",
++                    "type": "bytes"
++                }
++            ],
++            "stateMutability": "nonpayable",
++            "type": "function"
+         }
+-      ],
+-      "stateMutability": "nonpayable",
+-      "type": "function"
+-    }
+-  ]
++    ]
+ }
+diff --git a/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/src/assets/v1.4.1/compatibility_fallback_handler.json b/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/src/assets/v1.4.1/compatibility_fallback_handler.json
+index 4088dc7..dec62a8 100644
+--- a/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/src/assets/v1.4.1/compatibility_fallback_handler.json
++++ b/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/src/assets/v1.4.1/compatibility_fallback_handler.json
+@@ -1,335 +1,336 @@
+ {
+-  "defaultAddress": "0xfd0732Dc9E303f09fCEf3a7388Ad10A83459Ec99",
+-  "released": true,
+-  "contractName": "CompatibilityFallbackHandler",
+-  "version": "1.4.1",
+-  "networkAddresses": {
+-    "1": "0xfd0732Dc9E303f09fCEf3a7388Ad10A83459Ec99",
+-    "100": "0xfd0732Dc9E303f09fCEf3a7388Ad10A83459Ec99",
+-    "1442": "0xfd0732Dc9E303f09fCEf3a7388Ad10A83459Ec99",
+-    "80001": "0xfd0732Dc9E303f09fCEf3a7388Ad10A83459Ec99"
+-  },
+-  "abi": [
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "contract Safe",
+-          "name": "safe",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "bytes",
+-          "name": "message",
+-          "type": "bytes"
+-        }
+-      ],
+-      "name": "encodeMessageDataForSafe",
+-      "outputs": [
+-        {
+-          "internalType": "bytes",
+-          "name": "",
+-          "type": "bytes"
+-        }
+-      ],
+-      "stateMutability": "view",
+-      "type": "function"
++    "defaultAddress": "0xfd0732Dc9E303f09fCEf3a7388Ad10A83459Ec99",
++    "released": true,
++    "contractName": "CompatibilityFallbackHandler",
++    "version": "1.4.1",
++    "networkAddresses": {
++        "1": "0xfd0732Dc9E303f09fCEf3a7388Ad10A83459Ec99",
++        "100": "0xfd0732Dc9E303f09fCEf3a7388Ad10A83459Ec99",
++        "957": "0xfd0732Dc9E303f09fCEf3a7388Ad10A83459Ec99",
++        "1442": "0xfd0732Dc9E303f09fCEf3a7388Ad10A83459Ec99",
++        "80001": "0xfd0732Dc9E303f09fCEf3a7388Ad10A83459Ec99"
+     },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "bytes",
+-          "name": "message",
+-          "type": "bytes"
+-        }
+-      ],
+-      "name": "getMessageHash",
+-      "outputs": [
+-        {
+-          "internalType": "bytes32",
+-          "name": "",
+-          "type": "bytes32"
+-        }
+-      ],
+-      "stateMutability": "view",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "contract Safe",
+-          "name": "safe",
+-          "type": "address"
++    "abi": [
++        {
++            "inputs": [
++                {
++                    "internalType": "contract Safe",
++                    "name": "safe",
++                    "type": "address"
++                },
++                {
++                    "internalType": "bytes",
++                    "name": "message",
++                    "type": "bytes"
++                }
++            ],
++            "name": "encodeMessageDataForSafe",
++            "outputs": [
++                {
++                    "internalType": "bytes",
++                    "name": "",
++                    "type": "bytes"
++                }
++            ],
++            "stateMutability": "view",
++            "type": "function"
+         },
+         {
+-          "internalType": "bytes",
+-          "name": "message",
+-          "type": "bytes"
+-        }
+-      ],
+-      "name": "getMessageHashForSafe",
+-      "outputs": [
+-        {
+-          "internalType": "bytes32",
+-          "name": "",
+-          "type": "bytes32"
+-        }
+-      ],
+-      "stateMutability": "view",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [],
+-      "name": "getModules",
+-      "outputs": [
+-        {
+-          "internalType": "address[]",
+-          "name": "",
+-          "type": "address[]"
+-        }
+-      ],
+-      "stateMutability": "view",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "bytes32",
+-          "name": "_dataHash",
+-          "type": "bytes32"
++            "inputs": [
++                {
++                    "internalType": "bytes",
++                    "name": "message",
++                    "type": "bytes"
++                }
++            ],
++            "name": "getMessageHash",
++            "outputs": [
++                {
++                    "internalType": "bytes32",
++                    "name": "",
++                    "type": "bytes32"
++                }
++            ],
++            "stateMutability": "view",
++            "type": "function"
+         },
+         {
+-          "internalType": "bytes",
+-          "name": "_signature",
+-          "type": "bytes"
+-        }
+-      ],
+-      "name": "isValidSignature",
+-      "outputs": [
+-        {
+-          "internalType": "bytes4",
+-          "name": "",
+-          "type": "bytes4"
+-        }
+-      ],
+-      "stateMutability": "view",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "bytes",
+-          "name": "_data",
+-          "type": "bytes"
+-        },
+-        {
+-          "internalType": "bytes",
+-          "name": "_signature",
+-          "type": "bytes"
+-        }
+-      ],
+-      "name": "isValidSignature",
+-      "outputs": [
+-        {
+-          "internalType": "bytes4",
+-          "name": "",
+-          "type": "bytes4"
+-        }
+-      ],
+-      "stateMutability": "view",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "address",
+-          "name": "",
+-          "type": "address"
++            "inputs": [
++                {
++                    "internalType": "contract Safe",
++                    "name": "safe",
++                    "type": "address"
++                },
++                {
++                    "internalType": "bytes",
++                    "name": "message",
++                    "type": "bytes"
++                }
++            ],
++            "name": "getMessageHashForSafe",
++            "outputs": [
++                {
++                    "internalType": "bytes32",
++                    "name": "",
++                    "type": "bytes32"
++                }
++            ],
++            "stateMutability": "view",
++            "type": "function"
+         },
+         {
+-          "internalType": "address",
+-          "name": "",
+-          "type": "address"
++            "inputs": [],
++            "name": "getModules",
++            "outputs": [
++                {
++                    "internalType": "address[]",
++                    "name": "",
++                    "type": "address[]"
++                }
++            ],
++            "stateMutability": "view",
++            "type": "function"
+         },
+         {
+-          "internalType": "uint256[]",
+-          "name": "",
+-          "type": "uint256[]"
++            "inputs": [
++                {
++                    "internalType": "bytes32",
++                    "name": "_dataHash",
++                    "type": "bytes32"
++                },
++                {
++                    "internalType": "bytes",
++                    "name": "_signature",
++                    "type": "bytes"
++                }
++            ],
++            "name": "isValidSignature",
++            "outputs": [
++                {
++                    "internalType": "bytes4",
++                    "name": "",
++                    "type": "bytes4"
++                }
++            ],
++            "stateMutability": "view",
++            "type": "function"
+         },
+         {
+-          "internalType": "uint256[]",
+-          "name": "",
+-          "type": "uint256[]"
++            "inputs": [
++                {
++                    "internalType": "bytes",
++                    "name": "_data",
++                    "type": "bytes"
++                },
++                {
++                    "internalType": "bytes",
++                    "name": "_signature",
++                    "type": "bytes"
++                }
++            ],
++            "name": "isValidSignature",
++            "outputs": [
++                {
++                    "internalType": "bytes4",
++                    "name": "",
++                    "type": "bytes4"
++                }
++            ],
++            "stateMutability": "view",
++            "type": "function"
+         },
+         {
+-          "internalType": "bytes",
+-          "name": "",
+-          "type": "bytes"
+-        }
+-      ],
+-      "name": "onERC1155BatchReceived",
+-      "outputs": [
+-        {
+-          "internalType": "bytes4",
+-          "name": "",
+-          "type": "bytes4"
+-        }
+-      ],
+-      "stateMutability": "pure",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "address",
+-          "name": "",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "address",
+-          "name": "",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "",
+-          "type": "uint256"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "",
+-          "type": "uint256"
+-        },
+-        {
+-          "internalType": "bytes",
+-          "name": "",
+-          "type": "bytes"
+-        }
+-      ],
+-      "name": "onERC1155Received",
+-      "outputs": [
+-        {
+-          "internalType": "bytes4",
+-          "name": "",
+-          "type": "bytes4"
+-        }
+-      ],
+-      "stateMutability": "pure",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "address",
+-          "name": "",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "address",
+-          "name": "",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "",
+-          "type": "uint256"
+-        },
+-        {
+-          "internalType": "bytes",
+-          "name": "",
+-          "type": "bytes"
+-        }
+-      ],
+-      "name": "onERC721Received",
+-      "outputs": [
+-        {
+-          "internalType": "bytes4",
+-          "name": "",
+-          "type": "bytes4"
+-        }
+-      ],
+-      "stateMutability": "pure",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "address",
+-          "name": "targetContract",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "bytes",
+-          "name": "calldataPayload",
+-          "type": "bytes"
+-        }
+-      ],
+-      "name": "simulate",
+-      "outputs": [
+-        {
+-          "internalType": "bytes",
+-          "name": "response",
+-          "type": "bytes"
+-        }
+-      ],
+-      "stateMutability": "nonpayable",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "bytes4",
+-          "name": "interfaceId",
+-          "type": "bytes4"
+-        }
+-      ],
+-      "name": "supportsInterface",
+-      "outputs": [
+-        {
+-          "internalType": "bool",
+-          "name": "",
+-          "type": "bool"
+-        }
+-      ],
+-      "stateMutability": "view",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "address",
+-          "name": "",
+-          "type": "address"
++            "inputs": [
++                {
++                    "internalType": "address",
++                    "name": "",
++                    "type": "address"
++                },
++                {
++                    "internalType": "address",
++                    "name": "",
++                    "type": "address"
++                },
++                {
++                    "internalType": "uint256[]",
++                    "name": "",
++                    "type": "uint256[]"
++                },
++                {
++                    "internalType": "uint256[]",
++                    "name": "",
++                    "type": "uint256[]"
++                },
++                {
++                    "internalType": "bytes",
++                    "name": "",
++                    "type": "bytes"
++                }
++            ],
++            "name": "onERC1155BatchReceived",
++            "outputs": [
++                {
++                    "internalType": "bytes4",
++                    "name": "",
++                    "type": "bytes4"
++                }
++            ],
++            "stateMutability": "pure",
++            "type": "function"
+         },
+         {
+-          "internalType": "address",
+-          "name": "",
+-          "type": "address"
++            "inputs": [
++                {
++                    "internalType": "address",
++                    "name": "",
++                    "type": "address"
++                },
++                {
++                    "internalType": "address",
++                    "name": "",
++                    "type": "address"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "",
++                    "type": "uint256"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "",
++                    "type": "uint256"
++                },
++                {
++                    "internalType": "bytes",
++                    "name": "",
++                    "type": "bytes"
++                }
++            ],
++            "name": "onERC1155Received",
++            "outputs": [
++                {
++                    "internalType": "bytes4",
++                    "name": "",
++                    "type": "bytes4"
++                }
++            ],
++            "stateMutability": "pure",
++            "type": "function"
+         },
+         {
+-          "internalType": "address",
+-          "name": "",
+-          "type": "address"
++            "inputs": [
++                {
++                    "internalType": "address",
++                    "name": "",
++                    "type": "address"
++                },
++                {
++                    "internalType": "address",
++                    "name": "",
++                    "type": "address"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "",
++                    "type": "uint256"
++                },
++                {
++                    "internalType": "bytes",
++                    "name": "",
++                    "type": "bytes"
++                }
++            ],
++            "name": "onERC721Received",
++            "outputs": [
++                {
++                    "internalType": "bytes4",
++                    "name": "",
++                    "type": "bytes4"
++                }
++            ],
++            "stateMutability": "pure",
++            "type": "function"
+         },
+         {
+-          "internalType": "uint256",
+-          "name": "",
+-          "type": "uint256"
++            "inputs": [
++                {
++                    "internalType": "address",
++                    "name": "targetContract",
++                    "type": "address"
++                },
++                {
++                    "internalType": "bytes",
++                    "name": "calldataPayload",
++                    "type": "bytes"
++                }
++            ],
++            "name": "simulate",
++            "outputs": [
++                {
++                    "internalType": "bytes",
++                    "name": "response",
++                    "type": "bytes"
++                }
++            ],
++            "stateMutability": "nonpayable",
++            "type": "function"
+         },
+         {
+-          "internalType": "bytes",
+-          "name": "",
+-          "type": "bytes"
++            "inputs": [
++                {
++                    "internalType": "bytes4",
++                    "name": "interfaceId",
++                    "type": "bytes4"
++                }
++            ],
++            "name": "supportsInterface",
++            "outputs": [
++                {
++                    "internalType": "bool",
++                    "name": "",
++                    "type": "bool"
++                }
++            ],
++            "stateMutability": "view",
++            "type": "function"
+         },
+         {
+-          "internalType": "bytes",
+-          "name": "",
+-          "type": "bytes"
++            "inputs": [
++                {
++                    "internalType": "address",
++                    "name": "",
++                    "type": "address"
++                },
++                {
++                    "internalType": "address",
++                    "name": "",
++                    "type": "address"
++                },
++                {
++                    "internalType": "address",
++                    "name": "",
++                    "type": "address"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "",
++                    "type": "uint256"
++                },
++                {
++                    "internalType": "bytes",
++                    "name": "",
++                    "type": "bytes"
++                },
++                {
++                    "internalType": "bytes",
++                    "name": "",
++                    "type": "bytes"
++                }
++            ],
++            "name": "tokensReceived",
++            "outputs": [],
++            "stateMutability": "pure",
++            "type": "function"
+         }
+-      ],
+-      "name": "tokensReceived",
+-      "outputs": [],
+-      "stateMutability": "pure",
+-      "type": "function"
+-    }
+-  ]
++    ]
+ }
+diff --git a/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/src/assets/v1.4.1/create_call.json b/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/src/assets/v1.4.1/create_call.json
+index d0dcf1f..01612fd 100644
+--- a/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/src/assets/v1.4.1/create_call.json
++++ b/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/src/assets/v1.4.1/create_call.json
+@@ -1,81 +1,82 @@
+ {
+-  "defaultAddress": "0x9b35Af71d77eaf8d7e40252370304687390A1A52",
+-  "released": true,
+-  "contractName": "CreateCall",
+-  "version": "1.4.1",
+-  "networkAddresses": {
+-    "1": "0x9b35Af71d77eaf8d7e40252370304687390A1A52",
+-    "5": "0x9b35Af71d77eaf8d7e40252370304687390A1A52",
+-    "56": "0x9b35Af71d77eaf8d7e40252370304687390A1A52",
+-    "100": "0x9b35Af71d77eaf8d7e40252370304687390A1A52",
+-    "80001": "0x9b35Af71d77eaf8d7e40252370304687390A1A52"
+-  },
+-  "abi": [
+-    {
+-      "anonymous": false,
+-      "inputs": [
+-        {
+-          "indexed": true,
+-          "internalType": "address",
+-          "name": "newContract",
+-          "type": "address"
+-        }
+-      ],
+-      "name": "ContractCreation",
+-      "type": "event"
++    "defaultAddress": "0x9b35Af71d77eaf8d7e40252370304687390A1A52",
++    "released": true,
++    "contractName": "CreateCall",
++    "version": "1.4.1",
++    "networkAddresses": {
++        "1": "0x9b35Af71d77eaf8d7e40252370304687390A1A52",
++        "5": "0x9b35Af71d77eaf8d7e40252370304687390A1A52",
++        "56": "0x9b35Af71d77eaf8d7e40252370304687390A1A52",
++        "957": "0x9b35Af71d77eaf8d7e40252370304687390A1A52",
++        "100": "0x9b35Af71d77eaf8d7e40252370304687390A1A52",
++        "80001": "0x9b35Af71d77eaf8d7e40252370304687390A1A52"
+     },
+-    {
+-      "inputs": [
++    "abi": [
+         {
+-          "internalType": "uint256",
+-          "name": "value",
+-          "type": "uint256"
++            "anonymous": false,
++            "inputs": [
++                {
++                    "indexed": true,
++                    "internalType": "address",
++                    "name": "newContract",
++                    "type": "address"
++                }
++            ],
++            "name": "ContractCreation",
++            "type": "event"
+         },
+         {
+-          "internalType": "bytes",
+-          "name": "deploymentData",
+-          "type": "bytes"
+-        }
+-      ],
+-      "name": "performCreate",
+-      "outputs": [
+-        {
+-          "internalType": "address",
+-          "name": "newContract",
+-          "type": "address"
+-        }
+-      ],
+-      "stateMutability": "nonpayable",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "uint256",
+-          "name": "value",
+-          "type": "uint256"
+-        },
+-        {
+-          "internalType": "bytes",
+-          "name": "deploymentData",
+-          "type": "bytes"
++            "inputs": [
++                {
++                    "internalType": "uint256",
++                    "name": "value",
++                    "type": "uint256"
++                },
++                {
++                    "internalType": "bytes",
++                    "name": "deploymentData",
++                    "type": "bytes"
++                }
++            ],
++            "name": "performCreate",
++            "outputs": [
++                {
++                    "internalType": "address",
++                    "name": "newContract",
++                    "type": "address"
++                }
++            ],
++            "stateMutability": "nonpayable",
++            "type": "function"
+         },
+         {
+-          "internalType": "bytes32",
+-          "name": "salt",
+-          "type": "bytes32"
+-        }
+-      ],
+-      "name": "performCreate2",
+-      "outputs": [
+-        {
+-          "internalType": "address",
+-          "name": "newContract",
+-          "type": "address"
++            "inputs": [
++                {
++                    "internalType": "uint256",
++                    "name": "value",
++                    "type": "uint256"
++                },
++                {
++                    "internalType": "bytes",
++                    "name": "deploymentData",
++                    "type": "bytes"
++                },
++                {
++                    "internalType": "bytes32",
++                    "name": "salt",
++                    "type": "bytes32"
++                }
++            ],
++            "name": "performCreate2",
++            "outputs": [
++                {
++                    "internalType": "address",
++                    "name": "newContract",
++                    "type": "address"
++                }
++            ],
++            "stateMutability": "nonpayable",
++            "type": "function"
+         }
+-      ],
+-      "stateMutability": "nonpayable",
+-      "type": "function"
+-    }
+-  ]
++    ]
+ }
+diff --git a/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/src/assets/v1.4.1/multi_send.json b/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/src/assets/v1.4.1/multi_send.json
+index 55dd78e..4eb9aff 100644
+--- a/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/src/assets/v1.4.1/multi_send.json
++++ b/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/src/assets/v1.4.1/multi_send.json
+@@ -1,34 +1,35 @@
+ {
+-  "defaultAddress": "0x38869bf66a61cF6bDB996A6aE40D5853Fd43B526",
+-  "released": true,
+-  "contractName": "MultiSend",
+-  "version": "1.4.1",
+-  "networkAddresses": {
+-    "1": "0x38869bf66a61cF6bDB996A6aE40D5853Fd43B526",
+-    "5": "0x38869bf66a61cF6bDB996A6aE40D5853Fd43B526",
+-    "56": "0x38869bf66a61cF6bDB996A6aE40D5853Fd43B526",
+-    "100": "0x38869bf66a61cF6bDB996A6aE40D5853Fd43B526",
+-    "1442": "0x38869bf66a61cF6bDB996A6aE40D5853Fd43B526",
+-    "80001": "0x38869bf66a61cF6bDB996A6aE40D5853Fd43B526"
+-  },
+-  "abi": [
+-    {
+-      "inputs": [],
+-      "stateMutability": "nonpayable",
+-      "type": "constructor"
++    "defaultAddress": "0x38869bf66a61cF6bDB996A6aE40D5853Fd43B526",
++    "released": true,
++    "contractName": "MultiSend",
++    "version": "1.4.1",
++    "networkAddresses": {
++        "1": "0x38869bf66a61cF6bDB996A6aE40D5853Fd43B526",
++        "5": "0x38869bf66a61cF6bDB996A6aE40D5853Fd43B526",
++        "56": "0x38869bf66a61cF6bDB996A6aE40D5853Fd43B526",
++        "957": "0x38869bf66a61cF6bDB996A6aE40D5853Fd43B526",
++        "100": "0x38869bf66a61cF6bDB996A6aE40D5853Fd43B526",
++        "1442": "0x38869bf66a61cF6bDB996A6aE40D5853Fd43B526",
++        "80001": "0x38869bf66a61cF6bDB996A6aE40D5853Fd43B526"
+     },
+-    {
+-      "inputs": [
++    "abi": [
+         {
+-          "internalType": "bytes",
+-          "name": "transactions",
+-          "type": "bytes"
++            "inputs": [],
++            "stateMutability": "nonpayable",
++            "type": "constructor"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "bytes",
++                    "name": "transactions",
++                    "type": "bytes"
++                }
++            ],
++            "name": "multiSend",
++            "outputs": [],
++            "stateMutability": "payable",
++            "type": "function"
+         }
+-      ],
+-      "name": "multiSend",
+-      "outputs": [],
+-      "stateMutability": "payable",
+-      "type": "function"
+-    }
+-  ]
++    ]
+ }
+diff --git a/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/src/assets/v1.4.1/multi_send_call_only.json b/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/src/assets/v1.4.1/multi_send_call_only.json
+index 7864a8b..394e914 100644
+--- a/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/src/assets/v1.4.1/multi_send_call_only.json
++++ b/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/src/assets/v1.4.1/multi_send_call_only.json
+@@ -1,29 +1,30 @@
+ {
+-  "defaultAddress": "0x9641d764fc13c8B624c04430C7356C1C7C8102e2",
+-  "released": true,
+-  "contractName": "MultiSendCallOnly",
+-  "version": "1.4.1",
+-  "networkAddresses": {
+-    "1": "0x9641d764fc13c8B624c04430C7356C1C7C8102e2",
+-    "5": "0x9641d764fc13c8B624c04430C7356C1C7C8102e2",
+-    "56": "0x9641d764fc13c8B624c04430C7356C1C7C8102e2",
+-    "100": "0x9641d764fc13c8B624c04430C7356C1C7C8102e2",
+-    "1442": "0x9641d764fc13c8B624c04430C7356C1C7C8102e2",
+-    "80001": "0x9641d764fc13c8B624c04430C7356C1C7C8102e2"
+-  },
+-  "abi": [
+-    {
+-      "inputs": [
++    "defaultAddress": "0x9641d764fc13c8B624c04430C7356C1C7C8102e2",
++    "released": true,
++    "contractName": "MultiSendCallOnly",
++    "version": "1.4.1",
++    "networkAddresses": {
++        "1": "0x9641d764fc13c8B624c04430C7356C1C7C8102e2",
++        "5": "0x9641d764fc13c8B624c04430C7356C1C7C8102e2",
++        "56": "0x9641d764fc13c8B624c04430C7356C1C7C8102e2",
++        "957": "0x9641d764fc13c8B624c04430C7356C1C7C8102e2",
++        "100": "0x9641d764fc13c8B624c04430C7356C1C7C8102e2",
++        "1442": "0x9641d764fc13c8B624c04430C7356C1C7C8102e2",
++        "80001": "0x9641d764fc13c8B624c04430C7356C1C7C8102e2"
++    },
++    "abi": [
+         {
+-          "internalType": "bytes",
+-          "name": "transactions",
+-          "type": "bytes"
++            "inputs": [
++                {
++                    "internalType": "bytes",
++                    "name": "transactions",
++                    "type": "bytes"
++                }
++            ],
++            "name": "multiSend",
++            "outputs": [],
++            "stateMutability": "payable",
++            "type": "function"
+         }
+-      ],
+-      "name": "multiSend",
+-      "outputs": [],
+-      "stateMutability": "payable",
+-      "type": "function"
+-    }
+-  ]
++    ]
+ }
+diff --git a/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/src/assets/v1.4.1/safe.json b/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/src/assets/v1.4.1/safe.json
+index 8074de8..17b30fa 100644
+--- a/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/src/assets/v1.4.1/safe.json
++++ b/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/src/assets/v1.4.1/safe.json
+@@ -1,1011 +1,1012 @@
+ {
+-  "defaultAddress": "0x41675C099F32341bf84BFc5382aF534df5C7461a",
+-  "released": true,
+-  "contractName": "Safe",
+-  "version": "1.4.1",
+-  "networkAddresses": {
+-    "1": "0x41675C099F32341bf84BFc5382aF534df5C7461a",
+-    "100": "0x41675C099F32341bf84BFc5382aF534df5C7461a",
+-    "1442": "0x41675C099F32341bf84BFc5382aF534df5C7461a",
+-    "80001": "0x41675C099F32341bf84BFc5382aF534df5C7461a"
+-  },
+-  "abi": [
+-    {
+-      "inputs": [],
+-      "stateMutability": "nonpayable",
+-      "type": "constructor"
+-    },
+-    {
+-      "anonymous": false,
+-      "inputs": [
+-        {
+-          "indexed": true,
+-          "internalType": "address",
+-          "name": "owner",
+-          "type": "address"
+-        }
+-      ],
+-      "name": "AddedOwner",
+-      "type": "event"
+-    },
+-    {
+-      "anonymous": false,
+-      "inputs": [
+-        {
+-          "indexed": true,
+-          "internalType": "bytes32",
+-          "name": "approvedHash",
+-          "type": "bytes32"
+-        },
+-        {
+-          "indexed": true,
+-          "internalType": "address",
+-          "name": "owner",
+-          "type": "address"
+-        }
+-      ],
+-      "name": "ApproveHash",
+-      "type": "event"
+-    },
+-    {
+-      "anonymous": false,
+-      "inputs": [
+-        {
+-          "indexed": true,
+-          "internalType": "address",
+-          "name": "handler",
+-          "type": "address"
+-        }
+-      ],
+-      "name": "ChangedFallbackHandler",
+-      "type": "event"
+-    },
+-    {
+-      "anonymous": false,
+-      "inputs": [
+-        {
+-          "indexed": true,
+-          "internalType": "address",
+-          "name": "guard",
+-          "type": "address"
+-        }
+-      ],
+-      "name": "ChangedGuard",
+-      "type": "event"
+-    },
+-    {
+-      "anonymous": false,
+-      "inputs": [
+-        {
+-          "indexed": false,
+-          "internalType": "uint256",
+-          "name": "threshold",
+-          "type": "uint256"
+-        }
+-      ],
+-      "name": "ChangedThreshold",
+-      "type": "event"
+-    },
+-    {
+-      "anonymous": false,
+-      "inputs": [
+-        {
+-          "indexed": true,
+-          "internalType": "address",
+-          "name": "module",
+-          "type": "address"
+-        }
+-      ],
+-      "name": "DisabledModule",
+-      "type": "event"
+-    },
+-    {
+-      "anonymous": false,
+-      "inputs": [
+-        {
+-          "indexed": true,
+-          "internalType": "address",
+-          "name": "module",
+-          "type": "address"
+-        }
+-      ],
+-      "name": "EnabledModule",
+-      "type": "event"
+-    },
+-    {
+-      "anonymous": false,
+-      "inputs": [
+-        {
+-          "indexed": true,
+-          "internalType": "bytes32",
+-          "name": "txHash",
+-          "type": "bytes32"
+-        },
+-        {
+-          "indexed": false,
+-          "internalType": "uint256",
+-          "name": "payment",
+-          "type": "uint256"
+-        }
+-      ],
+-      "name": "ExecutionFailure",
+-      "type": "event"
+-    },
+-    {
+-      "anonymous": false,
+-      "inputs": [
+-        {
+-          "indexed": true,
+-          "internalType": "address",
+-          "name": "module",
+-          "type": "address"
+-        }
+-      ],
+-      "name": "ExecutionFromModuleFailure",
+-      "type": "event"
+-    },
+-    {
+-      "anonymous": false,
+-      "inputs": [
+-        {
+-          "indexed": true,
+-          "internalType": "address",
+-          "name": "module",
+-          "type": "address"
+-        }
+-      ],
+-      "name": "ExecutionFromModuleSuccess",
+-      "type": "event"
+-    },
+-    {
+-      "anonymous": false,
+-      "inputs": [
+-        {
+-          "indexed": true,
+-          "internalType": "bytes32",
+-          "name": "txHash",
+-          "type": "bytes32"
+-        },
+-        {
+-          "indexed": false,
+-          "internalType": "uint256",
+-          "name": "payment",
+-          "type": "uint256"
+-        }
+-      ],
+-      "name": "ExecutionSuccess",
+-      "type": "event"
+-    },
+-    {
+-      "anonymous": false,
+-      "inputs": [
+-        {
+-          "indexed": true,
+-          "internalType": "address",
+-          "name": "owner",
+-          "type": "address"
+-        }
+-      ],
+-      "name": "RemovedOwner",
+-      "type": "event"
+-    },
+-    {
+-      "anonymous": false,
+-      "inputs": [
+-        {
+-          "indexed": true,
+-          "internalType": "address",
+-          "name": "sender",
+-          "type": "address"
+-        },
+-        {
+-          "indexed": false,
+-          "internalType": "uint256",
+-          "name": "value",
+-          "type": "uint256"
+-        }
+-      ],
+-      "name": "SafeReceived",
+-      "type": "event"
+-    },
+-    {
+-      "anonymous": false,
+-      "inputs": [
+-        {
+-          "indexed": true,
+-          "internalType": "address",
+-          "name": "initiator",
+-          "type": "address"
+-        },
+-        {
+-          "indexed": false,
+-          "internalType": "address[]",
+-          "name": "owners",
+-          "type": "address[]"
+-        },
+-        {
+-          "indexed": false,
+-          "internalType": "uint256",
+-          "name": "threshold",
+-          "type": "uint256"
+-        },
+-        {
+-          "indexed": false,
+-          "internalType": "address",
+-          "name": "initializer",
+-          "type": "address"
+-        },
+-        {
+-          "indexed": false,
+-          "internalType": "address",
+-          "name": "fallbackHandler",
+-          "type": "address"
+-        }
+-      ],
+-      "name": "SafeSetup",
+-      "type": "event"
+-    },
+-    {
+-      "anonymous": false,
+-      "inputs": [
+-        {
+-          "indexed": true,
+-          "internalType": "bytes32",
+-          "name": "msgHash",
+-          "type": "bytes32"
+-        }
+-      ],
+-      "name": "SignMsg",
+-      "type": "event"
+-    },
+-    {
+-      "stateMutability": "nonpayable",
+-      "type": "fallback"
+-    },
+-    {
+-      "inputs": [],
+-      "name": "VERSION",
+-      "outputs": [
+-        {
+-          "internalType": "string",
+-          "name": "",
+-          "type": "string"
+-        }
+-      ],
+-      "stateMutability": "view",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "address",
+-          "name": "owner",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "_threshold",
+-          "type": "uint256"
+-        }
+-      ],
+-      "name": "addOwnerWithThreshold",
+-      "outputs": [],
+-      "stateMutability": "nonpayable",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "bytes32",
+-          "name": "hashToApprove",
+-          "type": "bytes32"
+-        }
+-      ],
+-      "name": "approveHash",
+-      "outputs": [],
+-      "stateMutability": "nonpayable",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "address",
+-          "name": "",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "bytes32",
+-          "name": "",
+-          "type": "bytes32"
+-        }
+-      ],
+-      "name": "approvedHashes",
+-      "outputs": [
+-        {
+-          "internalType": "uint256",
+-          "name": "",
+-          "type": "uint256"
+-        }
+-      ],
+-      "stateMutability": "view",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "uint256",
+-          "name": "_threshold",
+-          "type": "uint256"
+-        }
+-      ],
+-      "name": "changeThreshold",
+-      "outputs": [],
+-      "stateMutability": "nonpayable",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "bytes32",
+-          "name": "dataHash",
+-          "type": "bytes32"
+-        },
+-        {
+-          "internalType": "bytes",
+-          "name": "data",
+-          "type": "bytes"
+-        },
+-        {
+-          "internalType": "bytes",
+-          "name": "signatures",
+-          "type": "bytes"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "requiredSignatures",
+-          "type": "uint256"
+-        }
+-      ],
+-      "name": "checkNSignatures",
+-      "outputs": [],
+-      "stateMutability": "view",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "bytes32",
+-          "name": "dataHash",
+-          "type": "bytes32"
+-        },
+-        {
+-          "internalType": "bytes",
+-          "name": "data",
+-          "type": "bytes"
+-        },
+-        {
+-          "internalType": "bytes",
+-          "name": "signatures",
+-          "type": "bytes"
+-        }
+-      ],
+-      "name": "checkSignatures",
+-      "outputs": [],
+-      "stateMutability": "view",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "address",
+-          "name": "prevModule",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "address",
+-          "name": "module",
+-          "type": "address"
+-        }
+-      ],
+-      "name": "disableModule",
+-      "outputs": [],
+-      "stateMutability": "nonpayable",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [],
+-      "name": "domainSeparator",
+-      "outputs": [
+-        {
+-          "internalType": "bytes32",
+-          "name": "",
+-          "type": "bytes32"
+-        }
+-      ],
+-      "stateMutability": "view",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "address",
+-          "name": "module",
+-          "type": "address"
+-        }
+-      ],
+-      "name": "enableModule",
+-      "outputs": [],
+-      "stateMutability": "nonpayable",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "address",
+-          "name": "to",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "value",
+-          "type": "uint256"
+-        },
+-        {
+-          "internalType": "bytes",
+-          "name": "data",
+-          "type": "bytes"
+-        },
+-        {
+-          "internalType": "enum Enum.Operation",
+-          "name": "operation",
+-          "type": "uint8"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "safeTxGas",
+-          "type": "uint256"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "baseGas",
+-          "type": "uint256"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "gasPrice",
+-          "type": "uint256"
+-        },
+-        {
+-          "internalType": "address",
+-          "name": "gasToken",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "address",
+-          "name": "refundReceiver",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "_nonce",
+-          "type": "uint256"
+-        }
+-      ],
+-      "name": "encodeTransactionData",
+-      "outputs": [
+-        {
+-          "internalType": "bytes",
+-          "name": "",
+-          "type": "bytes"
+-        }
+-      ],
+-      "stateMutability": "view",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "address",
+-          "name": "to",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "value",
+-          "type": "uint256"
+-        },
+-        {
+-          "internalType": "bytes",
+-          "name": "data",
+-          "type": "bytes"
+-        },
+-        {
+-          "internalType": "enum Enum.Operation",
+-          "name": "operation",
+-          "type": "uint8"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "safeTxGas",
+-          "type": "uint256"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "baseGas",
+-          "type": "uint256"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "gasPrice",
+-          "type": "uint256"
+-        },
+-        {
+-          "internalType": "address",
+-          "name": "gasToken",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "address payable",
+-          "name": "refundReceiver",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "bytes",
+-          "name": "signatures",
+-          "type": "bytes"
+-        }
+-      ],
+-      "name": "execTransaction",
+-      "outputs": [
+-        {
+-          "internalType": "bool",
+-          "name": "success",
+-          "type": "bool"
+-        }
+-      ],
+-      "stateMutability": "payable",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "address",
+-          "name": "to",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "value",
+-          "type": "uint256"
+-        },
+-        {
+-          "internalType": "bytes",
+-          "name": "data",
+-          "type": "bytes"
+-        },
+-        {
+-          "internalType": "enum Enum.Operation",
+-          "name": "operation",
+-          "type": "uint8"
+-        }
+-      ],
+-      "name": "execTransactionFromModule",
+-      "outputs": [
+-        {
+-          "internalType": "bool",
+-          "name": "success",
+-          "type": "bool"
+-        }
+-      ],
+-      "stateMutability": "nonpayable",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "address",
+-          "name": "to",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "value",
+-          "type": "uint256"
+-        },
+-        {
+-          "internalType": "bytes",
+-          "name": "data",
+-          "type": "bytes"
+-        },
+-        {
+-          "internalType": "enum Enum.Operation",
+-          "name": "operation",
+-          "type": "uint8"
+-        }
+-      ],
+-      "name": "execTransactionFromModuleReturnData",
+-      "outputs": [
+-        {
+-          "internalType": "bool",
+-          "name": "success",
+-          "type": "bool"
+-        },
+-        {
+-          "internalType": "bytes",
+-          "name": "returnData",
+-          "type": "bytes"
+-        }
+-      ],
+-      "stateMutability": "nonpayable",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [],
+-      "name": "getChainId",
+-      "outputs": [
+-        {
+-          "internalType": "uint256",
+-          "name": "",
+-          "type": "uint256"
+-        }
+-      ],
+-      "stateMutability": "view",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "address",
+-          "name": "start",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "pageSize",
+-          "type": "uint256"
+-        }
+-      ],
+-      "name": "getModulesPaginated",
+-      "outputs": [
+-        {
+-          "internalType": "address[]",
+-          "name": "array",
+-          "type": "address[]"
+-        },
+-        {
+-          "internalType": "address",
+-          "name": "next",
+-          "type": "address"
+-        }
+-      ],
+-      "stateMutability": "view",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [],
+-      "name": "getOwners",
+-      "outputs": [
+-        {
+-          "internalType": "address[]",
+-          "name": "",
+-          "type": "address[]"
+-        }
+-      ],
+-      "stateMutability": "view",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "uint256",
+-          "name": "offset",
+-          "type": "uint256"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "length",
+-          "type": "uint256"
+-        }
+-      ],
+-      "name": "getStorageAt",
+-      "outputs": [
+-        {
+-          "internalType": "bytes",
+-          "name": "",
+-          "type": "bytes"
+-        }
+-      ],
+-      "stateMutability": "view",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [],
+-      "name": "getThreshold",
+-      "outputs": [
+-        {
+-          "internalType": "uint256",
+-          "name": "",
+-          "type": "uint256"
+-        }
+-      ],
+-      "stateMutability": "view",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "address",
+-          "name": "to",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "value",
+-          "type": "uint256"
+-        },
+-        {
+-          "internalType": "bytes",
+-          "name": "data",
+-          "type": "bytes"
+-        },
+-        {
+-          "internalType": "enum Enum.Operation",
+-          "name": "operation",
+-          "type": "uint8"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "safeTxGas",
+-          "type": "uint256"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "baseGas",
+-          "type": "uint256"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "gasPrice",
+-          "type": "uint256"
+-        },
+-        {
+-          "internalType": "address",
+-          "name": "gasToken",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "address",
+-          "name": "refundReceiver",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "_nonce",
+-          "type": "uint256"
+-        }
+-      ],
+-      "name": "getTransactionHash",
+-      "outputs": [
+-        {
+-          "internalType": "bytes32",
+-          "name": "",
+-          "type": "bytes32"
+-        }
+-      ],
+-      "stateMutability": "view",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "address",
+-          "name": "module",
+-          "type": "address"
+-        }
+-      ],
+-      "name": "isModuleEnabled",
+-      "outputs": [
+-        {
+-          "internalType": "bool",
+-          "name": "",
+-          "type": "bool"
+-        }
+-      ],
+-      "stateMutability": "view",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "address",
+-          "name": "owner",
+-          "type": "address"
+-        }
+-      ],
+-      "name": "isOwner",
+-      "outputs": [
+-        {
+-          "internalType": "bool",
+-          "name": "",
+-          "type": "bool"
+-        }
+-      ],
+-      "stateMutability": "view",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [],
+-      "name": "nonce",
+-      "outputs": [
+-        {
+-          "internalType": "uint256",
+-          "name": "",
+-          "type": "uint256"
+-        }
+-      ],
+-      "stateMutability": "view",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "address",
+-          "name": "prevOwner",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "address",
+-          "name": "owner",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "_threshold",
+-          "type": "uint256"
+-        }
+-      ],
+-      "name": "removeOwner",
+-      "outputs": [],
+-      "stateMutability": "nonpayable",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "address",
+-          "name": "handler",
+-          "type": "address"
+-        }
+-      ],
+-      "name": "setFallbackHandler",
+-      "outputs": [],
+-      "stateMutability": "nonpayable",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "address",
+-          "name": "guard",
+-          "type": "address"
+-        }
+-      ],
+-      "name": "setGuard",
+-      "outputs": [],
+-      "stateMutability": "nonpayable",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "address[]",
+-          "name": "_owners",
+-          "type": "address[]"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "_threshold",
+-          "type": "uint256"
+-        },
+-        {
+-          "internalType": "address",
+-          "name": "to",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "bytes",
+-          "name": "data",
+-          "type": "bytes"
+-        },
+-        {
+-          "internalType": "address",
+-          "name": "fallbackHandler",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "address",
+-          "name": "paymentToken",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "payment",
+-          "type": "uint256"
+-        },
+-        {
+-          "internalType": "address payable",
+-          "name": "paymentReceiver",
+-          "type": "address"
+-        }
+-      ],
+-      "name": "setup",
+-      "outputs": [],
+-      "stateMutability": "nonpayable",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "bytes32",
+-          "name": "",
+-          "type": "bytes32"
+-        }
+-      ],
+-      "name": "signedMessages",
+-      "outputs": [
+-        {
+-          "internalType": "uint256",
+-          "name": "",
+-          "type": "uint256"
+-        }
+-      ],
+-      "stateMutability": "view",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "address",
+-          "name": "targetContract",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "bytes",
+-          "name": "calldataPayload",
+-          "type": "bytes"
+-        }
+-      ],
+-      "name": "simulateAndRevert",
+-      "outputs": [],
+-      "stateMutability": "nonpayable",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "address",
+-          "name": "prevOwner",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "address",
+-          "name": "oldOwner",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "address",
+-          "name": "newOwner",
+-          "type": "address"
+-        }
+-      ],
+-      "name": "swapOwner",
+-      "outputs": [],
+-      "stateMutability": "nonpayable",
+-      "type": "function"
+-    },
+-    {
+-      "stateMutability": "payable",
+-      "type": "receive"
+-    }
+-  ]
++    "defaultAddress": "0x41675C099F32341bf84BFc5382aF534df5C7461a",
++    "released": true,
++    "contractName": "Safe",
++    "version": "1.4.1",
++    "networkAddresses": {
++        "1": "0x41675C099F32341bf84BFc5382aF534df5C7461a",
++        "100": "0x41675C099F32341bf84BFc5382aF534df5C7461a",
++        "957": "0x41675C099F32341bf84BFc5382aF534df5C7461a",
++        "1442": "0x41675C099F32341bf84BFc5382aF534df5C7461a",
++        "80001": "0x41675C099F32341bf84BFc5382aF534df5C7461a"
++    },
++    "abi": [
++        {
++            "inputs": [],
++            "stateMutability": "nonpayable",
++            "type": "constructor"
++        },
++        {
++            "anonymous": false,
++            "inputs": [
++                {
++                    "indexed": true,
++                    "internalType": "address",
++                    "name": "owner",
++                    "type": "address"
++                }
++            ],
++            "name": "AddedOwner",
++            "type": "event"
++        },
++        {
++            "anonymous": false,
++            "inputs": [
++                {
++                    "indexed": true,
++                    "internalType": "bytes32",
++                    "name": "approvedHash",
++                    "type": "bytes32"
++                },
++                {
++                    "indexed": true,
++                    "internalType": "address",
++                    "name": "owner",
++                    "type": "address"
++                }
++            ],
++            "name": "ApproveHash",
++            "type": "event"
++        },
++        {
++            "anonymous": false,
++            "inputs": [
++                {
++                    "indexed": true,
++                    "internalType": "address",
++                    "name": "handler",
++                    "type": "address"
++                }
++            ],
++            "name": "ChangedFallbackHandler",
++            "type": "event"
++        },
++        {
++            "anonymous": false,
++            "inputs": [
++                {
++                    "indexed": true,
++                    "internalType": "address",
++                    "name": "guard",
++                    "type": "address"
++                }
++            ],
++            "name": "ChangedGuard",
++            "type": "event"
++        },
++        {
++            "anonymous": false,
++            "inputs": [
++                {
++                    "indexed": false,
++                    "internalType": "uint256",
++                    "name": "threshold",
++                    "type": "uint256"
++                }
++            ],
++            "name": "ChangedThreshold",
++            "type": "event"
++        },
++        {
++            "anonymous": false,
++            "inputs": [
++                {
++                    "indexed": true,
++                    "internalType": "address",
++                    "name": "module",
++                    "type": "address"
++                }
++            ],
++            "name": "DisabledModule",
++            "type": "event"
++        },
++        {
++            "anonymous": false,
++            "inputs": [
++                {
++                    "indexed": true,
++                    "internalType": "address",
++                    "name": "module",
++                    "type": "address"
++                }
++            ],
++            "name": "EnabledModule",
++            "type": "event"
++        },
++        {
++            "anonymous": false,
++            "inputs": [
++                {
++                    "indexed": true,
++                    "internalType": "bytes32",
++                    "name": "txHash",
++                    "type": "bytes32"
++                },
++                {
++                    "indexed": false,
++                    "internalType": "uint256",
++                    "name": "payment",
++                    "type": "uint256"
++                }
++            ],
++            "name": "ExecutionFailure",
++            "type": "event"
++        },
++        {
++            "anonymous": false,
++            "inputs": [
++                {
++                    "indexed": true,
++                    "internalType": "address",
++                    "name": "module",
++                    "type": "address"
++                }
++            ],
++            "name": "ExecutionFromModuleFailure",
++            "type": "event"
++        },
++        {
++            "anonymous": false,
++            "inputs": [
++                {
++                    "indexed": true,
++                    "internalType": "address",
++                    "name": "module",
++                    "type": "address"
++                }
++            ],
++            "name": "ExecutionFromModuleSuccess",
++            "type": "event"
++        },
++        {
++            "anonymous": false,
++            "inputs": [
++                {
++                    "indexed": true,
++                    "internalType": "bytes32",
++                    "name": "txHash",
++                    "type": "bytes32"
++                },
++                {
++                    "indexed": false,
++                    "internalType": "uint256",
++                    "name": "payment",
++                    "type": "uint256"
++                }
++            ],
++            "name": "ExecutionSuccess",
++            "type": "event"
++        },
++        {
++            "anonymous": false,
++            "inputs": [
++                {
++                    "indexed": true,
++                    "internalType": "address",
++                    "name": "owner",
++                    "type": "address"
++                }
++            ],
++            "name": "RemovedOwner",
++            "type": "event"
++        },
++        {
++            "anonymous": false,
++            "inputs": [
++                {
++                    "indexed": true,
++                    "internalType": "address",
++                    "name": "sender",
++                    "type": "address"
++                },
++                {
++                    "indexed": false,
++                    "internalType": "uint256",
++                    "name": "value",
++                    "type": "uint256"
++                }
++            ],
++            "name": "SafeReceived",
++            "type": "event"
++        },
++        {
++            "anonymous": false,
++            "inputs": [
++                {
++                    "indexed": true,
++                    "internalType": "address",
++                    "name": "initiator",
++                    "type": "address"
++                },
++                {
++                    "indexed": false,
++                    "internalType": "address[]",
++                    "name": "owners",
++                    "type": "address[]"
++                },
++                {
++                    "indexed": false,
++                    "internalType": "uint256",
++                    "name": "threshold",
++                    "type": "uint256"
++                },
++                {
++                    "indexed": false,
++                    "internalType": "address",
++                    "name": "initializer",
++                    "type": "address"
++                },
++                {
++                    "indexed": false,
++                    "internalType": "address",
++                    "name": "fallbackHandler",
++                    "type": "address"
++                }
++            ],
++            "name": "SafeSetup",
++            "type": "event"
++        },
++        {
++            "anonymous": false,
++            "inputs": [
++                {
++                    "indexed": true,
++                    "internalType": "bytes32",
++                    "name": "msgHash",
++                    "type": "bytes32"
++                }
++            ],
++            "name": "SignMsg",
++            "type": "event"
++        },
++        {
++            "stateMutability": "nonpayable",
++            "type": "fallback"
++        },
++        {
++            "inputs": [],
++            "name": "VERSION",
++            "outputs": [
++                {
++                    "internalType": "string",
++                    "name": "",
++                    "type": "string"
++                }
++            ],
++            "stateMutability": "view",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "address",
++                    "name": "owner",
++                    "type": "address"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "_threshold",
++                    "type": "uint256"
++                }
++            ],
++            "name": "addOwnerWithThreshold",
++            "outputs": [],
++            "stateMutability": "nonpayable",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "bytes32",
++                    "name": "hashToApprove",
++                    "type": "bytes32"
++                }
++            ],
++            "name": "approveHash",
++            "outputs": [],
++            "stateMutability": "nonpayable",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "address",
++                    "name": "",
++                    "type": "address"
++                },
++                {
++                    "internalType": "bytes32",
++                    "name": "",
++                    "type": "bytes32"
++                }
++            ],
++            "name": "approvedHashes",
++            "outputs": [
++                {
++                    "internalType": "uint256",
++                    "name": "",
++                    "type": "uint256"
++                }
++            ],
++            "stateMutability": "view",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "uint256",
++                    "name": "_threshold",
++                    "type": "uint256"
++                }
++            ],
++            "name": "changeThreshold",
++            "outputs": [],
++            "stateMutability": "nonpayable",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "bytes32",
++                    "name": "dataHash",
++                    "type": "bytes32"
++                },
++                {
++                    "internalType": "bytes",
++                    "name": "data",
++                    "type": "bytes"
++                },
++                {
++                    "internalType": "bytes",
++                    "name": "signatures",
++                    "type": "bytes"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "requiredSignatures",
++                    "type": "uint256"
++                }
++            ],
++            "name": "checkNSignatures",
++            "outputs": [],
++            "stateMutability": "view",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "bytes32",
++                    "name": "dataHash",
++                    "type": "bytes32"
++                },
++                {
++                    "internalType": "bytes",
++                    "name": "data",
++                    "type": "bytes"
++                },
++                {
++                    "internalType": "bytes",
++                    "name": "signatures",
++                    "type": "bytes"
++                }
++            ],
++            "name": "checkSignatures",
++            "outputs": [],
++            "stateMutability": "view",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "address",
++                    "name": "prevModule",
++                    "type": "address"
++                },
++                {
++                    "internalType": "address",
++                    "name": "module",
++                    "type": "address"
++                }
++            ],
++            "name": "disableModule",
++            "outputs": [],
++            "stateMutability": "nonpayable",
++            "type": "function"
++        },
++        {
++            "inputs": [],
++            "name": "domainSeparator",
++            "outputs": [
++                {
++                    "internalType": "bytes32",
++                    "name": "",
++                    "type": "bytes32"
++                }
++            ],
++            "stateMutability": "view",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "address",
++                    "name": "module",
++                    "type": "address"
++                }
++            ],
++            "name": "enableModule",
++            "outputs": [],
++            "stateMutability": "nonpayable",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "address",
++                    "name": "to",
++                    "type": "address"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "value",
++                    "type": "uint256"
++                },
++                {
++                    "internalType": "bytes",
++                    "name": "data",
++                    "type": "bytes"
++                },
++                {
++                    "internalType": "enum Enum.Operation",
++                    "name": "operation",
++                    "type": "uint8"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "safeTxGas",
++                    "type": "uint256"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "baseGas",
++                    "type": "uint256"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "gasPrice",
++                    "type": "uint256"
++                },
++                {
++                    "internalType": "address",
++                    "name": "gasToken",
++                    "type": "address"
++                },
++                {
++                    "internalType": "address",
++                    "name": "refundReceiver",
++                    "type": "address"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "_nonce",
++                    "type": "uint256"
++                }
++            ],
++            "name": "encodeTransactionData",
++            "outputs": [
++                {
++                    "internalType": "bytes",
++                    "name": "",
++                    "type": "bytes"
++                }
++            ],
++            "stateMutability": "view",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "address",
++                    "name": "to",
++                    "type": "address"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "value",
++                    "type": "uint256"
++                },
++                {
++                    "internalType": "bytes",
++                    "name": "data",
++                    "type": "bytes"
++                },
++                {
++                    "internalType": "enum Enum.Operation",
++                    "name": "operation",
++                    "type": "uint8"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "safeTxGas",
++                    "type": "uint256"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "baseGas",
++                    "type": "uint256"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "gasPrice",
++                    "type": "uint256"
++                },
++                {
++                    "internalType": "address",
++                    "name": "gasToken",
++                    "type": "address"
++                },
++                {
++                    "internalType": "address payable",
++                    "name": "refundReceiver",
++                    "type": "address"
++                },
++                {
++                    "internalType": "bytes",
++                    "name": "signatures",
++                    "type": "bytes"
++                }
++            ],
++            "name": "execTransaction",
++            "outputs": [
++                {
++                    "internalType": "bool",
++                    "name": "success",
++                    "type": "bool"
++                }
++            ],
++            "stateMutability": "payable",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "address",
++                    "name": "to",
++                    "type": "address"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "value",
++                    "type": "uint256"
++                },
++                {
++                    "internalType": "bytes",
++                    "name": "data",
++                    "type": "bytes"
++                },
++                {
++                    "internalType": "enum Enum.Operation",
++                    "name": "operation",
++                    "type": "uint8"
++                }
++            ],
++            "name": "execTransactionFromModule",
++            "outputs": [
++                {
++                    "internalType": "bool",
++                    "name": "success",
++                    "type": "bool"
++                }
++            ],
++            "stateMutability": "nonpayable",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "address",
++                    "name": "to",
++                    "type": "address"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "value",
++                    "type": "uint256"
++                },
++                {
++                    "internalType": "bytes",
++                    "name": "data",
++                    "type": "bytes"
++                },
++                {
++                    "internalType": "enum Enum.Operation",
++                    "name": "operation",
++                    "type": "uint8"
++                }
++            ],
++            "name": "execTransactionFromModuleReturnData",
++            "outputs": [
++                {
++                    "internalType": "bool",
++                    "name": "success",
++                    "type": "bool"
++                },
++                {
++                    "internalType": "bytes",
++                    "name": "returnData",
++                    "type": "bytes"
++                }
++            ],
++            "stateMutability": "nonpayable",
++            "type": "function"
++        },
++        {
++            "inputs": [],
++            "name": "getChainId",
++            "outputs": [
++                {
++                    "internalType": "uint256",
++                    "name": "",
++                    "type": "uint256"
++                }
++            ],
++            "stateMutability": "view",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "address",
++                    "name": "start",
++                    "type": "address"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "pageSize",
++                    "type": "uint256"
++                }
++            ],
++            "name": "getModulesPaginated",
++            "outputs": [
++                {
++                    "internalType": "address[]",
++                    "name": "array",
++                    "type": "address[]"
++                },
++                {
++                    "internalType": "address",
++                    "name": "next",
++                    "type": "address"
++                }
++            ],
++            "stateMutability": "view",
++            "type": "function"
++        },
++        {
++            "inputs": [],
++            "name": "getOwners",
++            "outputs": [
++                {
++                    "internalType": "address[]",
++                    "name": "",
++                    "type": "address[]"
++                }
++            ],
++            "stateMutability": "view",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "uint256",
++                    "name": "offset",
++                    "type": "uint256"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "length",
++                    "type": "uint256"
++                }
++            ],
++            "name": "getStorageAt",
++            "outputs": [
++                {
++                    "internalType": "bytes",
++                    "name": "",
++                    "type": "bytes"
++                }
++            ],
++            "stateMutability": "view",
++            "type": "function"
++        },
++        {
++            "inputs": [],
++            "name": "getThreshold",
++            "outputs": [
++                {
++                    "internalType": "uint256",
++                    "name": "",
++                    "type": "uint256"
++                }
++            ],
++            "stateMutability": "view",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "address",
++                    "name": "to",
++                    "type": "address"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "value",
++                    "type": "uint256"
++                },
++                {
++                    "internalType": "bytes",
++                    "name": "data",
++                    "type": "bytes"
++                },
++                {
++                    "internalType": "enum Enum.Operation",
++                    "name": "operation",
++                    "type": "uint8"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "safeTxGas",
++                    "type": "uint256"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "baseGas",
++                    "type": "uint256"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "gasPrice",
++                    "type": "uint256"
++                },
++                {
++                    "internalType": "address",
++                    "name": "gasToken",
++                    "type": "address"
++                },
++                {
++                    "internalType": "address",
++                    "name": "refundReceiver",
++                    "type": "address"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "_nonce",
++                    "type": "uint256"
++                }
++            ],
++            "name": "getTransactionHash",
++            "outputs": [
++                {
++                    "internalType": "bytes32",
++                    "name": "",
++                    "type": "bytes32"
++                }
++            ],
++            "stateMutability": "view",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "address",
++                    "name": "module",
++                    "type": "address"
++                }
++            ],
++            "name": "isModuleEnabled",
++            "outputs": [
++                {
++                    "internalType": "bool",
++                    "name": "",
++                    "type": "bool"
++                }
++            ],
++            "stateMutability": "view",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "address",
++                    "name": "owner",
++                    "type": "address"
++                }
++            ],
++            "name": "isOwner",
++            "outputs": [
++                {
++                    "internalType": "bool",
++                    "name": "",
++                    "type": "bool"
++                }
++            ],
++            "stateMutability": "view",
++            "type": "function"
++        },
++        {
++            "inputs": [],
++            "name": "nonce",
++            "outputs": [
++                {
++                    "internalType": "uint256",
++                    "name": "",
++                    "type": "uint256"
++                }
++            ],
++            "stateMutability": "view",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "address",
++                    "name": "prevOwner",
++                    "type": "address"
++                },
++                {
++                    "internalType": "address",
++                    "name": "owner",
++                    "type": "address"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "_threshold",
++                    "type": "uint256"
++                }
++            ],
++            "name": "removeOwner",
++            "outputs": [],
++            "stateMutability": "nonpayable",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "address",
++                    "name": "handler",
++                    "type": "address"
++                }
++            ],
++            "name": "setFallbackHandler",
++            "outputs": [],
++            "stateMutability": "nonpayable",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "address",
++                    "name": "guard",
++                    "type": "address"
++                }
++            ],
++            "name": "setGuard",
++            "outputs": [],
++            "stateMutability": "nonpayable",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "address[]",
++                    "name": "_owners",
++                    "type": "address[]"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "_threshold",
++                    "type": "uint256"
++                },
++                {
++                    "internalType": "address",
++                    "name": "to",
++                    "type": "address"
++                },
++                {
++                    "internalType": "bytes",
++                    "name": "data",
++                    "type": "bytes"
++                },
++                {
++                    "internalType": "address",
++                    "name": "fallbackHandler",
++                    "type": "address"
++                },
++                {
++                    "internalType": "address",
++                    "name": "paymentToken",
++                    "type": "address"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "payment",
++                    "type": "uint256"
++                },
++                {
++                    "internalType": "address payable",
++                    "name": "paymentReceiver",
++                    "type": "address"
++                }
++            ],
++            "name": "setup",
++            "outputs": [],
++            "stateMutability": "nonpayable",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "bytes32",
++                    "name": "",
++                    "type": "bytes32"
++                }
++            ],
++            "name": "signedMessages",
++            "outputs": [
++                {
++                    "internalType": "uint256",
++                    "name": "",
++                    "type": "uint256"
++                }
++            ],
++            "stateMutability": "view",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "address",
++                    "name": "targetContract",
++                    "type": "address"
++                },
++                {
++                    "internalType": "bytes",
++                    "name": "calldataPayload",
++                    "type": "bytes"
++                }
++            ],
++            "name": "simulateAndRevert",
++            "outputs": [],
++            "stateMutability": "nonpayable",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "address",
++                    "name": "prevOwner",
++                    "type": "address"
++                },
++                {
++                    "internalType": "address",
++                    "name": "oldOwner",
++                    "type": "address"
++                },
++                {
++                    "internalType": "address",
++                    "name": "newOwner",
++                    "type": "address"
++                }
++            ],
++            "name": "swapOwner",
++            "outputs": [],
++            "stateMutability": "nonpayable",
++            "type": "function"
++        },
++        {
++            "stateMutability": "payable",
++            "type": "receive"
++        }
++    ]
+ }
+diff --git a/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/src/assets/v1.4.1/safe_l2.json b/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/src/assets/v1.4.1/safe_l2.json
+index 619bfdd..b6e36f2 100644
+--- a/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/src/assets/v1.4.1/safe_l2.json
++++ b/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/src/assets/v1.4.1/safe_l2.json
+@@ -1,1116 +1,1117 @@
+ {
+-  "defaultAddress": "0x29fcB43b46531BcA003ddC8FCB67FFE91900C762",
+-  "released": true,
+-  "contractName": "SafeL2",
+-  "version": "1.4.1",
+-  "networkAddresses": {
+-    "1": "0x29fcB43b46531BcA003ddC8FCB67FFE91900C762",
+-    "100": "0x29fcB43b46531BcA003ddC8FCB67FFE91900C762",
+-    "1442": "0x29fcB43b46531BcA003ddC8FCB67FFE91900C762",
+-    "80001": "0x29fcB43b46531BcA003ddC8FCB67FFE91900C762"
+-  },
+-  "abi": [
+-    {
+-      "anonymous": false,
+-      "inputs": [
+-        {
+-          "indexed": true,
+-          "internalType": "address",
+-          "name": "owner",
+-          "type": "address"
+-        }
+-      ],
+-      "name": "AddedOwner",
+-      "type": "event"
+-    },
+-    {
+-      "anonymous": false,
+-      "inputs": [
+-        {
+-          "indexed": true,
+-          "internalType": "bytes32",
+-          "name": "approvedHash",
+-          "type": "bytes32"
+-        },
+-        {
+-          "indexed": true,
+-          "internalType": "address",
+-          "name": "owner",
+-          "type": "address"
+-        }
+-      ],
+-      "name": "ApproveHash",
+-      "type": "event"
+-    },
+-    {
+-      "anonymous": false,
+-      "inputs": [
+-        {
+-          "indexed": true,
+-          "internalType": "address",
+-          "name": "handler",
+-          "type": "address"
+-        }
+-      ],
+-      "name": "ChangedFallbackHandler",
+-      "type": "event"
+-    },
+-    {
+-      "anonymous": false,
+-      "inputs": [
+-        {
+-          "indexed": true,
+-          "internalType": "address",
+-          "name": "guard",
+-          "type": "address"
+-        }
+-      ],
+-      "name": "ChangedGuard",
+-      "type": "event"
+-    },
+-    {
+-      "anonymous": false,
+-      "inputs": [
+-        {
+-          "indexed": false,
+-          "internalType": "uint256",
+-          "name": "threshold",
+-          "type": "uint256"
+-        }
+-      ],
+-      "name": "ChangedThreshold",
+-      "type": "event"
+-    },
+-    {
+-      "anonymous": false,
+-      "inputs": [
+-        {
+-          "indexed": true,
+-          "internalType": "address",
+-          "name": "module",
+-          "type": "address"
+-        }
+-      ],
+-      "name": "DisabledModule",
+-      "type": "event"
+-    },
+-    {
+-      "anonymous": false,
+-      "inputs": [
+-        {
+-          "indexed": true,
+-          "internalType": "address",
+-          "name": "module",
+-          "type": "address"
+-        }
+-      ],
+-      "name": "EnabledModule",
+-      "type": "event"
+-    },
+-    {
+-      "anonymous": false,
+-      "inputs": [
+-        {
+-          "indexed": true,
+-          "internalType": "bytes32",
+-          "name": "txHash",
+-          "type": "bytes32"
+-        },
+-        {
+-          "indexed": false,
+-          "internalType": "uint256",
+-          "name": "payment",
+-          "type": "uint256"
+-        }
+-      ],
+-      "name": "ExecutionFailure",
+-      "type": "event"
+-    },
+-    {
+-      "anonymous": false,
+-      "inputs": [
+-        {
+-          "indexed": true,
+-          "internalType": "address",
+-          "name": "module",
+-          "type": "address"
+-        }
+-      ],
+-      "name": "ExecutionFromModuleFailure",
+-      "type": "event"
+-    },
+-    {
+-      "anonymous": false,
+-      "inputs": [
+-        {
+-          "indexed": true,
+-          "internalType": "address",
+-          "name": "module",
+-          "type": "address"
+-        }
+-      ],
+-      "name": "ExecutionFromModuleSuccess",
+-      "type": "event"
+-    },
+-    {
+-      "anonymous": false,
+-      "inputs": [
+-        {
+-          "indexed": true,
+-          "internalType": "bytes32",
+-          "name": "txHash",
+-          "type": "bytes32"
+-        },
+-        {
+-          "indexed": false,
+-          "internalType": "uint256",
+-          "name": "payment",
+-          "type": "uint256"
+-        }
+-      ],
+-      "name": "ExecutionSuccess",
+-      "type": "event"
+-    },
+-    {
+-      "anonymous": false,
+-      "inputs": [
+-        {
+-          "indexed": true,
+-          "internalType": "address",
+-          "name": "owner",
+-          "type": "address"
+-        }
+-      ],
+-      "name": "RemovedOwner",
+-      "type": "event"
+-    },
+-    {
+-      "anonymous": false,
+-      "inputs": [
+-        {
+-          "indexed": false,
+-          "internalType": "address",
+-          "name": "module",
+-          "type": "address"
+-        },
+-        {
+-          "indexed": false,
+-          "internalType": "address",
+-          "name": "to",
+-          "type": "address"
+-        },
+-        {
+-          "indexed": false,
+-          "internalType": "uint256",
+-          "name": "value",
+-          "type": "uint256"
+-        },
+-        {
+-          "indexed": false,
+-          "internalType": "bytes",
+-          "name": "data",
+-          "type": "bytes"
+-        },
+-        {
+-          "indexed": false,
+-          "internalType": "enum Enum.Operation",
+-          "name": "operation",
+-          "type": "uint8"
+-        }
+-      ],
+-      "name": "SafeModuleTransaction",
+-      "type": "event"
+-    },
+-    {
+-      "anonymous": false,
+-      "inputs": [
+-        {
+-          "indexed": false,
+-          "internalType": "address",
+-          "name": "to",
+-          "type": "address"
+-        },
+-        {
+-          "indexed": false,
+-          "internalType": "uint256",
+-          "name": "value",
+-          "type": "uint256"
+-        },
+-        {
+-          "indexed": false,
+-          "internalType": "bytes",
+-          "name": "data",
+-          "type": "bytes"
+-        },
+-        {
+-          "indexed": false,
+-          "internalType": "enum Enum.Operation",
+-          "name": "operation",
+-          "type": "uint8"
+-        },
+-        {
+-          "indexed": false,
+-          "internalType": "uint256",
+-          "name": "safeTxGas",
+-          "type": "uint256"
+-        },
+-        {
+-          "indexed": false,
+-          "internalType": "uint256",
+-          "name": "baseGas",
+-          "type": "uint256"
+-        },
+-        {
+-          "indexed": false,
+-          "internalType": "uint256",
+-          "name": "gasPrice",
+-          "type": "uint256"
+-        },
+-        {
+-          "indexed": false,
+-          "internalType": "address",
+-          "name": "gasToken",
+-          "type": "address"
+-        },
+-        {
+-          "indexed": false,
+-          "internalType": "address payable",
+-          "name": "refundReceiver",
+-          "type": "address"
+-        },
+-        {
+-          "indexed": false,
+-          "internalType": "bytes",
+-          "name": "signatures",
+-          "type": "bytes"
+-        },
+-        {
+-          "indexed": false,
+-          "internalType": "bytes",
+-          "name": "additionalInfo",
+-          "type": "bytes"
+-        }
+-      ],
+-      "name": "SafeMultiSigTransaction",
+-      "type": "event"
+-    },
+-    {
+-      "anonymous": false,
+-      "inputs": [
+-        {
+-          "indexed": true,
+-          "internalType": "address",
+-          "name": "sender",
+-          "type": "address"
+-        },
+-        {
+-          "indexed": false,
+-          "internalType": "uint256",
+-          "name": "value",
+-          "type": "uint256"
+-        }
+-      ],
+-      "name": "SafeReceived",
+-      "type": "event"
+-    },
+-    {
+-      "anonymous": false,
+-      "inputs": [
+-        {
+-          "indexed": true,
+-          "internalType": "address",
+-          "name": "initiator",
+-          "type": "address"
+-        },
+-        {
+-          "indexed": false,
+-          "internalType": "address[]",
+-          "name": "owners",
+-          "type": "address[]"
+-        },
+-        {
+-          "indexed": false,
+-          "internalType": "uint256",
+-          "name": "threshold",
+-          "type": "uint256"
+-        },
+-        {
+-          "indexed": false,
+-          "internalType": "address",
+-          "name": "initializer",
+-          "type": "address"
+-        },
+-        {
+-          "indexed": false,
+-          "internalType": "address",
+-          "name": "fallbackHandler",
+-          "type": "address"
+-        }
+-      ],
+-      "name": "SafeSetup",
+-      "type": "event"
+-    },
+-    {
+-      "anonymous": false,
+-      "inputs": [
+-        {
+-          "indexed": true,
+-          "internalType": "bytes32",
+-          "name": "msgHash",
+-          "type": "bytes32"
+-        }
+-      ],
+-      "name": "SignMsg",
+-      "type": "event"
+-    },
+-    {
+-      "stateMutability": "nonpayable",
+-      "type": "fallback"
+-    },
+-    {
+-      "inputs": [],
+-      "name": "VERSION",
+-      "outputs": [
+-        {
+-          "internalType": "string",
+-          "name": "",
+-          "type": "string"
+-        }
+-      ],
+-      "stateMutability": "view",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "address",
+-          "name": "owner",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "_threshold",
+-          "type": "uint256"
+-        }
+-      ],
+-      "name": "addOwnerWithThreshold",
+-      "outputs": [],
+-      "stateMutability": "nonpayable",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "bytes32",
+-          "name": "hashToApprove",
+-          "type": "bytes32"
+-        }
+-      ],
+-      "name": "approveHash",
+-      "outputs": [],
+-      "stateMutability": "nonpayable",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "address",
+-          "name": "",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "bytes32",
+-          "name": "",
+-          "type": "bytes32"
+-        }
+-      ],
+-      "name": "approvedHashes",
+-      "outputs": [
+-        {
+-          "internalType": "uint256",
+-          "name": "",
+-          "type": "uint256"
+-        }
+-      ],
+-      "stateMutability": "view",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "uint256",
+-          "name": "_threshold",
+-          "type": "uint256"
+-        }
+-      ],
+-      "name": "changeThreshold",
+-      "outputs": [],
+-      "stateMutability": "nonpayable",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "bytes32",
+-          "name": "dataHash",
+-          "type": "bytes32"
+-        },
+-        {
+-          "internalType": "bytes",
+-          "name": "data",
+-          "type": "bytes"
+-        },
+-        {
+-          "internalType": "bytes",
+-          "name": "signatures",
+-          "type": "bytes"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "requiredSignatures",
+-          "type": "uint256"
+-        }
+-      ],
+-      "name": "checkNSignatures",
+-      "outputs": [],
+-      "stateMutability": "view",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "bytes32",
+-          "name": "dataHash",
+-          "type": "bytes32"
+-        },
+-        {
+-          "internalType": "bytes",
+-          "name": "data",
+-          "type": "bytes"
+-        },
+-        {
+-          "internalType": "bytes",
+-          "name": "signatures",
+-          "type": "bytes"
+-        }
+-      ],
+-      "name": "checkSignatures",
+-      "outputs": [],
+-      "stateMutability": "view",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "address",
+-          "name": "prevModule",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "address",
+-          "name": "module",
+-          "type": "address"
+-        }
+-      ],
+-      "name": "disableModule",
+-      "outputs": [],
+-      "stateMutability": "nonpayable",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [],
+-      "name": "domainSeparator",
+-      "outputs": [
+-        {
+-          "internalType": "bytes32",
+-          "name": "",
+-          "type": "bytes32"
+-        }
+-      ],
+-      "stateMutability": "view",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "address",
+-          "name": "module",
+-          "type": "address"
+-        }
+-      ],
+-      "name": "enableModule",
+-      "outputs": [],
+-      "stateMutability": "nonpayable",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "address",
+-          "name": "to",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "value",
+-          "type": "uint256"
+-        },
+-        {
+-          "internalType": "bytes",
+-          "name": "data",
+-          "type": "bytes"
+-        },
+-        {
+-          "internalType": "enum Enum.Operation",
+-          "name": "operation",
+-          "type": "uint8"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "safeTxGas",
+-          "type": "uint256"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "baseGas",
+-          "type": "uint256"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "gasPrice",
+-          "type": "uint256"
+-        },
+-        {
+-          "internalType": "address",
+-          "name": "gasToken",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "address",
+-          "name": "refundReceiver",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "_nonce",
+-          "type": "uint256"
+-        }
+-      ],
+-      "name": "encodeTransactionData",
+-      "outputs": [
+-        {
+-          "internalType": "bytes",
+-          "name": "",
+-          "type": "bytes"
+-        }
+-      ],
+-      "stateMutability": "view",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "address",
+-          "name": "to",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "value",
+-          "type": "uint256"
+-        },
+-        {
+-          "internalType": "bytes",
+-          "name": "data",
+-          "type": "bytes"
+-        },
+-        {
+-          "internalType": "enum Enum.Operation",
+-          "name": "operation",
+-          "type": "uint8"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "safeTxGas",
+-          "type": "uint256"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "baseGas",
+-          "type": "uint256"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "gasPrice",
+-          "type": "uint256"
+-        },
+-        {
+-          "internalType": "address",
+-          "name": "gasToken",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "address payable",
+-          "name": "refundReceiver",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "bytes",
+-          "name": "signatures",
+-          "type": "bytes"
+-        }
+-      ],
+-      "name": "execTransaction",
+-      "outputs": [
+-        {
+-          "internalType": "bool",
+-          "name": "",
+-          "type": "bool"
+-        }
+-      ],
+-      "stateMutability": "payable",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "address",
+-          "name": "to",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "value",
+-          "type": "uint256"
+-        },
+-        {
+-          "internalType": "bytes",
+-          "name": "data",
+-          "type": "bytes"
+-        },
+-        {
+-          "internalType": "enum Enum.Operation",
+-          "name": "operation",
+-          "type": "uint8"
+-        }
+-      ],
+-      "name": "execTransactionFromModule",
+-      "outputs": [
+-        {
+-          "internalType": "bool",
+-          "name": "success",
+-          "type": "bool"
+-        }
+-      ],
+-      "stateMutability": "nonpayable",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "address",
+-          "name": "to",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "value",
+-          "type": "uint256"
+-        },
+-        {
+-          "internalType": "bytes",
+-          "name": "data",
+-          "type": "bytes"
+-        },
+-        {
+-          "internalType": "enum Enum.Operation",
+-          "name": "operation",
+-          "type": "uint8"
+-        }
+-      ],
+-      "name": "execTransactionFromModuleReturnData",
+-      "outputs": [
+-        {
+-          "internalType": "bool",
+-          "name": "success",
+-          "type": "bool"
+-        },
+-        {
+-          "internalType": "bytes",
+-          "name": "returnData",
+-          "type": "bytes"
+-        }
+-      ],
+-      "stateMutability": "nonpayable",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [],
+-      "name": "getChainId",
+-      "outputs": [
+-        {
+-          "internalType": "uint256",
+-          "name": "",
+-          "type": "uint256"
+-        }
+-      ],
+-      "stateMutability": "view",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "address",
+-          "name": "start",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "pageSize",
+-          "type": "uint256"
+-        }
+-      ],
+-      "name": "getModulesPaginated",
+-      "outputs": [
+-        {
+-          "internalType": "address[]",
+-          "name": "array",
+-          "type": "address[]"
+-        },
+-        {
+-          "internalType": "address",
+-          "name": "next",
+-          "type": "address"
+-        }
+-      ],
+-      "stateMutability": "view",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [],
+-      "name": "getOwners",
+-      "outputs": [
+-        {
+-          "internalType": "address[]",
+-          "name": "",
+-          "type": "address[]"
+-        }
+-      ],
+-      "stateMutability": "view",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "uint256",
+-          "name": "offset",
+-          "type": "uint256"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "length",
+-          "type": "uint256"
+-        }
+-      ],
+-      "name": "getStorageAt",
+-      "outputs": [
+-        {
+-          "internalType": "bytes",
+-          "name": "",
+-          "type": "bytes"
+-        }
+-      ],
+-      "stateMutability": "view",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [],
+-      "name": "getThreshold",
+-      "outputs": [
+-        {
+-          "internalType": "uint256",
+-          "name": "",
+-          "type": "uint256"
+-        }
+-      ],
+-      "stateMutability": "view",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "address",
+-          "name": "to",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "value",
+-          "type": "uint256"
+-        },
+-        {
+-          "internalType": "bytes",
+-          "name": "data",
+-          "type": "bytes"
+-        },
+-        {
+-          "internalType": "enum Enum.Operation",
+-          "name": "operation",
+-          "type": "uint8"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "safeTxGas",
+-          "type": "uint256"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "baseGas",
+-          "type": "uint256"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "gasPrice",
+-          "type": "uint256"
+-        },
+-        {
+-          "internalType": "address",
+-          "name": "gasToken",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "address",
+-          "name": "refundReceiver",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "_nonce",
+-          "type": "uint256"
+-        }
+-      ],
+-      "name": "getTransactionHash",
+-      "outputs": [
+-        {
+-          "internalType": "bytes32",
+-          "name": "",
+-          "type": "bytes32"
+-        }
+-      ],
+-      "stateMutability": "view",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "address",
+-          "name": "module",
+-          "type": "address"
+-        }
+-      ],
+-      "name": "isModuleEnabled",
+-      "outputs": [
+-        {
+-          "internalType": "bool",
+-          "name": "",
+-          "type": "bool"
+-        }
+-      ],
+-      "stateMutability": "view",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "address",
+-          "name": "owner",
+-          "type": "address"
+-        }
+-      ],
+-      "name": "isOwner",
+-      "outputs": [
+-        {
+-          "internalType": "bool",
+-          "name": "",
+-          "type": "bool"
+-        }
+-      ],
+-      "stateMutability": "view",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [],
+-      "name": "nonce",
+-      "outputs": [
+-        {
+-          "internalType": "uint256",
+-          "name": "",
+-          "type": "uint256"
+-        }
+-      ],
+-      "stateMutability": "view",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "address",
+-          "name": "prevOwner",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "address",
+-          "name": "owner",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "_threshold",
+-          "type": "uint256"
+-        }
+-      ],
+-      "name": "removeOwner",
+-      "outputs": [],
+-      "stateMutability": "nonpayable",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "address",
+-          "name": "handler",
+-          "type": "address"
+-        }
+-      ],
+-      "name": "setFallbackHandler",
+-      "outputs": [],
+-      "stateMutability": "nonpayable",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "address",
+-          "name": "guard",
+-          "type": "address"
+-        }
+-      ],
+-      "name": "setGuard",
+-      "outputs": [],
+-      "stateMutability": "nonpayable",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "address[]",
+-          "name": "_owners",
+-          "type": "address[]"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "_threshold",
+-          "type": "uint256"
+-        },
+-        {
+-          "internalType": "address",
+-          "name": "to",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "bytes",
+-          "name": "data",
+-          "type": "bytes"
+-        },
+-        {
+-          "internalType": "address",
+-          "name": "fallbackHandler",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "address",
+-          "name": "paymentToken",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "payment",
+-          "type": "uint256"
+-        },
+-        {
+-          "internalType": "address payable",
+-          "name": "paymentReceiver",
+-          "type": "address"
+-        }
+-      ],
+-      "name": "setup",
+-      "outputs": [],
+-      "stateMutability": "nonpayable",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "bytes32",
+-          "name": "",
+-          "type": "bytes32"
+-        }
+-      ],
+-      "name": "signedMessages",
+-      "outputs": [
+-        {
+-          "internalType": "uint256",
+-          "name": "",
+-          "type": "uint256"
+-        }
+-      ],
+-      "stateMutability": "view",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "address",
+-          "name": "targetContract",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "bytes",
+-          "name": "calldataPayload",
+-          "type": "bytes"
+-        }
+-      ],
+-      "name": "simulateAndRevert",
+-      "outputs": [],
+-      "stateMutability": "nonpayable",
+-      "type": "function"
++    "defaultAddress": "0x29fcB43b46531BcA003ddC8FCB67FFE91900C762",
++    "released": true,
++    "contractName": "SafeL2",
++    "version": "1.4.1",
++    "networkAddresses": {
++        "1": "0x29fcB43b46531BcA003ddC8FCB67FFE91900C762",
++        "100": "0x29fcB43b46531BcA003ddC8FCB67FFE91900C762",
++        "957": "0x29fcB43b46531BcA003ddC8FCB67FFE91900C762",
++        "1442": "0x29fcB43b46531BcA003ddC8FCB67FFE91900C762",
++        "80001": "0x29fcB43b46531BcA003ddC8FCB67FFE91900C762"
+     },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "address",
+-          "name": "prevOwner",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "address",
+-          "name": "oldOwner",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "address",
+-          "name": "newOwner",
+-          "type": "address"
++    "abi": [
++        {
++            "anonymous": false,
++            "inputs": [
++                {
++                    "indexed": true,
++                    "internalType": "address",
++                    "name": "owner",
++                    "type": "address"
++                }
++            ],
++            "name": "AddedOwner",
++            "type": "event"
++        },
++        {
++            "anonymous": false,
++            "inputs": [
++                {
++                    "indexed": true,
++                    "internalType": "bytes32",
++                    "name": "approvedHash",
++                    "type": "bytes32"
++                },
++                {
++                    "indexed": true,
++                    "internalType": "address",
++                    "name": "owner",
++                    "type": "address"
++                }
++            ],
++            "name": "ApproveHash",
++            "type": "event"
++        },
++        {
++            "anonymous": false,
++            "inputs": [
++                {
++                    "indexed": true,
++                    "internalType": "address",
++                    "name": "handler",
++                    "type": "address"
++                }
++            ],
++            "name": "ChangedFallbackHandler",
++            "type": "event"
++        },
++        {
++            "anonymous": false,
++            "inputs": [
++                {
++                    "indexed": true,
++                    "internalType": "address",
++                    "name": "guard",
++                    "type": "address"
++                }
++            ],
++            "name": "ChangedGuard",
++            "type": "event"
++        },
++        {
++            "anonymous": false,
++            "inputs": [
++                {
++                    "indexed": false,
++                    "internalType": "uint256",
++                    "name": "threshold",
++                    "type": "uint256"
++                }
++            ],
++            "name": "ChangedThreshold",
++            "type": "event"
++        },
++        {
++            "anonymous": false,
++            "inputs": [
++                {
++                    "indexed": true,
++                    "internalType": "address",
++                    "name": "module",
++                    "type": "address"
++                }
++            ],
++            "name": "DisabledModule",
++            "type": "event"
++        },
++        {
++            "anonymous": false,
++            "inputs": [
++                {
++                    "indexed": true,
++                    "internalType": "address",
++                    "name": "module",
++                    "type": "address"
++                }
++            ],
++            "name": "EnabledModule",
++            "type": "event"
++        },
++        {
++            "anonymous": false,
++            "inputs": [
++                {
++                    "indexed": true,
++                    "internalType": "bytes32",
++                    "name": "txHash",
++                    "type": "bytes32"
++                },
++                {
++                    "indexed": false,
++                    "internalType": "uint256",
++                    "name": "payment",
++                    "type": "uint256"
++                }
++            ],
++            "name": "ExecutionFailure",
++            "type": "event"
++        },
++        {
++            "anonymous": false,
++            "inputs": [
++                {
++                    "indexed": true,
++                    "internalType": "address",
++                    "name": "module",
++                    "type": "address"
++                }
++            ],
++            "name": "ExecutionFromModuleFailure",
++            "type": "event"
++        },
++        {
++            "anonymous": false,
++            "inputs": [
++                {
++                    "indexed": true,
++                    "internalType": "address",
++                    "name": "module",
++                    "type": "address"
++                }
++            ],
++            "name": "ExecutionFromModuleSuccess",
++            "type": "event"
++        },
++        {
++            "anonymous": false,
++            "inputs": [
++                {
++                    "indexed": true,
++                    "internalType": "bytes32",
++                    "name": "txHash",
++                    "type": "bytes32"
++                },
++                {
++                    "indexed": false,
++                    "internalType": "uint256",
++                    "name": "payment",
++                    "type": "uint256"
++                }
++            ],
++            "name": "ExecutionSuccess",
++            "type": "event"
++        },
++        {
++            "anonymous": false,
++            "inputs": [
++                {
++                    "indexed": true,
++                    "internalType": "address",
++                    "name": "owner",
++                    "type": "address"
++                }
++            ],
++            "name": "RemovedOwner",
++            "type": "event"
++        },
++        {
++            "anonymous": false,
++            "inputs": [
++                {
++                    "indexed": false,
++                    "internalType": "address",
++                    "name": "module",
++                    "type": "address"
++                },
++                {
++                    "indexed": false,
++                    "internalType": "address",
++                    "name": "to",
++                    "type": "address"
++                },
++                {
++                    "indexed": false,
++                    "internalType": "uint256",
++                    "name": "value",
++                    "type": "uint256"
++                },
++                {
++                    "indexed": false,
++                    "internalType": "bytes",
++                    "name": "data",
++                    "type": "bytes"
++                },
++                {
++                    "indexed": false,
++                    "internalType": "enum Enum.Operation",
++                    "name": "operation",
++                    "type": "uint8"
++                }
++            ],
++            "name": "SafeModuleTransaction",
++            "type": "event"
++        },
++        {
++            "anonymous": false,
++            "inputs": [
++                {
++                    "indexed": false,
++                    "internalType": "address",
++                    "name": "to",
++                    "type": "address"
++                },
++                {
++                    "indexed": false,
++                    "internalType": "uint256",
++                    "name": "value",
++                    "type": "uint256"
++                },
++                {
++                    "indexed": false,
++                    "internalType": "bytes",
++                    "name": "data",
++                    "type": "bytes"
++                },
++                {
++                    "indexed": false,
++                    "internalType": "enum Enum.Operation",
++                    "name": "operation",
++                    "type": "uint8"
++                },
++                {
++                    "indexed": false,
++                    "internalType": "uint256",
++                    "name": "safeTxGas",
++                    "type": "uint256"
++                },
++                {
++                    "indexed": false,
++                    "internalType": "uint256",
++                    "name": "baseGas",
++                    "type": "uint256"
++                },
++                {
++                    "indexed": false,
++                    "internalType": "uint256",
++                    "name": "gasPrice",
++                    "type": "uint256"
++                },
++                {
++                    "indexed": false,
++                    "internalType": "address",
++                    "name": "gasToken",
++                    "type": "address"
++                },
++                {
++                    "indexed": false,
++                    "internalType": "address payable",
++                    "name": "refundReceiver",
++                    "type": "address"
++                },
++                {
++                    "indexed": false,
++                    "internalType": "bytes",
++                    "name": "signatures",
++                    "type": "bytes"
++                },
++                {
++                    "indexed": false,
++                    "internalType": "bytes",
++                    "name": "additionalInfo",
++                    "type": "bytes"
++                }
++            ],
++            "name": "SafeMultiSigTransaction",
++            "type": "event"
++        },
++        {
++            "anonymous": false,
++            "inputs": [
++                {
++                    "indexed": true,
++                    "internalType": "address",
++                    "name": "sender",
++                    "type": "address"
++                },
++                {
++                    "indexed": false,
++                    "internalType": "uint256",
++                    "name": "value",
++                    "type": "uint256"
++                }
++            ],
++            "name": "SafeReceived",
++            "type": "event"
++        },
++        {
++            "anonymous": false,
++            "inputs": [
++                {
++                    "indexed": true,
++                    "internalType": "address",
++                    "name": "initiator",
++                    "type": "address"
++                },
++                {
++                    "indexed": false,
++                    "internalType": "address[]",
++                    "name": "owners",
++                    "type": "address[]"
++                },
++                {
++                    "indexed": false,
++                    "internalType": "uint256",
++                    "name": "threshold",
++                    "type": "uint256"
++                },
++                {
++                    "indexed": false,
++                    "internalType": "address",
++                    "name": "initializer",
++                    "type": "address"
++                },
++                {
++                    "indexed": false,
++                    "internalType": "address",
++                    "name": "fallbackHandler",
++                    "type": "address"
++                }
++            ],
++            "name": "SafeSetup",
++            "type": "event"
++        },
++        {
++            "anonymous": false,
++            "inputs": [
++                {
++                    "indexed": true,
++                    "internalType": "bytes32",
++                    "name": "msgHash",
++                    "type": "bytes32"
++                }
++            ],
++            "name": "SignMsg",
++            "type": "event"
++        },
++        {
++            "stateMutability": "nonpayable",
++            "type": "fallback"
++        },
++        {
++            "inputs": [],
++            "name": "VERSION",
++            "outputs": [
++                {
++                    "internalType": "string",
++                    "name": "",
++                    "type": "string"
++                }
++            ],
++            "stateMutability": "view",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "address",
++                    "name": "owner",
++                    "type": "address"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "_threshold",
++                    "type": "uint256"
++                }
++            ],
++            "name": "addOwnerWithThreshold",
++            "outputs": [],
++            "stateMutability": "nonpayable",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "bytes32",
++                    "name": "hashToApprove",
++                    "type": "bytes32"
++                }
++            ],
++            "name": "approveHash",
++            "outputs": [],
++            "stateMutability": "nonpayable",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "address",
++                    "name": "",
++                    "type": "address"
++                },
++                {
++                    "internalType": "bytes32",
++                    "name": "",
++                    "type": "bytes32"
++                }
++            ],
++            "name": "approvedHashes",
++            "outputs": [
++                {
++                    "internalType": "uint256",
++                    "name": "",
++                    "type": "uint256"
++                }
++            ],
++            "stateMutability": "view",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "uint256",
++                    "name": "_threshold",
++                    "type": "uint256"
++                }
++            ],
++            "name": "changeThreshold",
++            "outputs": [],
++            "stateMutability": "nonpayable",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "bytes32",
++                    "name": "dataHash",
++                    "type": "bytes32"
++                },
++                {
++                    "internalType": "bytes",
++                    "name": "data",
++                    "type": "bytes"
++                },
++                {
++                    "internalType": "bytes",
++                    "name": "signatures",
++                    "type": "bytes"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "requiredSignatures",
++                    "type": "uint256"
++                }
++            ],
++            "name": "checkNSignatures",
++            "outputs": [],
++            "stateMutability": "view",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "bytes32",
++                    "name": "dataHash",
++                    "type": "bytes32"
++                },
++                {
++                    "internalType": "bytes",
++                    "name": "data",
++                    "type": "bytes"
++                },
++                {
++                    "internalType": "bytes",
++                    "name": "signatures",
++                    "type": "bytes"
++                }
++            ],
++            "name": "checkSignatures",
++            "outputs": [],
++            "stateMutability": "view",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "address",
++                    "name": "prevModule",
++                    "type": "address"
++                },
++                {
++                    "internalType": "address",
++                    "name": "module",
++                    "type": "address"
++                }
++            ],
++            "name": "disableModule",
++            "outputs": [],
++            "stateMutability": "nonpayable",
++            "type": "function"
++        },
++        {
++            "inputs": [],
++            "name": "domainSeparator",
++            "outputs": [
++                {
++                    "internalType": "bytes32",
++                    "name": "",
++                    "type": "bytes32"
++                }
++            ],
++            "stateMutability": "view",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "address",
++                    "name": "module",
++                    "type": "address"
++                }
++            ],
++            "name": "enableModule",
++            "outputs": [],
++            "stateMutability": "nonpayable",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "address",
++                    "name": "to",
++                    "type": "address"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "value",
++                    "type": "uint256"
++                },
++                {
++                    "internalType": "bytes",
++                    "name": "data",
++                    "type": "bytes"
++                },
++                {
++                    "internalType": "enum Enum.Operation",
++                    "name": "operation",
++                    "type": "uint8"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "safeTxGas",
++                    "type": "uint256"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "baseGas",
++                    "type": "uint256"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "gasPrice",
++                    "type": "uint256"
++                },
++                {
++                    "internalType": "address",
++                    "name": "gasToken",
++                    "type": "address"
++                },
++                {
++                    "internalType": "address",
++                    "name": "refundReceiver",
++                    "type": "address"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "_nonce",
++                    "type": "uint256"
++                }
++            ],
++            "name": "encodeTransactionData",
++            "outputs": [
++                {
++                    "internalType": "bytes",
++                    "name": "",
++                    "type": "bytes"
++                }
++            ],
++            "stateMutability": "view",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "address",
++                    "name": "to",
++                    "type": "address"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "value",
++                    "type": "uint256"
++                },
++                {
++                    "internalType": "bytes",
++                    "name": "data",
++                    "type": "bytes"
++                },
++                {
++                    "internalType": "enum Enum.Operation",
++                    "name": "operation",
++                    "type": "uint8"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "safeTxGas",
++                    "type": "uint256"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "baseGas",
++                    "type": "uint256"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "gasPrice",
++                    "type": "uint256"
++                },
++                {
++                    "internalType": "address",
++                    "name": "gasToken",
++                    "type": "address"
++                },
++                {
++                    "internalType": "address payable",
++                    "name": "refundReceiver",
++                    "type": "address"
++                },
++                {
++                    "internalType": "bytes",
++                    "name": "signatures",
++                    "type": "bytes"
++                }
++            ],
++            "name": "execTransaction",
++            "outputs": [
++                {
++                    "internalType": "bool",
++                    "name": "",
++                    "type": "bool"
++                }
++            ],
++            "stateMutability": "payable",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "address",
++                    "name": "to",
++                    "type": "address"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "value",
++                    "type": "uint256"
++                },
++                {
++                    "internalType": "bytes",
++                    "name": "data",
++                    "type": "bytes"
++                },
++                {
++                    "internalType": "enum Enum.Operation",
++                    "name": "operation",
++                    "type": "uint8"
++                }
++            ],
++            "name": "execTransactionFromModule",
++            "outputs": [
++                {
++                    "internalType": "bool",
++                    "name": "success",
++                    "type": "bool"
++                }
++            ],
++            "stateMutability": "nonpayable",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "address",
++                    "name": "to",
++                    "type": "address"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "value",
++                    "type": "uint256"
++                },
++                {
++                    "internalType": "bytes",
++                    "name": "data",
++                    "type": "bytes"
++                },
++                {
++                    "internalType": "enum Enum.Operation",
++                    "name": "operation",
++                    "type": "uint8"
++                }
++            ],
++            "name": "execTransactionFromModuleReturnData",
++            "outputs": [
++                {
++                    "internalType": "bool",
++                    "name": "success",
++                    "type": "bool"
++                },
++                {
++                    "internalType": "bytes",
++                    "name": "returnData",
++                    "type": "bytes"
++                }
++            ],
++            "stateMutability": "nonpayable",
++            "type": "function"
++        },
++        {
++            "inputs": [],
++            "name": "getChainId",
++            "outputs": [
++                {
++                    "internalType": "uint256",
++                    "name": "",
++                    "type": "uint256"
++                }
++            ],
++            "stateMutability": "view",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "address",
++                    "name": "start",
++                    "type": "address"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "pageSize",
++                    "type": "uint256"
++                }
++            ],
++            "name": "getModulesPaginated",
++            "outputs": [
++                {
++                    "internalType": "address[]",
++                    "name": "array",
++                    "type": "address[]"
++                },
++                {
++                    "internalType": "address",
++                    "name": "next",
++                    "type": "address"
++                }
++            ],
++            "stateMutability": "view",
++            "type": "function"
++        },
++        {
++            "inputs": [],
++            "name": "getOwners",
++            "outputs": [
++                {
++                    "internalType": "address[]",
++                    "name": "",
++                    "type": "address[]"
++                }
++            ],
++            "stateMutability": "view",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "uint256",
++                    "name": "offset",
++                    "type": "uint256"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "length",
++                    "type": "uint256"
++                }
++            ],
++            "name": "getStorageAt",
++            "outputs": [
++                {
++                    "internalType": "bytes",
++                    "name": "",
++                    "type": "bytes"
++                }
++            ],
++            "stateMutability": "view",
++            "type": "function"
++        },
++        {
++            "inputs": [],
++            "name": "getThreshold",
++            "outputs": [
++                {
++                    "internalType": "uint256",
++                    "name": "",
++                    "type": "uint256"
++                }
++            ],
++            "stateMutability": "view",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "address",
++                    "name": "to",
++                    "type": "address"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "value",
++                    "type": "uint256"
++                },
++                {
++                    "internalType": "bytes",
++                    "name": "data",
++                    "type": "bytes"
++                },
++                {
++                    "internalType": "enum Enum.Operation",
++                    "name": "operation",
++                    "type": "uint8"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "safeTxGas",
++                    "type": "uint256"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "baseGas",
++                    "type": "uint256"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "gasPrice",
++                    "type": "uint256"
++                },
++                {
++                    "internalType": "address",
++                    "name": "gasToken",
++                    "type": "address"
++                },
++                {
++                    "internalType": "address",
++                    "name": "refundReceiver",
++                    "type": "address"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "_nonce",
++                    "type": "uint256"
++                }
++            ],
++            "name": "getTransactionHash",
++            "outputs": [
++                {
++                    "internalType": "bytes32",
++                    "name": "",
++                    "type": "bytes32"
++                }
++            ],
++            "stateMutability": "view",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "address",
++                    "name": "module",
++                    "type": "address"
++                }
++            ],
++            "name": "isModuleEnabled",
++            "outputs": [
++                {
++                    "internalType": "bool",
++                    "name": "",
++                    "type": "bool"
++                }
++            ],
++            "stateMutability": "view",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "address",
++                    "name": "owner",
++                    "type": "address"
++                }
++            ],
++            "name": "isOwner",
++            "outputs": [
++                {
++                    "internalType": "bool",
++                    "name": "",
++                    "type": "bool"
++                }
++            ],
++            "stateMutability": "view",
++            "type": "function"
++        },
++        {
++            "inputs": [],
++            "name": "nonce",
++            "outputs": [
++                {
++                    "internalType": "uint256",
++                    "name": "",
++                    "type": "uint256"
++                }
++            ],
++            "stateMutability": "view",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "address",
++                    "name": "prevOwner",
++                    "type": "address"
++                },
++                {
++                    "internalType": "address",
++                    "name": "owner",
++                    "type": "address"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "_threshold",
++                    "type": "uint256"
++                }
++            ],
++            "name": "removeOwner",
++            "outputs": [],
++            "stateMutability": "nonpayable",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "address",
++                    "name": "handler",
++                    "type": "address"
++                }
++            ],
++            "name": "setFallbackHandler",
++            "outputs": [],
++            "stateMutability": "nonpayable",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "address",
++                    "name": "guard",
++                    "type": "address"
++                }
++            ],
++            "name": "setGuard",
++            "outputs": [],
++            "stateMutability": "nonpayable",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "address[]",
++                    "name": "_owners",
++                    "type": "address[]"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "_threshold",
++                    "type": "uint256"
++                },
++                {
++                    "internalType": "address",
++                    "name": "to",
++                    "type": "address"
++                },
++                {
++                    "internalType": "bytes",
++                    "name": "data",
++                    "type": "bytes"
++                },
++                {
++                    "internalType": "address",
++                    "name": "fallbackHandler",
++                    "type": "address"
++                },
++                {
++                    "internalType": "address",
++                    "name": "paymentToken",
++                    "type": "address"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "payment",
++                    "type": "uint256"
++                },
++                {
++                    "internalType": "address payable",
++                    "name": "paymentReceiver",
++                    "type": "address"
++                }
++            ],
++            "name": "setup",
++            "outputs": [],
++            "stateMutability": "nonpayable",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "bytes32",
++                    "name": "",
++                    "type": "bytes32"
++                }
++            ],
++            "name": "signedMessages",
++            "outputs": [
++                {
++                    "internalType": "uint256",
++                    "name": "",
++                    "type": "uint256"
++                }
++            ],
++            "stateMutability": "view",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "address",
++                    "name": "targetContract",
++                    "type": "address"
++                },
++                {
++                    "internalType": "bytes",
++                    "name": "calldataPayload",
++                    "type": "bytes"
++                }
++            ],
++            "name": "simulateAndRevert",
++            "outputs": [],
++            "stateMutability": "nonpayable",
++            "type": "function"
++        },
++        {
++            "inputs": [
++                {
++                    "internalType": "address",
++                    "name": "prevOwner",
++                    "type": "address"
++                },
++                {
++                    "internalType": "address",
++                    "name": "oldOwner",
++                    "type": "address"
++                },
++                {
++                    "internalType": "address",
++                    "name": "newOwner",
++                    "type": "address"
++                }
++            ],
++            "name": "swapOwner",
++            "outputs": [],
++            "stateMutability": "nonpayable",
++            "type": "function"
++        },
++        {
++            "stateMutability": "payable",
++            "type": "receive"
+         }
+-      ],
+-      "name": "swapOwner",
+-      "outputs": [],
+-      "stateMutability": "nonpayable",
+-      "type": "function"
+-    },
+-    {
+-      "stateMutability": "payable",
+-      "type": "receive"
+-    }
+-  ]
++    ]
+ }
+diff --git a/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/src/assets/v1.4.1/safe_proxy_factory.json b/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/src/assets/v1.4.1/safe_proxy_factory.json
+index a6dcdc1..00401e6 100644
+--- a/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/src/assets/v1.4.1/safe_proxy_factory.json
++++ b/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/src/assets/v1.4.1/safe_proxy_factory.json
+@@ -1,153 +1,154 @@
+ {
+-  "defaultAddress": "0x4e1DCf7AD4e460CfD30791CCC4F9c8a4f820ec67",
+-  "contractName": "SafeProxyFactory",
+-  "version": "1.4.1",
+-  "released": true,
+-  "networkAddresses": {
+-    "1": "0x4e1DCf7AD4e460CfD30791CCC4F9c8a4f820ec67",
+-    "5": "0x4e1DCf7AD4e460CfD30791CCC4F9c8a4f820ec67",
+-    "56": "0x4e1DCf7AD4e460CfD30791CCC4F9c8a4f820ec67",
+-    "100": "0x4e1DCf7AD4e460CfD30791CCC4F9c8a4f820ec67",
+-    "1442": "0x4e1DCf7AD4e460CfD30791CCC4F9c8a4f820ec67",
+-    "80001": "0x4e1DCf7AD4e460CfD30791CCC4F9c8a4f820ec67"
+-  },
+-  "abi": [
+-    {
+-      "anonymous": false,
+-      "inputs": [
+-        {
+-          "indexed": true,
+-          "internalType": "contract SafeProxy",
+-          "name": "proxy",
+-          "type": "address"
+-        },
+-        {
+-          "indexed": false,
+-          "internalType": "address",
+-          "name": "singleton",
+-          "type": "address"
+-        }
+-      ],
+-      "name": "ProxyCreation",
+-      "type": "event"
++    "defaultAddress": "0x4e1DCf7AD4e460CfD30791CCC4F9c8a4f820ec67",
++    "contractName": "SafeProxyFactory",
++    "version": "1.4.1",
++    "released": true,
++    "networkAddresses": {
++        "1": "0x4e1DCf7AD4e460CfD30791CCC4F9c8a4f820ec67",
++        "5": "0x4e1DCf7AD4e460CfD30791CCC4F9c8a4f820ec67",
++        "56": "0x4e1DCf7AD4e460CfD30791CCC4F9c8a4f820ec67",
++        "957": "0x4e1DCf7AD4e460CfD30791CCC4F9c8a4f820ec67",
++        "100": "0x4e1DCf7AD4e460CfD30791CCC4F9c8a4f820ec67",
++        "1442": "0x4e1DCf7AD4e460CfD30791CCC4F9c8a4f820ec67",
++        "80001": "0x4e1DCf7AD4e460CfD30791CCC4F9c8a4f820ec67"
+     },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "address",
+-          "name": "_singleton",
+-          "type": "address"
++    "abi": [
++        {
++            "anonymous": false,
++            "inputs": [
++                {
++                    "indexed": true,
++                    "internalType": "contract SafeProxy",
++                    "name": "proxy",
++                    "type": "address"
++                },
++                {
++                    "indexed": false,
++                    "internalType": "address",
++                    "name": "singleton",
++                    "type": "address"
++                }
++            ],
++            "name": "ProxyCreation",
++            "type": "event"
+         },
+         {
+-          "internalType": "bytes",
+-          "name": "initializer",
+-          "type": "bytes"
++            "inputs": [
++                {
++                    "internalType": "address",
++                    "name": "_singleton",
++                    "type": "address"
++                },
++                {
++                    "internalType": "bytes",
++                    "name": "initializer",
++                    "type": "bytes"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "saltNonce",
++                    "type": "uint256"
++                }
++            ],
++            "name": "createChainSpecificProxyWithNonce",
++            "outputs": [
++                {
++                    "internalType": "contract SafeProxy",
++                    "name": "proxy",
++                    "type": "address"
++                }
++            ],
++            "stateMutability": "nonpayable",
++            "type": "function"
+         },
+         {
+-          "internalType": "uint256",
+-          "name": "saltNonce",
+-          "type": "uint256"
+-        }
+-      ],
+-      "name": "createChainSpecificProxyWithNonce",
+-      "outputs": [
+-        {
+-          "internalType": "contract SafeProxy",
+-          "name": "proxy",
+-          "type": "address"
+-        }
+-      ],
+-      "stateMutability": "nonpayable",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "address",
+-          "name": "_singleton",
+-          "type": "address"
++            "inputs": [
++                {
++                    "internalType": "address",
++                    "name": "_singleton",
++                    "type": "address"
++                },
++                {
++                    "internalType": "bytes",
++                    "name": "initializer",
++                    "type": "bytes"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "saltNonce",
++                    "type": "uint256"
++                },
++                {
++                    "internalType": "contract IProxyCreationCallback",
++                    "name": "callback",
++                    "type": "address"
++                }
++            ],
++            "name": "createProxyWithCallback",
++            "outputs": [
++                {
++                    "internalType": "contract SafeProxy",
++                    "name": "proxy",
++                    "type": "address"
++                }
++            ],
++            "stateMutability": "nonpayable",
++            "type": "function"
+         },
+         {
+-          "internalType": "bytes",
+-          "name": "initializer",
+-          "type": "bytes"
++            "inputs": [
++                {
++                    "internalType": "address",
++                    "name": "_singleton",
++                    "type": "address"
++                },
++                {
++                    "internalType": "bytes",
++                    "name": "initializer",
++                    "type": "bytes"
++                },
++                {
++                    "internalType": "uint256",
++                    "name": "saltNonce",
++                    "type": "uint256"
++                }
++            ],
++            "name": "createProxyWithNonce",
++            "outputs": [
++                {
++                    "internalType": "contract SafeProxy",
++                    "name": "proxy",
++                    "type": "address"
++                }
++            ],
++            "stateMutability": "nonpayable",
++            "type": "function"
+         },
+         {
+-          "internalType": "uint256",
+-          "name": "saltNonce",
+-          "type": "uint256"
++            "inputs": [],
++            "name": "getChainId",
++            "outputs": [
++                {
++                    "internalType": "uint256",
++                    "name": "",
++                    "type": "uint256"
++                }
++            ],
++            "stateMutability": "view",
++            "type": "function"
+         },
+         {
+-          "internalType": "contract IProxyCreationCallback",
+-          "name": "callback",
+-          "type": "address"
+-        }
+-      ],
+-      "name": "createProxyWithCallback",
+-      "outputs": [
+-        {
+-          "internalType": "contract SafeProxy",
+-          "name": "proxy",
+-          "type": "address"
+-        }
+-      ],
+-      "stateMutability": "nonpayable",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
+-        {
+-          "internalType": "address",
+-          "name": "_singleton",
+-          "type": "address"
+-        },
+-        {
+-          "internalType": "bytes",
+-          "name": "initializer",
+-          "type": "bytes"
+-        },
+-        {
+-          "internalType": "uint256",
+-          "name": "saltNonce",
+-          "type": "uint256"
+-        }
+-      ],
+-      "name": "createProxyWithNonce",
+-      "outputs": [
+-        {
+-          "internalType": "contract SafeProxy",
+-          "name": "proxy",
+-          "type": "address"
+-        }
+-      ],
+-      "stateMutability": "nonpayable",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [],
+-      "name": "getChainId",
+-      "outputs": [
+-        {
+-          "internalType": "uint256",
+-          "name": "",
+-          "type": "uint256"
+-        }
+-      ],
+-      "stateMutability": "view",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [],
+-      "name": "proxyCreationCode",
+-      "outputs": [
+-        {
+-          "internalType": "bytes",
+-          "name": "",
+-          "type": "bytes"
++            "inputs": [],
++            "name": "proxyCreationCode",
++            "outputs": [
++                {
++                    "internalType": "bytes",
++                    "name": "",
++                    "type": "bytes"
++                }
++            ],
++            "stateMutability": "pure",
++            "type": "function"
+         }
+-      ],
+-      "stateMutability": "pure",
+-      "type": "function"
+-    }
+-  ]
++    ]
+ }
+diff --git a/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/src/assets/v1.4.1/sign_message_lib.json b/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/src/assets/v1.4.1/sign_message_lib.json
+index 4ebc190..9d0bb10 100644
+--- a/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/src/assets/v1.4.1/sign_message_lib.json
++++ b/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/src/assets/v1.4.1/sign_message_lib.json
+@@ -1,59 +1,60 @@
+ {
+-  "defaultAddress": "0xd53cd0aB83D845Ac265BE939c57F53AD838012c9",
+-  "contractName": "SignMessageLib",
+-  "version": "1.4.1",
+-  "released": true,
+-  "networkAddresses": {
+-    "1": "0xd53cd0aB83D845Ac265BE939c57F53AD838012c9",
+-    "100": "0xd53cd0aB83D845Ac265BE939c57F53AD838012c9",
+-    "1442": "0xd53cd0aB83D845Ac265BE939c57F53AD838012c9",
+-    "80001": "0xd53cd0aB83D845Ac265BE939c57F53AD838012c9"
+-  },
+-  "abi": [
+-    {
+-      "anonymous": false,
+-      "inputs": [
+-        {
+-          "indexed": true,
+-          "internalType": "bytes32",
+-          "name": "msgHash",
+-          "type": "bytes32"
+-        }
+-      ],
+-      "name": "SignMsg",
+-      "type": "event"
++    "defaultAddress": "0xd53cd0aB83D845Ac265BE939c57F53AD838012c9",
++    "contractName": "SignMessageLib",
++    "version": "1.4.1",
++    "released": true,
++    "networkAddresses": {
++        "1": "0xd53cd0aB83D845Ac265BE939c57F53AD838012c9",
++        "100": "0xd53cd0aB83D845Ac265BE939c57F53AD838012c9",
++        "957": "0xd53cd0aB83D845Ac265BE939c57F53AD838012c9",
++        "1442": "0xd53cd0aB83D845Ac265BE939c57F53AD838012c9",
++        "80001": "0xd53cd0aB83D845Ac265BE939c57F53AD838012c9"
+     },
+-    {
+-      "inputs": [
++    "abi": [
+         {
+-          "internalType": "bytes",
+-          "name": "message",
+-          "type": "bytes"
+-        }
+-      ],
+-      "name": "getMessageHash",
+-      "outputs": [
++            "anonymous": false,
++            "inputs": [
++                {
++                    "indexed": true,
++                    "internalType": "bytes32",
++                    "name": "msgHash",
++                    "type": "bytes32"
++                }
++            ],
++            "name": "SignMsg",
++            "type": "event"
++        },
+         {
+-          "internalType": "bytes32",
+-          "name": "",
+-          "type": "bytes32"
+-        }
+-      ],
+-      "stateMutability": "view",
+-      "type": "function"
+-    },
+-    {
+-      "inputs": [
++            "inputs": [
++                {
++                    "internalType": "bytes",
++                    "name": "message",
++                    "type": "bytes"
++                }
++            ],
++            "name": "getMessageHash",
++            "outputs": [
++                {
++                    "internalType": "bytes32",
++                    "name": "",
++                    "type": "bytes32"
++                }
++            ],
++            "stateMutability": "view",
++            "type": "function"
++        },
+         {
+-          "internalType": "bytes",
+-          "name": "_data",
+-          "type": "bytes"
++            "inputs": [
++                {
++                    "internalType": "bytes",
++                    "name": "_data",
++                    "type": "bytes"
++                }
++            ],
++            "name": "signMessage",
++            "outputs": [],
++            "stateMutability": "nonpayable",
++            "type": "function"
+         }
+-      ],
+-      "name": "signMessage",
+-      "outputs": [],
+-      "stateMutability": "nonpayable",
+-      "type": "function"
+-    }
+-  ]
++    ]
+ }
+diff --git a/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/src/assets/v1.4.1/simulate_tx_accessor.json b/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/src/assets/v1.4.1/simulate_tx_accessor.json
+index 7264a67..74d544c 100644
+--- a/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/src/assets/v1.4.1/simulate_tx_accessor.json
++++ b/node_modules/@safe-global/safe-core-sdk-types/node_modules/@safe-global/safe-deployments/src/assets/v1.4.1/simulate_tx_accessor.json
+@@ -1,65 +1,66 @@
+ {
+-  "defaultAddress": "0x3d4BA2E0884aa488718476ca2FB8Efc291A46199",
+-  "released": true,
+-  "contractName": "SimulateTxAccessor",
+-  "version": "1.4.1",
+-  "networkAddresses": {
+-    "1": "0x3d4BA2E0884aa488718476ca2FB8Efc291A46199",
+-    "5": "0x3d4BA2E0884aa488718476ca2FB8Efc291A46199",
+-    "56": "0x3d4BA2E0884aa488718476ca2FB8Efc291A46199",
+-    "100": "0x3d4BA2E0884aa488718476ca2FB8Efc291A46199",
+-    "1442": "0x3d4BA2E0884aa488718476ca2FB8Efc291A46199",
+-    "80001": "0x3d4BA2E0884aa488718476ca2FB8Efc291A46199"
+-  },
+-  "abi": [
+-    {
+-      "inputs": [],
+-      "stateMutability": "nonpayable",
+-      "type": "constructor"
++    "defaultAddress": "0x3d4BA2E0884aa488718476ca2FB8Efc291A46199",
++    "released": true,
++    "contractName": "SimulateTxAccessor",
++    "version": "1.4.1",
++    "networkAddresses": {
++        "1": "0x3d4BA2E0884aa488718476ca2FB8Efc291A46199",
++        "5": "0x3d4BA2E0884aa488718476ca2FB8Efc291A46199",
++        "56": "0x3d4BA2E0884aa488718476ca2FB8Efc291A46199",
++        "957": "0x3d4BA2E0884aa488718476ca2FB8Efc291A46199",
++        "100": "0x3d4BA2E0884aa488718476ca2FB8Efc291A46199",
++        "1442": "0x3d4BA2E0884aa488718476ca2FB8Efc291A46199",
++        "80001": "0x3d4BA2E0884aa488718476ca2FB8Efc291A46199"
      },
 -    {
 -      "inputs": [
