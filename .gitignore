@@ -56,3 +56,6 @@ yalc.lock
 /public/*.js.LICENSE.txt
 certificates
 *storybook.log
+
+# Claude Code local settings
+.claude/settings.local.json
