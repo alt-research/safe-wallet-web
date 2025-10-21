@@ -1,11 +1,26 @@
 import { useEffect } from 'react'
-import { getChainsConfig, type ChainInfo } from '@safe-global/safe-gateway-typescript-sdk'
+import { getChainsConfig, type ChainInfo, FEATURES } from '@safe-global/safe-gateway-typescript-sdk'
 import useAsync, { type AsyncResult } from '../useAsync'
 import { logError, Errors } from '@/services/exceptions'
 
 const getConfigs = async (): Promise<ChainInfo[]> => {
   const data = await getChainsConfig()
-  return data.results || []
+  const chains = data.results || []
+
+  // Add missing features for self-hosted chains
+  return chains.map((chain) => {
+    // For chain 957, ensure SAFE_APPS feature is enabled
+    if (chain.chainId === '957') {
+      const features = chain.features || []
+      if (!features.includes(FEATURES.SAFE_APPS)) {
+        return {
+          ...chain,
+          features: [...features, FEATURES.SAFE_APPS],
+        }
+      }
+    }
+    return chain
+  })
 }
 
 export const useLoadChains = (): AsyncResult<ChainInfo[]> => {
