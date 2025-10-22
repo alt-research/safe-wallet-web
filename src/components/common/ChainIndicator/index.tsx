@@ -38,7 +38,7 @@ const ChainIndicator = ({
   className,
   inline = false,
   showUnknown = true,
-  showLogo = true,
+  showLogo = false,
   responsive = false,
 }: ChainIndicatorProps): ReactElement | null => {
   const currentChainId = useChainId()
