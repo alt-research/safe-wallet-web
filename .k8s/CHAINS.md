@@ -8,13 +8,13 @@ Last updated: 2025-12-24
 
 ## Active Chains
 
-### Orbit-demo (Chain ID: 141414)
+### Orbit-demo (Chain ID: 20240328)
 - **Status:** ✅ Ready (patches exist)
-- **Added to patches:** Historical
-- **Network Type:** Testnet
+- **Added to patches:** 2025-12-24 (fixed chain ID)
+- **Network Type:** Testnet (Arb Orbit)
 - **Safe Contracts Version:** v1.4.1
-- **RPC:** TBD (configure in Config Service)
-- **Explorer:** TBD (configure in Config Service)
+- **RPC:** https://orbit-demo.alt.technology/
+- **Explorer:** https://orbit-demo-explorer.alt.technology/
 - **Transaction Service:** TBD (deploy to K8s)
 
 **Contract Addresses:**
@@ -161,7 +161,7 @@ git tag test-abc      # ❌ Does NOT trigger
 
 1. **Check patches are applied:**
    ```bash
-   grep -r "\"141414\"" node_modules/@safe-global/safe-deployments/
+   grep -r "\"20240328\"" node_modules/@safe-global/safe-deployments/
    ```
 
 2. **Rebuild image:**
