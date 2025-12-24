@@ -3,10 +3,7 @@ RUN apk add --no-cache libc6-compat git python3 py3-pip make g++ libusb-dev eude
 WORKDIR /app
 COPY . .
 
-# Accept GitHub token as build arg for private package access (build-time only)
-ARG GITHUB_TOKEN
-
-# Fix arm64 timeouts and add retry logic
+# Fix arm64 timeouts and add retry logic for public npm packages
 RUN yarn config set network-timeout 300000 && \
     yarn config set network-concurrency 1
 
