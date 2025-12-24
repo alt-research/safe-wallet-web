@@ -24,6 +24,13 @@ ENV NODE_ENV=production
 # Uncomment the following line in case you want to disable telemetry during the build.
 ENV NEXT_TELEMETRY_DISABLED=1
 
+# Set Next.js public environment variables for build
+# These get baked into the static export and cannot be changed at runtime
+ENV NEXT_PUBLIC_GATEWAY_URL_PRODUCTION=/cgw
+ENV NEXT_PUBLIC_IS_PRODUCTION=true
+ENV NEXT_PUBLIC_SAFE_VERSION=1.4.1
+ENV NEXT_PUBLIC_WC_PROJECT_ID=dce8b76eeca269d6a63782777c1972d9
+
 # Build the Next.js app during Docker build (not at runtime)
 RUN yarn build
 
