@@ -17,16 +17,21 @@ Last updated: 2025-12-24
 - **Explorer:** https://orbit-demo-explorer.alt.technology/
 - **Transaction Service:** TBD (deploy to K8s)
 
-**Contract Addresses:**
+**Contract Addresses (Deployed 2025-12-24):**
 ```json
 {
-  "SimulateTxAccessor": "0xf48f2B2d2a534e402487b3ee7C18c33Aec0Fe5e4",
-  "SafeProxyFactory": "0x7cbB62EaA69F79e6873cD1ecB2392971036cFAa4",
-  "TokenCallbackHandler": "0xd9Db270c1B5E3Bd161E8c8503c55cEABeE709552",
-  "CompatibilityFallbackHandler": "0x3E5c63644E683549055b9Be8653de26E0B4CD36E",
-  "CreateCall": "0xA238CBeb142c10Ef7Ad8442C6D1f9E89e07e7761"
+  "SafeProxyFactory": "0x1970996dAcE0e304e98888d54C8ff5B8541B6e53",
+  "SafeL2": "0x7d17ce1410eD66417aA8Ab8c61a10e4cD1312e01",
+  "Safe": "0x3FF82beB47F9AD9e5FF31C79ad87375acad19f81",
+  "CompatibilityFallbackHandler": "0x3C7455c65b8B179412046e95147a58557DdA176C",
+  "MultiSend": "0x44a2d054F69910A7D439ffFa510Bdc00CbBF66Ce",
+  "SimulateTxAccessor": "0x47e367b6c6480464DBB953541Be53e7534d2b498",
+  "CreateCall": "0xA60dd58079F2bc7e2C7DeC9314ce0ba46C39e55d",
+  "TokenCallbackHandler": "0xeb8546c79EC8356224c031b11e7FB7F02857fF0B"
 }
 ```
+
+**Note:** These are NON-deterministic addresses (deployed without CREATE2) and differ from other chains.
 
 ### Lyra Mainnet (Chain ID: 957)
 - **Status:** ✅ Deployed (staging)
