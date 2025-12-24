@@ -46,12 +46,26 @@ This branch is **not** synced with the official Safe wallet (https://github.com/
    git push origin k8s-deployment
    ```
 
-4. **GitHub Actions will auto-build:**
-   - Watch: https://github.com/alt-research/safe-wallet-web/actions
-   - Image pushed to ECR: `305587085711.dkr.ecr.us-west-2.amazonaws.com/safe-wallet-web:k8s-latest`
+4. **Create a git tag and push:**
+   ```bash
+   # Version tag (e.g., v1.0.0)
+   git tag v1.0.0
+   git push origin v1.0.0
 
-5. **Deploy to K8s:**
-   - Update GitOps HelmRelease
+   # Or chain-specific tag
+   git tag v1.0.0-orbit  # For orbit-demo
+   git tag v1.0.0-lyra   # For lyra-mainnet
+   git push origin v1.0.0-orbit
+   ```
+
+5. **GitHub Actions will auto-build:**
+   - Watch: https://github.com/alt-research/safe-wallet-web/actions
+   - Images pushed to ECR:
+     - `305587085711.dkr.ecr.us-west-2.amazonaws.com/safe-wallet-web:v1.0.0`
+     - `305587085711.dkr.ecr.us-west-2.amazonaws.com/safe-wallet-web:latest`
+
+6. **Deploy to K8s:**
+   - Update GitOps HelmRelease with the tagged version
    - See: `gitops-staging-others/gnosis-safe/`
 
 ### Manual Build (Local Testing)
@@ -80,9 +94,14 @@ open http://localhost:8080
 
 | Workflow | Trigger | Purpose |
 |----------|---------|---------|
-| `deploy-k8s-ecr.yml` | Push to k8s-deployment | Build & push Docker image to ECR |
+| `deploy-k8s-ecr.yml` | Git tags (`v*`, `*-orbit`, `*-lyra`) | Build & push Docker image to ECR |
 | `lint.yml` | Push, PR | Code linting |
 | `unit-tests.yml` | Push, PR | Run unit tests |
+
+**Tag patterns that trigger builds:**
+- `v*` - Version tags (e.g., `v1.0.0`, `v2.1.3`)
+- `*-orbit` - Orbit-specific releases (e.g., `v1.0.0-orbit`)
+- `*-lyra` - Lyra-specific releases (e.g., `v1.0.0-lyra`)
 
 ### Removed Workflows
 
@@ -128,31 +147,40 @@ Dockerfile              # K8s-optimized Dockerfile
                  │
                  ▼
 ┌─────────────────────────────────────────────────┐
-│ 2. Push to k8s-deployment branch                │
+│ 2. Commit and push to k8s-deployment branch     │
+│    git commit -m "Add chain XYZ"                │
 │    git push origin k8s-deployment               │
 └────────────────┬────────────────────────────────┘
                  │
                  ▼
 ┌─────────────────────────────────────────────────┐
-│ 3. GitHub Actions auto-builds                   │
+│ 3. Create and push git tag                      │
+│    git tag v1.0.0                               │
+│    git push origin v1.0.0                       │
+└────────────────┬────────────────────────────────┘
+                 │
+                 ▼
+┌─────────────────────────────────────────────────┐
+│ 4. GitHub Actions auto-builds                   │
+│    - Triggered by git tag                       │
 │    - Runs yarn build (static export)            │
 │    - Builds Docker image                        │
 │    - Pushes to ECR with tags:                   │
-│      * k8s-latest                               │
-│      * k8s-{short-sha}                          │
+│      * v1.0.0 (git tag name)                    │
+│      * latest                                   │
 └────────────────┬────────────────────────────────┘
                  │
                  ▼
 ┌─────────────────────────────────────────────────┐
-│ 4. Update GitOps HelmRelease                    │
+│ 5. Update GitOps HelmRelease                    │
 │    - Edit: gitops-staging-others/               │
 │      gnosis-safe/core/helmrelease.yaml          │
-│    - Update ui.image to k8s-latest              │
+│    - Update ui.image to v1.0.0                  │
 └────────────────┬────────────────────────────────┘
                  │
                  ▼
 ┌─────────────────────────────────────────────────┐
-│ 5. FluxCD deploys to K8s                        │
+│ 6. FluxCD deploys to K8s                        │
 │    - Pulls new image from ECR                   │
 │    - Rolls out new UI pods                      │
 │    - Chain now available in UI                  │
@@ -161,15 +189,28 @@ Dockerfile              # K8s-optimized Dockerfile
 
 ## Image Tags Explained
 
-| Tag | Description | Use Case |
-|-----|-------------|----------|
-| `k8s-latest` | Latest k8s-deployment build | Staging, auto-update |
-| `k8s-{sha}` | Specific commit (e.g., k8s-a1b2c3d) | Production, pinned version |
-| `k8s-{custom}` | Manual workflow tag | Special deployments |
+| Tag | Description | Use Case | Example |
+|-----|-------------|----------|---------|
+| `latest` | Latest tagged build | Rolling updates, staging | `safe-wallet-web:latest` |
+| `v*` | Version release | Production, stable deployments | `safe-wallet-web:v1.0.0` |
+| `*-orbit` | Orbit-specific release | Orbit-demo deployments | `safe-wallet-web:v1.0.0-orbit` |
+| `*-lyra` | Lyra-specific release | Lyra-mainnet deployments | `safe-wallet-web:v1.0.0-lyra` |
 
 **Recommendation:**
-- **Staging:** Use `k8s-latest` for automatic updates
-- **Production:** Use `k8s-{sha}` or `k8s-{version}` for stability
+- **Staging:** Use `latest` for automatic updates on new tags
+- **Production:** Use specific version tags (`v1.0.0`) for stability
+- **Chain-specific:** Use tagged releases with chain suffix (`v1.0.0-orbit`)
+
+**Creating tags:**
+```bash
+# General release
+git tag v1.0.0
+git push origin v1.0.0
+
+# Chain-specific release
+git tag v1.0.0-orbit
+git push origin v1.0.0-orbit
+```
 
 ## Syncing with Upstream (Optional)
 

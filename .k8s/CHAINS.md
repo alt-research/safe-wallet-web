@@ -93,12 +93,25 @@ These chains are configured in the patches but not yet deployed to K8s:
    git push origin k8s-deployment
    ```
 
-4. **GitHub Actions will auto-build**
-   - Watch: https://github.com/alt-research/safe-wallet-web/actions
-   - New image will be pushed to ECR with tag `k8s-latest`
+4. **Create and push git tag**
+   ```bash
+   # Version tag
+   git tag v1.0.0
+   git push origin v1.0.0
 
-5. **Deploy to K8s**
-   - Update GitOps HelmRelease to use new image
+   # Or chain-specific tag
+   git tag v1.0.0-orbit  # For orbit-demo
+   git push origin v1.0.0-orbit
+   ```
+
+5. **GitHub Actions will auto-build**
+   - Watch: https://github.com/alt-research/safe-wallet-web/actions
+   - Images pushed to ECR:
+     - `305587085711.dkr.ecr.us-west-2.amazonaws.com/safe-wallet-web:v1.0.0`
+     - `305587085711.dkr.ecr.us-west-2.amazonaws.com/safe-wallet-web:latest`
+
+6. **Deploy to K8s**
+   - Update GitOps HelmRelease to use tagged version
    - Add chain to Config Service database
    - Deploy chain-specific transaction service
    - See: gitops-staging-others/gnosis-safe/ADDING_CHAINS.md
@@ -107,15 +120,24 @@ These chains are configured in the patches but not yet deployed to K8s:
 
 ## Image Tags
 
-GitHub Actions creates the following tags:
+GitHub Actions creates tags based on git tags:
 
-- `k8s-latest` - Always points to latest k8s-deployment branch build
-- `k8s-{short-sha}` - Specific commit build (e.g., `k8s-a1b2c3d`)
-- `k8s-{custom}` - Manual workflow dispatch with custom tag
+- `latest` - Always points to latest tagged build
+- `v*` - Version tags (e.g., `v1.0.0`, `v2.1.3`)
+- `*-orbit` - Orbit-specific releases (e.g., `v1.0.0-orbit`)
+- `*-lyra` - Lyra-specific releases (e.g., `v1.0.0-lyra`)
 
 **ECR Repository:**
 ```
 305587085711.dkr.ecr.us-west-2.amazonaws.com/safe-wallet-web
+```
+
+**Tag workflow triggers:**
+```bash
+# Triggers build on tags matching: v*, *-orbit, *-lyra
+git tag v1.0.0        # ✅ Triggers build
+git tag v1.0.0-orbit  # ✅ Triggers build
+git tag test-abc      # ❌ Does NOT trigger
 ```
 
 ---
@@ -124,8 +146,12 @@ GitHub Actions creates the following tags:
 
 | Environment | Image Tag | GitOps Repo | Namespace |
 |-------------|-----------|-------------|-----------|
-| Staging | `k8s-latest` | gitops-staging-others | gnosis-safe |
-| Production | `k8s-{version}` | gitops-mainnet-others | gnosis-safe |
+| Staging | `latest` or `v*` | gitops-staging-others | gnosis-safe |
+| Production | `v{version}` | gitops-mainnet-others | gnosis-safe |
+
+**Recommendation:**
+- **Staging:** Use `latest` for automatic updates or specific version `v1.0.0`
+- **Production:** Always use specific version tags `v1.0.0` for stability
 
 ---
 
