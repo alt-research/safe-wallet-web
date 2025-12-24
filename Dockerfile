@@ -3,11 +3,19 @@ RUN apk add --no-cache libc6-compat git python3 py3-pip make g++ libusb-dev eude
 WORKDIR /app
 COPY . .
 
-# Fix arm64 timeouts
-RUN yarn config set network-timeout 300000
+# Accept GitHub token as build arg for private package access
+ARG GITHUB_TOKEN
+ENV GITHUB_TOKEN=${GITHUB_TOKEN}
 
-# install deps
-RUN yarn install
+# Fix arm64 timeouts and add retry logic
+RUN yarn config set network-timeout 300000 && \
+    yarn config set network-concurrency 1
+
+# install deps with retry
+RUN yarn install --frozen-lockfile || \
+    (sleep 10 && yarn install --frozen-lockfile) || \
+    (sleep 30 && yarn install --frozen-lockfile)
+
 RUN yarn after-install
 
 # Install serve globally during build
