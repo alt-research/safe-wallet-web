@@ -3,22 +3,47 @@ RUN apk add --no-cache libc6-compat git python3 py3-pip make g++ libusb-dev eude
 WORKDIR /app
 COPY . .
 
-# Fix arm64 timeouts
-RUN yarn config set network-timeout 300000 && yarn global add node-gyp
+# Fix arm64 timeouts and add retry logic for public npm packages
+RUN yarn config set network-timeout 300000 && \
+    yarn config set network-concurrency 1
 
-# install deps
-RUN yarn install
+# install deps with retry
+RUN yarn install || \
+    (sleep 10 && yarn install) || \
+    (sleep 30 && yarn install)
+
 RUN yarn after-install
 
-ENV NODE_ENV production
+# Install serve globally during build
+RUN yarn global add serve
+
+ENV NODE_ENV=production
 
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
 # Uncomment the following line in case you want to disable telemetry during the build.
-ENV NEXT_TELEMETRY_DISABLED 1
+ENV NEXT_TELEMETRY_DISABLED=1
 
-EXPOSE 3000
+# Set Next.js public environment variables for build
+# These get baked into the static export and cannot be changed at runtime
+ENV NEXT_PUBLIC_GATEWAY_URL_PRODUCTION=/cgw
+ENV NEXT_PUBLIC_IS_PRODUCTION=true
+ENV NEXT_PUBLIC_SAFE_VERSION=1.3.0
+ENV NEXT_PUBLIC_WC_PROJECT_ID=dce8b76eeca269d6a63782777c1972d9
 
-ENV PORT 3000
+# Optional environment variables (set to empty to disable features)
+ENV NEXT_PUBLIC_BEAMER_ID=
+ENV NEXT_PUBLIC_INFURA_TOKEN=
+ENV NEXT_PUBLIC_SAFE_APPS_INFURA_TOKEN=
+ENV NEXT_PUBLIC_SENTRY_DSN=
 
-CMD ["yarn", "static-serve"]
+# Build the Next.js app during Docker build (not at runtime)
+RUN yarn build
+
+EXPOSE 8080
+
+ENV PORT=8080
+ENV REVERSE_PROXY_UI_PORT=8080
+
+# Just serve the pre-built files using globally installed serve
+CMD ["serve", "out", "-p", "8080", "-n"]
