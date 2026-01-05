@@ -1,7 +1,7 @@
 import { FEATURES } from '@/utils/chains'
 import { CowSwapWidget } from '@cowprotocol/widget-react'
 import { type CowSwapWidgetParams, TradeType } from '@cowprotocol/widget-lib'
-import { CowEvents, type CowEventListeners } from '@cowprotocol/events'
+import { CowWidgetEvents, type CowWidgetEventListener } from '@cowprotocol/events'
 import { useState, useEffect, type MutableRefObject, useMemo } from 'react'
 import { Container, Grid, useTheme } from '@mui/material'
 import { useRef } from 'react'
@@ -108,10 +108,10 @@ const SwapWidget = ({ sell }: Params) => {
     [darkMode],
   )
 
-  const listeners = useMemo<CowEventListeners>(() => {
+  const listeners = useMemo<CowWidgetEventListener[]>(() => {
     return [
       {
-        event: CowEvents.ON_TOAST_MESSAGE,
+        event: CowWidgetEvents.ON_TOAST_MESSAGE,
         handler: (event) => {
           console.info('[Swaps] message:', event)
           const { messageType } = event
@@ -161,12 +161,12 @@ const SwapWidget = ({ sell }: Params) => {
         },
       },
       {
-        event: CowEvents.ON_CHANGE_TRADE_PARAMS,
+        event: CowWidgetEvents.ON_CHANGE_TRADE_PARAMS,
         handler: (newTradeParams) => {
           const { orderType: tradeType, recipient, sellToken, sellTokenAmount } = newTradeParams
-          dispatch(setSwapParams({ tradeType }))
+          dispatch(setSwapParams({ tradeType: tradeType as any }))
 
-          tradeTypeRef.current = tradeType
+          tradeTypeRef.current = tradeType as any
           sellTokenRef.current = {
             asset: sellToken?.symbol || '',
             amount: sellTokenAmount?.units || '0',

@@ -36,7 +36,6 @@ export const batchSlice = createSlice({
       state[chainId][safeAddress].push({
         id: Math.random().toString(36).slice(2),
         timestamp: Date.now(),
-        // @ts-expect-error
         txDetails,
       })
     },
