@@ -65,7 +65,7 @@ export const getSafeDeployProps = (
 export const createNewSafe = async (ethersProvider: Web3Provider, props: DeploySafeProps): Promise<Safe> => {
   const ethAdapter = createEthersAdapter(ethersProvider)
 
-  const safeFactory = await SafeFactory.create({ ethAdapter })
+  const safeFactory = await SafeFactory.create({ ethAdapter, safeVersion: LATEST_SAFE_VERSION })
   return safeFactory.deploySafe(props)
 }
 
@@ -75,7 +75,7 @@ export const createNewSafe = async (ethersProvider: Web3Provider, props: DeployS
 export const computeNewSafeAddress = async (ethersProvider: Web3Provider, props: PredictSafeProps): Promise<string> => {
   const ethAdapter = createEthersAdapter(ethersProvider)
 
-  const safeFactory = await SafeFactory.create({ ethAdapter })
+  const safeFactory = await SafeFactory.create({ ethAdapter, safeVersion: LATEST_SAFE_VERSION })
   return safeFactory.predictSafeAddress(props)
 }
 
