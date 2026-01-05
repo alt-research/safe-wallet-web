@@ -24,7 +24,7 @@ const useTxHistory = (
 
       return filter
         ? fetchFilteredTxHistory(chainId, safeAddress, filter, pageUrl)
-        : getTransactionHistory(chainId, safeAddress, pageUrl)
+        : getTransactionHistory(chainId, safeAddress, undefined, pageUrl)
     },
     [chainId, safeAddress, safeLoaded, pageUrl, filter],
     false,

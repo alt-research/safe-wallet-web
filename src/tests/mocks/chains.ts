@@ -8,6 +8,10 @@ const CONFIG_SERVICE_CHAINS: ChainInfo[] = [
     chainName: 'Ethereum',
     shortName: 'eth',
     l2: false,
+
+    isTestnet: false,
+
+    chainLogoUri: 'https://safe-transaction-assets.gnosis-safe.io/chains/1/chain_logo.png',
     description: 'The main Ethereum network',
     rpcUri: { authentication: RPC_AUTHENTICATION.API_KEY_PATH, value: 'https://mainnet.infura.io/v3/' },
     safeAppsRpcUri: { authentication: RPC_AUTHENTICATION.API_KEY_PATH, value: 'https://mainnet.infura.io/v3/' },
@@ -57,6 +61,10 @@ const CONFIG_SERVICE_CHAINS: ChainInfo[] = [
     chainName: 'Gnosis Chain',
     shortName: 'gno',
     l2: true,
+
+    isTestnet: false,
+
+    chainLogoUri: 'https://safe-transaction-assets.gnosis-safe.io/chains/1/chain_logo.png',
     description: '',
     rpcUri: { authentication: RPC_AUTHENTICATION.NO_AUTHENTICATION, value: 'https://rpc.gnosischain.com/' },
     safeAppsRpcUri: { authentication: RPC_AUTHENTICATION.NO_AUTHENTICATION, value: 'https://rpc.gnosischain.com/' },
@@ -105,6 +113,10 @@ const CONFIG_SERVICE_CHAINS: ChainInfo[] = [
     chainName: 'Polygon',
     shortName: 'matic',
     l2: true,
+
+    isTestnet: false,
+
+    chainLogoUri: 'https://safe-transaction-assets.gnosis-safe.io/chains/1/chain_logo.png',
     description: 'L2 chain (MATIC)',
     rpcUri: { authentication: RPC_AUTHENTICATION.API_KEY_PATH, value: 'https://polygon-mainnet.infura.io/v3/' },
     safeAppsRpcUri: { authentication: RPC_AUTHENTICATION.API_KEY_PATH, value: 'https://polygon-mainnet.infura.io/v3/' },
@@ -159,6 +171,10 @@ const CONFIG_SERVICE_CHAINS: ChainInfo[] = [
     chainName: 'BNB Smart Chain',
     shortName: 'bnb',
     l2: true,
+
+    isTestnet: false,
+
+    chainLogoUri: 'https://safe-transaction-assets.gnosis-safe.io/chains/1/chain_logo.png',
     description: '',
     rpcUri: { authentication: RPC_AUTHENTICATION.NO_AUTHENTICATION, value: 'https://bsc-dataseed.binance.org/' },
     safeAppsRpcUri: {
@@ -209,6 +225,10 @@ const CONFIG_SERVICE_CHAINS: ChainInfo[] = [
     chainName: 'Energy Web Chain',
     shortName: 'ewt',
     l2: true,
+
+    isTestnet: false,
+
+    chainLogoUri: 'https://safe-transaction-assets.gnosis-safe.io/chains/1/chain_logo.png',
     description: '',
     rpcUri: { authentication: RPC_AUTHENTICATION.NO_AUTHENTICATION, value: 'https://rpc.energyweb.org' },
     safeAppsRpcUri: { authentication: RPC_AUTHENTICATION.NO_AUTHENTICATION, value: 'https://rpc.energyweb.org' },
@@ -257,6 +277,10 @@ const CONFIG_SERVICE_CHAINS: ChainInfo[] = [
     chainName: 'Arbitrum',
     shortName: 'arb1',
     l2: true,
+
+    isTestnet: false,
+
+    chainLogoUri: 'https://safe-transaction-assets.gnosis-safe.io/chains/1/chain_logo.png',
     description: '',
     rpcUri: { authentication: RPC_AUTHENTICATION.NO_AUTHENTICATION, value: 'https://arb1.arbitrum.io/rpc' },
     safeAppsRpcUri: { authentication: RPC_AUTHENTICATION.NO_AUTHENTICATION, value: 'https://arb1.arbitrum.io/rpc' },
@@ -303,6 +327,10 @@ const CONFIG_SERVICE_CHAINS: ChainInfo[] = [
     chainName: 'Aurora',
     shortName: 'aurora',
     l2: true,
+
+    isTestnet: false,
+
+    chainLogoUri: 'https://safe-transaction-assets.gnosis-safe.io/chains/1/chain_logo.png',
     description: '',
     rpcUri: { authentication: RPC_AUTHENTICATION.NO_AUTHENTICATION, value: 'https://mainnet.aurora.dev' },
     safeAppsRpcUri: { authentication: RPC_AUTHENTICATION.NO_AUTHENTICATION, value: 'https://mainnet.aurora.dev' },
@@ -344,6 +372,10 @@ const CONFIG_SERVICE_CHAINS: ChainInfo[] = [
     chainName: 'Avalanche',
     shortName: 'avax',
     l2: true,
+
+    isTestnet: false,
+
+    chainLogoUri: 'https://safe-transaction-assets.gnosis-safe.io/chains/1/chain_logo.png',
     description: '',
     rpcUri: { authentication: RPC_AUTHENTICATION.NO_AUTHENTICATION, value: 'https://api.avax.network/ext/bc/C/rpc' },
     safeAppsRpcUri: {
@@ -397,6 +429,10 @@ const CONFIG_SERVICE_CHAINS: ChainInfo[] = [
     chainName: 'Optimism',
     shortName: 'oeth',
     l2: true,
+
+    isTestnet: false,
+
+    chainLogoUri: 'https://safe-transaction-assets.gnosis-safe.io/chains/1/chain_logo.png',
     description: '',
     rpcUri: { authentication: RPC_AUTHENTICATION.NO_AUTHENTICATION, value: 'https://mainnet.optimism.io/' },
     safeAppsRpcUri: { authentication: RPC_AUTHENTICATION.NO_AUTHENTICATION, value: 'https://mainnet.optimism.io/' },
@@ -443,6 +479,10 @@ const CONFIG_SERVICE_CHAINS: ChainInfo[] = [
     chainName: 'Goerli',
     shortName: 'gor',
     l2: true,
+
+    isTestnet: false,
+
+    chainLogoUri: 'https://safe-transaction-assets.gnosis-safe.io/chains/1/chain_logo.png',
     description: 'Ethereum Testnet Görli',
     rpcUri: { authentication: RPC_AUTHENTICATION.API_KEY_PATH, value: 'https://goerli.infura.io/v3/' },
     safeAppsRpcUri: { authentication: RPC_AUTHENTICATION.API_KEY_PATH, value: 'https://goerli.infura.io/v3/' },
@@ -492,6 +532,10 @@ const CONFIG_SERVICE_CHAINS: ChainInfo[] = [
     chainName: 'Rinkeby',
     shortName: 'rin',
     l2: false,
+
+    isTestnet: false,
+
+    chainLogoUri: 'https://safe-transaction-assets.gnosis-safe.io/chains/1/chain_logo.png',
     description: 'Ethereum testnet',
     rpcUri: { authentication: RPC_AUTHENTICATION.API_KEY_PATH, value: 'https://rinkeby.infura.io/v3/' },
     safeAppsRpcUri: { authentication: RPC_AUTHENTICATION.API_KEY_PATH, value: 'https://rinkeby.infura.io/v3/' },
@@ -531,6 +575,10 @@ const CONFIG_SERVICE_CHAINS: ChainInfo[] = [
     chainName: 'Volta',
     shortName: 'vt',
     l2: true,
+
+    isTestnet: false,
+
+    chainLogoUri: 'https://safe-transaction-assets.gnosis-safe.io/chains/1/chain_logo.png',
     description: '',
     rpcUri: { authentication: RPC_AUTHENTICATION.NO_AUTHENTICATION, value: 'https://volta-rpc.energyweb.org' },
     safeAppsRpcUri: { authentication: RPC_AUTHENTICATION.NO_AUTHENTICATION, value: 'https://volta-rpc.energyweb.org' },

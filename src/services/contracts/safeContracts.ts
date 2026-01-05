@@ -109,9 +109,12 @@ export const getReadOnlyMultiSendCallOnlyContract = (chainId: string, safeVersio
 export const getReadOnlyProxyFactoryContract = (chainId: string, safeVersion: SafeInfo['version']) => {
   const ethAdapter = createReadOnlyEthersAdapter()
 
+  // Chain 957 (Lyra) - use v1.3.0 for compatibility when v1.4.1 is requested
+  const proxyVersion = chainId === '957' && safeVersion === '1.4.1' ? '1.3.0' : safeVersion
+
   return ethAdapter.getSafeProxyFactoryContract({
-    singletonDeployment: getProxyFactoryContractDeployment(chainId, safeVersion),
-    ..._getValidatedGetContractProps(chainId, safeVersion),
+    singletonDeployment: getProxyFactoryContractDeployment(chainId, proxyVersion),
+    ..._getValidatedGetContractProps(chainId, proxyVersion),
   })
 }
 
@@ -123,9 +126,13 @@ export const getReadOnlyFallbackHandlerContract = (
 ): CompatibilityFallbackHandlerEthersContract => {
   const ethAdapter = createReadOnlyEthersAdapter()
 
+  // Chain 957 (Lyra) only has v1.3.0 FallbackHandler deployed
+  // Use v1.3.0 for compatibility when v1.4.1 is requested
+  const fallbackVersion = chainId === '957' && safeVersion === '1.4.1' ? '1.3.0' : safeVersion
+
   return ethAdapter.getCompatibilityFallbackHandlerContract({
-    singletonDeployment: getFallbackHandlerContractDeployment(chainId, safeVersion),
-    ..._getValidatedGetContractProps(chainId, safeVersion),
+    singletonDeployment: getFallbackHandlerContractDeployment(chainId, fallbackVersion),
+    ..._getValidatedGetContractProps(chainId, fallbackVersion),
   })
 }
 
