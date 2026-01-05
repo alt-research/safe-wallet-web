@@ -81,8 +81,9 @@ export const SpeedUpModal = ({
 
     const txOptions = getTxOptions(
       {
-        ...speedUpFee,
-        gasLimit,
+        maxFeePerGas: speedUpFee.maxFeePerGas ?? undefined,
+        maxPriorityFeePerGas: speedUpFee.maxPriorityFeePerGas ?? undefined,
+        gasLimit: gasLimit !== undefined ? BigInt(gasLimit) : undefined,
       },
       chainInfo,
     )
@@ -180,9 +181,9 @@ export const SpeedUpModal = ({
                 params={{
                   // nonce: safeTx?.data?.nonce,
                   userNonce: signerNonce,
-                  gasLimit,
-                  maxFeePerGas: speedUpFee.maxFeePerGas,
-                  maxPriorityFeePerGas: speedUpFee.maxPriorityFeePerGas,
+                  gasLimit: gasLimit !== undefined ? BigInt(gasLimit) : undefined,
+                  maxFeePerGas: speedUpFee.maxFeePerGas ?? undefined,
+                  maxPriorityFeePerGas: speedUpFee.maxPriorityFeePerGas ?? undefined,
                 }}
                 isExecution={true}
                 isEIP1559={isEIP1559}
