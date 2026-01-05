@@ -41,8 +41,7 @@
     "@safe-global/protocol-kit/**/ethers": "^6.11.1",
     "@safe-global/api-kit/**/ethers": "^6.11.1",
     "@gnosis.pm/zodiac/**/ethers": "^6.11.1",
-    "@safe-global/safe-deployments": "1.36.0",
-    "minimatch": "^9.0.0"
+    "@safe-global/safe-deployments": "1.36.0"
   },
   "dependencies": {
     "@cowprotocol/widget-react": "^0.9.1",
