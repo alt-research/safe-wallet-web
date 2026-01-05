@@ -1,7 +1,8 @@
 import { FEATURES } from '@/utils/chains'
 import { CowSwapWidget } from '@cowprotocol/widget-react'
 import { type CowSwapWidgetParams, TradeType } from '@cowprotocol/widget-lib'
-import { CowEvents, type CowEventListeners } from '@cowprotocol/events'
+import { CowEvents } from '@cowprotocol/events'
+import { type CowEventListeners } from '@cowprotocol/events/CowEventEmitter'
 import { useState, useEffect, type MutableRefObject, useMemo } from 'react'
 import { Container, Grid, useTheme } from '@mui/material'
 import { useRef } from 'react'
@@ -164,9 +165,9 @@ const SwapWidget = ({ sell }: Params) => {
         event: CowEvents.ON_CHANGE_TRADE_PARAMS,
         handler: (newTradeParams) => {
           const { orderType: tradeType, recipient, sellToken, sellTokenAmount } = newTradeParams
-          dispatch(setSwapParams({ tradeType }))
+          dispatch(setSwapParams({ tradeType: tradeType as any }))
 
-          tradeTypeRef.current = tradeType
+          tradeTypeRef.current = tradeType as any
           sellTokenRef.current = {
             asset: sellToken?.symbol || '',
             amount: sellTokenAmount?.units || '0',
