@@ -12,6 +12,9 @@ RUN yarn install || \
     (sleep 10 && yarn install) || \
     (sleep 30 && yarn install)
 
+# Remove deprecated @types/minimatch that causes build failures
+RUN rm -rf node_modules/@types/minimatch
+
 RUN yarn after-install
 
 # Install serve globally during build
