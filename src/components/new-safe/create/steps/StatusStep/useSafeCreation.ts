@@ -80,11 +80,14 @@ export const useSafeCreation = (
     const ownersAddresses = owners.map((owner) => owner.address)
 
     try {
-      // Verify the predicted address doesn't already have code (stale localStorage data protection)
+      // Check if Safe already exists at the predicted address (previous attempt may have succeeded)
       if (safeAddress) {
         const alreadyDeployed = await isSmartContract(provider, safeAddress)
         if (alreadyDeployed) {
-          throw new Error('A Safe already exists at this address. Please go back and try creating a new Safe.')
+          console.log('Safe already exists at predicted address, treating as success')
+          setStatus(SafeCreationStatus.SUCCESS)
+          setIsCreating(false)
+          return
         }
       }
       if (willRelay) {
@@ -126,6 +129,19 @@ export const useSafeCreation = (
       }
     } catch (err) {
       const _err = err as EthersError
+
+      // Workaround: If the error is "SafeProxy was not deployed correctly" but the Safe
+      // actually exists at the predicted address, treat it as success (event parsing issue)
+      if (_err.message?.includes('SafeProxy was not deployed correctly') && safeAddress) {
+        const actuallyDeployed = await isSmartContract(provider, safeAddress)
+        if (actuallyDeployed) {
+          console.log('Safe deployment succeeded despite event parsing error')
+          setStatus(SafeCreationStatus.SUCCESS)
+          setIsCreating(false)
+          return
+        }
+      }
+
       const status = handleSafeCreationError(_err)
 
       setStatus(status)
