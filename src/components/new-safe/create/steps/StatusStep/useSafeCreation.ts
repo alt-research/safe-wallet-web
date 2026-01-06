@@ -17,6 +17,7 @@ import {
   relaySafeCreation,
   estimateSafeCreationGas,
 } from '@/components/new-safe/create/logic'
+import { isSmartContract } from '@/hooks/wallets/web3'
 import { useAppDispatch } from '@/store'
 import { closeByGroupKey } from '@/store/notificationsSlice'
 import { CREATE_SAFE_EVENTS, trackEvent } from '@/services/analytics'
@@ -75,10 +76,17 @@ export const useSafeCreation = (
     setIsCreating(true)
     dispatch(closeByGroupKey({ groupKey: SAFE_CREATION_ERROR_KEY }))
 
-    const { owners, threshold, saltNonce } = pendingSafe
+    const { owners, threshold, saltNonce, safeAddress } = pendingSafe
     const ownersAddresses = owners.map((owner) => owner.address)
 
     try {
+      // Verify the predicted address doesn't already have code (stale localStorage data protection)
+      if (safeAddress) {
+        const alreadyDeployed = await isSmartContract(provider, safeAddress)
+        if (alreadyDeployed) {
+          throw new Error('A Safe already exists at this address. Please go back and try creating a new Safe.')
+        }
+      }
       if (willRelay) {
         const taskId = await relaySafeCreation(chain, ownersAddresses, threshold, saltNonce)
 
