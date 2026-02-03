@@ -1,4 +1,13 @@
 import type { SingletonDeployment } from '@safe-global/safe-deployments'
+import {
+  getSafeSingletonDeployment,
+  getSafeL2SingletonDeployment,
+  getMultiSendCallOnlyDeployment,
+  getFallbackHandlerDeployment,
+  getProxyFactoryDeployment,
+  getSignMessageLibDeployment,
+  getCreateCallDeployment,
+} from '@safe-global/safe-deployments'
 import type { CustomDeploymentsConfig, CustomChainConfig, CustomContractDeployment } from '@/config/custom-deployments.types'
 
 /**
@@ -103,7 +112,14 @@ class CustomDeploymentLoader {
       return undefined
     }
 
-    // Convert to SingletonDeployment format
+    // Get ABI from the package deployment for this version
+    const packageDeployment = this.getPackageDeployment(contractName, version)
+    if (!packageDeployment) {
+      console.warn(`Could not find package deployment for ${contractName}@${version}, skipping custom deployment`)
+      return undefined
+    }
+
+    // Convert to SingletonDeployment format, using package ABI
     return {
       defaultAddress: deployment.address,
       released: true,
@@ -112,6 +128,7 @@ class CustomDeploymentLoader {
       networkAddresses: {
         [chainId]: deployment.address,
       },
+      abi: packageDeployment.abi,
       ...(deployment.blockNumber && {
         deployments: {
           [chainId]: {
@@ -135,6 +152,41 @@ class CustomDeploymentLoader {
    */
   getCustomChainIds(): string[] {
     return Array.from(this.customChains.keys())
+  }
+
+  /**
+   * Get the package deployment for a contract to retrieve its ABI
+   */
+  private getPackageDeployment(contractName: string, version: string): SingletonDeployment | undefined {
+    try {
+      // Use a dummy network to get the deployment (we only need the ABI)
+      const filter = { version }
+
+      switch (contractName) {
+        case 'Safe':
+        case 'GnosisSafe':
+          return getSafeSingletonDeployment(filter)
+        case 'SafeL2':
+        case 'GnosisSafeL2':
+          return getSafeL2SingletonDeployment(filter)
+        case 'MultiSendCallOnly':
+          return getMultiSendCallOnlyDeployment(filter)
+        case 'CompatibilityFallbackHandler':
+          return getFallbackHandlerDeployment(filter)
+        case 'SafeProxyFactory':
+        case 'ProxyFactory':
+          return getProxyFactoryDeployment(filter)
+        case 'SignMessageLib':
+          return getSignMessageLibDeployment(filter)
+        case 'CreateCall':
+          return getCreateCallDeployment(filter)
+        default:
+          return undefined
+      }
+    } catch (error) {
+      console.warn(`Failed to get package deployment for ${contractName}@${version}:`, error)
+      return undefined
+    }
   }
 
   /**
