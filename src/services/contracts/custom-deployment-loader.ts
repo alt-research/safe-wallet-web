@@ -27,9 +27,9 @@ class CustomDeploymentLoader {
         return
       }
 
-      // Try to load from file (using dynamic import to avoid build issues)
+      // Try to load from file (using dynamic import with relative path from project root)
       try {
-        const configModule = await import('@/config/chains/custom-chains.json')
+        const configModule = await import('../../../config/chains/custom-chains.json')
         const config = configModule.default as CustomDeploymentsConfig
         this.loadFromConfig(config)
         this.loaded = true
