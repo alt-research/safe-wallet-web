@@ -15,7 +15,12 @@ RUN yarn install || \
 # Remove deprecated @types/minimatch that causes build failures
 RUN rm -rf node_modules/@types/minimatch
 
+# Run after-install (generates types and applies any remaining patches)
 RUN yarn after-install
+
+# Copy custom chain configuration
+# This file can be overridden via volume mount without rebuilding the image
+COPY config/chains/custom-chains.json /app/config/chains/custom-chains.json
 
 # Install serve globally during build
 RUN yarn global add serve

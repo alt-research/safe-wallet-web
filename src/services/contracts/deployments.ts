@@ -12,12 +12,39 @@ import type { SingletonDeployment, DeploymentFilter } from '@safe-global/safe-de
 import type { ChainInfo, SafeInfo } from '@safe-global/safe-gateway-typescript-sdk'
 
 import { LATEST_SAFE_VERSION } from '@/config/constants'
+import { customDeploymentLoader } from './custom-deployment-loader'
+
+// Initialize custom deployment loader
+// This is a promise that resolves when custom deployments are loaded
+let loaderInitialized = false
+const initLoader = async () => {
+  if (!loaderInitialized) {
+    await customDeploymentLoader.load()
+    loaderInitialized = true
+  }
+}
+
+// Start loading immediately if running on server
+if (typeof window === 'undefined') {
+  initLoader().catch((error) => {
+    console.error('Failed to initialize custom deployment loader:', error)
+  })
+}
 
 export const _tryDeploymentVersions = (
   getDeployment: (filter?: DeploymentFilter) => SingletonDeployment | undefined,
   network: string,
   version: SafeInfo['version'],
+  contractName?: string,
 ): SingletonDeployment | undefined => {
+  // Check custom deployments first if contract name is provided
+  if (contractName && version) {
+    const customDeployment = customDeploymentLoader.getDeployment(network, contractName, version)
+    if (customDeployment) {
+      return customDeployment
+    }
+  }
+
   // Unsupported Safe version
   if (version === null) {
     // Assume latest version as fallback
@@ -27,7 +54,7 @@ export const _tryDeploymentVersions = (
     })
   }
 
-  // Supported Safe version
+  // Supported Safe version - fall back to package defaults
   return getDeployment({
     version,
     network,
@@ -60,27 +87,29 @@ export const getSafeContractDeployment = (
     return getSafeSingletonDeployment({ version: '1.0.0' })
   }
 
-  const getDeployment = _isL2(chain, safeVersion) ? getSafeL2SingletonDeployment : getSafeSingletonDeployment
+  const isL2 = _isL2(chain, safeVersion)
+  const getDeployment = isL2 ? getSafeL2SingletonDeployment : getSafeSingletonDeployment
+  const contractName = isL2 ? 'SafeL2' : 'Safe'
 
-  return _tryDeploymentVersions(getDeployment, chain.chainId, safeVersion)
+  return _tryDeploymentVersions(getDeployment, chain.chainId, safeVersion, contractName)
 }
 
 export const getMultiSendCallOnlyContractDeployment = (chainId: string, safeVersion: SafeInfo['version']) => {
-  return _tryDeploymentVersions(getMultiSendCallOnlyDeployment, chainId, safeVersion)
+  return _tryDeploymentVersions(getMultiSendCallOnlyDeployment, chainId, safeVersion, 'MultiSendCallOnly')
 }
 
 export const getFallbackHandlerContractDeployment = (chainId: string, safeVersion: SafeInfo['version']) => {
-  return _tryDeploymentVersions(getFallbackHandlerDeployment, chainId, safeVersion)
+  return _tryDeploymentVersions(getFallbackHandlerDeployment, chainId, safeVersion, 'CompatibilityFallbackHandler')
 }
 
 export const getProxyFactoryContractDeployment = (chainId: string, safeVersion: SafeInfo['version']) => {
-  return _tryDeploymentVersions(getProxyFactoryDeployment, chainId, safeVersion)
+  return _tryDeploymentVersions(getProxyFactoryDeployment, chainId, safeVersion, 'SafeProxyFactory')
 }
 
 export const getSignMessageLibContractDeployment = (chainId: string, safeVersion: SafeInfo['version']) => {
-  return _tryDeploymentVersions(getSignMessageLibDeployment, chainId, safeVersion)
+  return _tryDeploymentVersions(getSignMessageLibDeployment, chainId, safeVersion, 'SignMessageLib')
 }
 
 export const getCreateCallContractDeployment = (chainId: string, safeVersion: SafeInfo['version']) => {
-  return _tryDeploymentVersions(getCreateCallDeployment, chainId, safeVersion)
+  return _tryDeploymentVersions(getCreateCallDeployment, chainId, safeVersion, 'CreateCall')
 }
