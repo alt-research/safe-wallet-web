@@ -25,6 +25,9 @@
       ],
       "@/public/*": [
         "./public/*"
+      ],
+      "@/config/*": [
+        "./config/*"
       ]
     },
     "plugins": [
