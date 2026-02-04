@@ -1,474 +1,505 @@
-# Safe 1.4.1 Contract Deployment Guide
+# Safe 1.4.1 Contract Deployment Tool
 
-Complete guide for deploying Safe 1.4.1 smart contracts to custom chains.
+Docker-based tool for deploying Safe (Gnosis Safe) 1.4.1 smart contracts to custom EVM-compatible networks.
 
-## Table of Contents
-- [Quick Start](#quick-start)
-- [Deployment Methods](#deployment-methods)
-- [Detailed Instructions](#detailed-instructions)
-- [Post-Deployment](#post-deployment)
-- [Troubleshooting](#troubleshooting)
+## Overview
 
----
+There are 3 `DEPLOYMENT_MODE` options:
 
-## Quick Start
+### 1. Standard Mode (Default)
 
-Choose the deployment method that best fits your needs:
+**Characteristics:**
+- ✅ No prerequisites
+- ✅ Fastest deployment
+- ✅ Will reuse existing contracts if already deployed
+- ❌ Different addresses on each network
+- ❌ Cannot predict addresses before deployment
+- ⚠️ Addresses depend on deployer account and nonce state
 
-### 🚀 Method 1: Official Safe Repo (Recommended)
+**Notes:**
+1. If you see "reusing" messages during deployment, it means the contracts are already deployed on-chain at those addresses. This is normal and prevents duplicate deployments
 
-**Best for:** Production deployments, deterministic addresses
+### 2. Singleton Factory Mode
 
-```bash
-# Clone and setup
-git clone https://github.com/safe-global/safe-smart-account.git
-cd safe-smart-account
-git checkout v1.4.1
-yarn install
+**Characteristics:**
+- ✅ Deterministic addresses (same across all networks)
+- ✅ Addresses can be predicted before deployment
+- ✅ Follows Safe's standard deployment pattern
+- ⚠️ Requires ~0.01 ETH for factory deployment (one-time cost)
+- ⚠️ Two-step process (factory deployment + Safe contracts)
+- ⚠️ **May not work on all networks** - some custom chains have EVM modifications that are incompatible with the singleton factory
 
-# Configure .env
-cat > .env << EOF
-MNEMONIC="your twelve word mnemonic here"
-NODE_URL="https://your-rpc-endpoint.com"
-EOF
+**Notes**:
+1. How it works: Deploys (if not present) then uses the [Deterministic Deployment Proxy](https://github.com/Arachnid/deterministic-deployment-proxy) (singleton factory) at `0xce0042B868300000d44A59004Da54A005ffdcf9f`
+1. For Arbitrum Orbit, the singleton factory uses a different interface than the standard Arachnid factory. It has a `deploy(bytes _initCode, bytes32 _salt)` function instead of just accepting raw calldata. See https://github.com/OffchainLabs/ERCs/blob/892a55cb81f43afeafcfe4e887bf48d400558630/ERCS/erc-2470.md
+1. If singleton mode fails with "execution reverted" or gas estimation errors, your network may not support the deterministic deployment proxy. Use standard mode instead
+ 
+### 3. Custom Factory Mode
 
-# Add network to hardhat.config.ts (see detailed instructions)
+**Characteristics:**
+- ✅ Uses existing factory (no deployment cost)
+- ✅ Deterministic addresses
+- ✅ Flexible - can use any compatible factory
+- ⚠️ Requires factory to be already deployed
+- ⚠️ Must know the factory address
 
-# Deploy
-yarn deploy-all custom
-```
-
-**Pros:** ✅ Official ✅ Well-tested ✅ Deterministic
-**Cons:** ❌ Requires cloning repo
-
----
-
-### ⚡ Method 2: Standalone Hardhat Script
-
-**Best for:** Quick deployments, custom networks
+## Build Steps
 
 ```bash
-# Create project
-mkdir safe-deployment && cd safe-deployment
-npm init -y
-
-# Install dependencies
-npm install --save-dev hardhat @nomiclabs/hardhat-ethers ethers
-npm install @safe-global/safe-contracts@1.4.1
-
-# Copy deployment script
-cp /path/to/safe-wallet-web/utils/deploy-contracts/hardhat-deploy-safe.js ./
-
-# Create hardhat.config.js (see template below)
-
-# Deploy
-npx hardhat run hardhat-deploy-safe.js --network custom
+docker build -t safe-deployer . -f Dockerfile --platform=linux/amd64
 ```
 
-**Pros:** ✅ Fast setup ✅ Auto-generates config
-**Cons:** ❌ Non-deterministic addresses
+## Usage
 
----
+1. Standard Mode
+   ```bash
+   docker run --rm \
+      -e PRIVATE_KEY="0x..." \
+      -e RPC_URL="https://orbit-demo.alt.technology" \
+      -e CHAIN_ID="20240328" \
+      -e NETWORK_NAME="orbit-demo-testnet" \
+      -e DEPLOYMENT_MODE="standard" \
+      safe-deployer
+   ```
+1. Singleton Factory Mode
+   ```bash
+   docker run --rm \
+      -e PRIVATE_KEY="0x..." \
+      -e RPC_URL="https://orbit-demo.alt.technology" \
+      -e CHAIN_ID="20240328" \
+      -e NETWORK_NAME="orbit-demo-testnet" \
+      -e DEPLOYMENT_MODE="singleton" \
+      safe-deployer
+   ```
+1. Custom Factory Mode
+   ```bash
+   docker run --rm \
+      -e PRIVATE_KEY="0x..." \
+      -e RPC_URL="https://orbit-demo.alt.technology" \
+      -e CHAIN_ID="20240328" \
+      -e NETWORK_NAME="orbit-demo-testnet" \
+      -e DEPLOYMENT_MODE="custom" \
+      -e FACTORY_ADDRESS="0xce0042B868300000d44A59004Da54A005ffdcf9f" \
+      safe-deployer
+   ```
 
-### 🛠️ Method 3: CreateX (Advanced)
+## Sample Results
 
-**Best for:** Cross-chain deterministic deployments
-
-**Pros:** ✅ Same addresses across chains ✅ Permissioned
-**Cons:** ❌ Complex ❌ Advanced users only
-
-See [CreateX Deployment](#method-3-createx-advanced) section below.
-
----
-
-## Deployment Methods
-
-## Method 1: Official Safe Repository (Recommended)
-
-### Prerequisites
-- Node.js v16+
-- Git
-- RPC endpoint for your target chain
-- Mnemonic with sufficient native tokens for gas (~0.05-0.1 ETH equivalent)
-
-### Step 1: Clone and Setup
+### Standard Mode
 
 ```bash
-git clone https://github.com/safe-global/safe-smart-account.git
-cd safe-smart-account
-git checkout v1.4.1
-yarn install
+============================================================
+  Safe 1.4.1 Contract Deployment
+============================================================
+
+ℹ️  Configuration:
+  Network: orbit-demo-testnet
+  Chain ID: 20240328
+  RPC URL: https://orbit-demo.alt.technology
+  Deployment Mode: standard
+
+📝 Adding network 'orbit-demo-testnet' to hardhat.config.ts...
+✅ Network configuration added successfully
+🔧 Patching hardhat.config.ts for custom network support...
+📦 Deployment mode: standard
+✅ Hardhat config patched successfully
+🔧 Patching deploy_contracts task to skip Etherscan verification...
+✅ Deploy task patched successfully
+
+============================================================
+  Starting Deployment
+============================================================
+
+ℹ️  Deployer Address: 0xa4a4adc9B25b0Dbe61CBF0Af667BD723f4D7CbeC
+
+💡 Note: Standard mode will reuse existing contracts if found on-chain.
+   If you see 'reusing' messages, contracts are already deployed.
+
+yarn run v1.22.22
+$ hardhat deploy-contracts --network orbit-demo-testnet
+Nothing to compile
+⚠️  Safe singleton factory not found for network 20240328
+ℹ️  Using non-deterministic deployment (addresses will vary by network)
+reusing "SimulateTxAccessor" at 0xB59bD9861a97F9c309B7b73338503507580625D2
+⚠️  Safe singleton factory not found for network 20240328
+ℹ️  Using non-deterministic deployment (addresses will vary by network)
+reusing "SafeProxyFactory" at 0xd9d2Ba03a7754250FDD71333F444636471CACBC4
+⚠️  Safe singleton factory not found for network 20240328
+ℹ️  Using non-deterministic deployment (addresses will vary by network)
+reusing "TokenCallbackHandler" at 0x63117fd9761850f4aC685457E484A01D752D5cC4
+⚠️  Safe singleton factory not found for network 20240328
+ℹ️  Using non-deterministic deployment (addresses will vary by network)
+reusing "CompatibilityFallbackHandler" at 0xcB4a8d3609A7CCa2D9c063a742f75c899BF2f7b5
+⚠️  Safe singleton factory not found for network 20240328
+ℹ️  Using non-deterministic deployment (addresses will vary by network)
+reusing "CreateCall" at 0x8BbCaE989A0Bdf15c8E783357a0E5848e36233d0
+⚠️  Safe singleton factory not found for network 20240328
+ℹ️  Using non-deterministic deployment (addresses will vary by network)
+reusing "MultiSend" at 0x7B21BBDBdE8D01Df591fdc2dc0bE9956Dde1e16C
+⚠️  Safe singleton factory not found for network 20240328
+ℹ️  Using non-deterministic deployment (addresses will vary by network)
+reusing "MultiSendCallOnly" at 0x32228dDEA8b9A2bd7f2d71A958fF241D79ca5eEC
+⚠️  Safe singleton factory not found for network 20240328
+ℹ️  Using non-deterministic deployment (addresses will vary by network)
+reusing "SignMessageLib" at 0x309C7b0A0D2f250Be322739753386911E1187C4E
+⚠️  Safe singleton factory not found for network 20240328
+ℹ️  Using non-deterministic deployment (addresses will vary by network)
+reusing "SafeL2" at 0x76667330c237Fb40f28d74563cdAAae4b06C23Ec
+⚠️  Safe singleton factory not found for network 20240328
+ℹ️  Using non-deterministic deployment (addresses will vary by network)
+reusing "Safe" at 0x639245e8476E03e789a244f279b5843b9633b2E7
+Verification status for SimulateTxAccessor: FAILURE
+Verification status for SafeProxyFactory: SUCCESS
+Verification status for TokenCallbackHandler: SUCCESS
+Verification status for CompatibilityFallbackHandler: SUCCESS
+Verification status for CreateCall: SUCCESS
+Verification status for MultiSend: FAILURE
+Verification status for MultiSendCallOnly: SUCCESS
+Verification status for SignMessageLib: SUCCESS
+Verification status for SafeL2: SUCCESS
+Verification status for Safe: SUCCESS
+{"error":"Invalid chainIds: 20240328","message":"Invalid chainIds: 20240328"}
+verifying SimulateTxAccessor (0xB59bD9861a97F9c309B7b73338503507580625D2 on chain 20240328) ...
+{"error":"Chain 20240328 not supported for verification!","message":"Chain 20240328 not supported for verification!"}
+{"error":"Invalid chainIds: 20240328","message":"Invalid chainIds: 20240328"}
+verifying SafeProxyFactory (0xd9d2Ba03a7754250FDD71333F444636471CACBC4 on chain 20240328) ...
+{"error":"Chain 20240328 not supported for verification!","message":"Chain 20240328 not supported for verification!"}
+{"error":"Invalid chainIds: 20240328","message":"Invalid chainIds: 20240328"}
+verifying TokenCallbackHandler (0x63117fd9761850f4aC685457E484A01D752D5cC4 on chain 20240328) ...
+{"error":"Chain 20240328 not supported for verification!","message":"Chain 20240328 not supported for verification!"}
+{"error":"Invalid chainIds: 20240328","message":"Invalid chainIds: 20240328"}
+verifying CompatibilityFallbackHandler (0xcB4a8d3609A7CCa2D9c063a742f75c899BF2f7b5 on chain 20240328) ...
+{"error":"Chain 20240328 not supported for verification!","message":"Chain 20240328 not supported for verification!"}
+{"error":"Invalid chainIds: 20240328","message":"Invalid chainIds: 20240328"}
+verifying CreateCall (0x8BbCaE989A0Bdf15c8E783357a0E5848e36233d0 on chain 20240328) ...
+{"error":"Chain 20240328 not supported for verification!","message":"Chain 20240328 not supported for verification!"}
+{"error":"Invalid chainIds: 20240328","message":"Invalid chainIds: 20240328"}
+verifying MultiSend (0x7B21BBDBdE8D01Df591fdc2dc0bE9956Dde1e16C on chain 20240328) ...
+{"error":"Chain 20240328 not supported for verification!","message":"Chain 20240328 not supported for verification!"}
+{"error":"Invalid chainIds: 20240328","message":"Invalid chainIds: 20240328"}
+verifying MultiSendCallOnly (0x32228dDEA8b9A2bd7f2d71A958fF241D79ca5eEC on chain 20240328) ...
+{"error":"Chain 20240328 not supported for verification!","message":"Chain 20240328 not supported for verification!"}
+{"error":"Invalid chainIds: 20240328","message":"Invalid chainIds: 20240328"}
+verifying SignMessageLib (0x309C7b0A0D2f250Be322739753386911E1187C4E on chain 20240328) ...
+{"error":"Chain 20240328 not supported for verification!","message":"Chain 20240328 not supported for verification!"}
+{"error":"Invalid chainIds: 20240328","message":"Invalid chainIds: 20240328"}
+verifying SafeL2 (0x76667330c237Fb40f28d74563cdAAae4b06C23Ec on chain 20240328) ...
+{"error":"Chain 20240328 not supported for verification!","message":"Chain 20240328 not supported for verification!"}
+{"error":"Invalid chainIds: 20240328","message":"Invalid chainIds: 20240328"}
+verifying Safe (0x639245e8476E03e789a244f279b5843b9633b2E7 on chain 20240328) ...
+{"error":"Chain 20240328 not supported for verification!","message":"Chain 20240328 not supported for verification!"}
+⚠️  Skipping Etherscan verification (no ETHERSCAN_API_KEY provided)
+Done in 56.97s.
+
+============================================================
+  ✅ Deployment Successful
+============================================================
+
+📋 Deployed Contract Addresses:
+
+   SimulateTxAccessor:              0xB59bD9861a97F9c309B7b73338503507580625D2
+   SafeProxyFactory:                0xd9d2Ba03a7754250FDD71333F444636471CACBC4
+   TokenCallbackHandler:            0x63117fd9761850f4aC685457E484A01D752D5cC4
+   CompatibilityFallbackHandler:    0xcB4a8d3609A7CCa2D9c063a742f75c899BF2f7b5
+   CreateCall:                      0x8BbCaE989A0Bdf15c8E783357a0E5848e36233d0
+   MultiSend:                       0x7B21BBDBdE8D01Df591fdc2dc0bE9956Dde1e16C
+   MultiSendCallOnly:               0x32228dDEA8b9A2bd7f2d71A958fF241D79ca5eEC
+   SignMessageLib:                  0x309C7b0A0D2f250Be322739753386911E1187C4E
+   SafeL2:                          0x76667330c237Fb40f28d74563cdAAae4b06C23Ec
+   Safe:                            0x639245e8476E03e789a244f279b5843b9633b2E7
+
+📋 Next steps:
+  1. Copy the contract addresses above
+  2. Add them to your Safe Wallet Web config
+  3. Update config/chains/custom-chains.json
+
+💡 Deployment mode used: standard
+   Note: Addresses are non-deterministic (unique to this network)
 ```
 
-### Step 2: Configure Environment
-
-Create `.env` file:
+### Singleton Factory Mode
 
 ```bash
-# .env
-MNEMONIC="your twelve word mnemonic phrase here"
-NODE_URL="https://your-rpc-endpoint.com"
+============================================================
+  Safe 1.4.1 Contract Deployment
+============================================================
 
-# Optional: If using Infura
-INFURA_KEY="your-infura-key"
+ℹ️  Configuration:
+  Network: orbit-demo-testnet
+  Chain ID: 20240328
+  RPC URL: https://orbit-demo.alt.technology
+  Deployment Mode: singleton
+
+📝 Adding network 'orbit-demo-testnet' to hardhat.config.ts...
+✅ Network configuration added successfully
+
+============================================================
+  Singleton Factory Deployment
+============================================================
+
+📡 Connected to: https://orbit-demo.alt.technology
+👤 Deployer: 0xa4a4adc9B25b0Dbe61CBF0Af667BD723f4D7CbeC
+
+✅ ERC-2470 factory detected at: 0xce0042B868300000d44A59004Da54A005ffdcf9f
+   This is the Arbitrum/ERC-2470 variant with deploy(bytes,bytes32) interface
+   Will use custom ERC-2470 deployment method
+
+
+🔍 Running factory diagnostics...
+🔍 Diagnosing Singleton Factory Issues...
+
+📡 Network: https://orbit-demo.alt.technology
+👤 Deployer: 0xa4a4adc9B25b0Dbe61CBF0Af667BD723f4D7CbeC
+
+Factory at 0xce0042B868300000d44A59004Da54A005ffdcf9f:
+   Code length: 618
+   Deployed: YES ✅
+
+Test CREATE2 calculation:
+   Salt: 0x0000000000000000000000000000000000000000000000000000000000000000
+   Bytecode hash: 0x07ad118d6cc8642c86c03827f276d8b791a65e5c99a3845faf186be720a1455d
+   Would deploy to: 0xc0b2033aafc6689e2d9a73fbb96acd266935084d
+   Already deployed there: NO
+
+Testing factory call with simple bytecode...
+   ❌ Gas estimate failed: cannot estimate gas; transaction may fail or may require manual gas limit
+   Error data: none
+
+   Attempting actual call to see revert reason...
+
+💡 Checking network chain ID handling...
+   Chain ID from provider: 20240328
+   Chain ID from env: 20240328
+   ✅ Chain ID matches
+
+🔧 Patching hardhat.config.ts for custom network support...
+📦 Deployment mode: singleton
+✅ Hardhat config patched successfully
+🔧 Patching deploy_contracts task to skip Etherscan verification...
+✅ Deploy task patched successfully
+
+============================================================
+  Starting Deployment
+============================================================
+
+ℹ️  Deployer Address: 0xa4a4adc9B25b0Dbe61CBF0Af667BD723f4D7CbeC
+
+ℹ️  Using ERC-2470 factory deployment method for Arbitrum Orbit
+
+📦 Compiling contracts...
+Nothing to compile
+
+🚀 Deploying Safe contracts with ERC-2470 factory...
+
+📡 Network: https://orbit-demo.alt.technology
+👤 Deployer: 0xa4a4adc9B25b0Dbe61CBF0Af667BD723f4D7CbeC
+🏭 Factory: 0xce0042B868300000d44A59004Da54A005ffdcf9f
+
+
+📦 Deploying SimulateTxAccessor...
+   Expected address: 0xeDd0ca2DD8E29885D27bdf80312730654B5E9C50
+   ✅ Already deployed, reusing
+
+📦 Deploying SafeProxyFactory...
+   Expected address: 0x523A58387ddbd3e735B63bE639057Cc5969Ad7c4
+   ✅ Already deployed, reusing
+
+📦 Deploying TokenCallbackHandler...
+   Expected address: 0x757807d10fac3ed93Dd9894da13fE9B5B6a7F13E
+   ✅ Already deployed, reusing
+
+📦 Deploying CompatibilityFallbackHandler...
+   Expected address: 0xEd91C9234AD8D8d9B15ef121B3F8047A8e08C39A
+   ✅ Already deployed, reusing
+
+📦 Deploying CreateCall...
+   Expected address: 0xef76497d5826f1A5b0d5B4180A55Eb63E8360dd8
+   ✅ Already deployed, reusing
+
+📦 Deploying MultiSend...
+   Expected address: 0x0beDfC60AA633c51F0eE17C2524B4c2261d13F58
+   ✅ Already deployed, reusing
+
+📦 Deploying MultiSendCallOnly...
+   Expected address: 0x7FEc2f134AcdBB8E5463375fD3C7232801643a74
+   ✅ Already deployed, reusing
+
+📦 Deploying SignMessageLib...
+   Expected address: 0x9A5578B307ab490C7c45f7330F416E73C607bE94
+   ✅ Already deployed, reusing
+
+📦 Deploying SafeL2...
+   Expected address: 0xef911c6af5e7FA6CDc1392e4B9fb783328929967
+   Deploying...
+   TX: 0xbcef2ef6062dd659e65457ec0eeb02c6e2bb31269b4335b16041a7304ce49878
+   ✅ Deployed at: 0xef911c6af5e7FA6CDc1392e4B9fb783328929967
+   Gas used: 4998113
+
+📦 Deploying Safe...
+   Expected address: 0x6001A5A6a18E5D0d3BEdae2349cf0c6fB99856F6
+   Deploying...
+   TX: 0x55c54f49207546d92501af28fa3e6358b1b92f535671c30c1bc5b7fccd57cdaf
+   ✅ Deployed at: 0x6001A5A6a18E5D0d3BEdae2349cf0c6fB99856F6
+   Gas used: 4995146
+
+
+============================================================
+  ✅ Deployment Complete
+============================================================
+
+📋 Deployed Contracts:
+
+   SimulateTxAccessor                  0xeDd0ca2DD8E29885D27bdf80312730654B5E9C50
+   SafeProxyFactory                    0x523A58387ddbd3e735B63bE639057Cc5969Ad7c4
+   TokenCallbackHandler                0x757807d10fac3ed93Dd9894da13fE9B5B6a7F13E
+   CompatibilityFallbackHandler        0xEd91C9234AD8D8d9B15ef121B3F8047A8e08C39A
+   CreateCall                          0xef76497d5826f1A5b0d5B4180A55Eb63E8360dd8
+   MultiSend                           0x0beDfC60AA633c51F0eE17C2524B4c2261d13F58
+   MultiSendCallOnly                   0x7FEc2f134AcdBB8E5463375fD3C7232801643a74
+   SignMessageLib                      0x9A5578B307ab490C7c45f7330F416E73C607bE94
+   SafeL2                              0xef911c6af5e7FA6CDc1392e4B9fb783328929967
+   Safe                                0x6001A5A6a18E5D0d3BEdae2349cf0c6fB99856F6
+
+
+============================================================
+  ✅ Deployment Successful
+============================================================
+
+📋 Deployed Contract Addresses:
+
+
+📋 Next steps:
+  1. Copy the contract addresses above
+  2. Add them to your Safe Wallet Web config
+  3. Update config/chains/custom-chains.json
+
+💡 Deployment mode used: singleton
+   Note: Addresses are deterministic (same across networks)
 ```
 
-### Step 3: Add Custom Network
-
-Edit `hardhat.config.ts` and add your network:
-
-```typescript
-// In the networks section
-custom: {
-  url: process.env.NODE_URL || "",
-  chainId: 957, // Your chain ID
-  accounts: {
-    mnemonic: process.env.MNEMONIC,
-  },
-},
-```
-
-### Step 4: Deploy
-
+### Custom Factory Mode
 ```bash
-# Deploy all Safe contracts
-yarn deploy-all custom
+============================================================
+  Safe 1.4.1 Contract Deployment
+============================================================
 
-# The output will show deployed addresses
+ℹ️  Configuration:
+  Network: orbit-demo-testnet
+  Chain ID: 20240328
+  RPC URL: https://orbit-demo.alt.technology
+  Deployment Mode: custom
+  Factory Address: 0xce0042B868300000d44A59004Da54A005ffdcf9f
+
+📝 Adding network 'orbit-demo-testnet' to hardhat.config.ts...
+✅ Network configuration added successfully
+🔧 Patching hardhat.config.ts for custom network support...
+📦 Deployment mode: custom
+✅ Hardhat config patched successfully
+🔧 Patching deploy_contracts task to skip Etherscan verification...
+✅ Deploy task patched successfully
+
+============================================================
+  Starting Deployment
+============================================================
+
+ℹ️  Deployer Address: 0xa4a4adc9B25b0Dbe61CBF0Af667BD723f4D7CbeC
+
+ℹ️  Using ERC-2470 factory deployment method for Arbitrum Orbit
+
+📦 Compiling contracts...
+Nothing to compile
+
+🚀 Deploying Safe contracts with ERC-2470 factory...
+
+📡 Network: https://orbit-demo.alt.technology
+👤 Deployer: 0xa4a4adc9B25b0Dbe61CBF0Af667BD723f4D7CbeC
+🏭 Factory: 0xce0042B868300000d44A59004Da54A005ffdcf9f
+
+
+📦 Deploying SimulateTxAccessor...
+   Expected address: 0xeDd0ca2DD8E29885D27bdf80312730654B5E9C50
+   ✅ Already deployed, reusing
+
+📦 Deploying SafeProxyFactory...
+   Expected address: 0x523A58387ddbd3e735B63bE639057Cc5969Ad7c4
+   ✅ Already deployed, reusing
+
+📦 Deploying TokenCallbackHandler...
+   Expected address: 0x757807d10fac3ed93Dd9894da13fE9B5B6a7F13E
+   ✅ Already deployed, reusing
+
+📦 Deploying CompatibilityFallbackHandler...
+   Expected address: 0xEd91C9234AD8D8d9B15ef121B3F8047A8e08C39A
+   ✅ Already deployed, reusing
+
+📦 Deploying CreateCall...
+   Expected address: 0xef76497d5826f1A5b0d5B4180A55Eb63E8360dd8
+   ✅ Already deployed, reusing
+
+📦 Deploying MultiSend...
+   Expected address: 0x0beDfC60AA633c51F0eE17C2524B4c2261d13F58
+   ✅ Already deployed, reusing
+
+📦 Deploying MultiSendCallOnly...
+   Expected address: 0x7FEc2f134AcdBB8E5463375fD3C7232801643a74
+   ✅ Already deployed, reusing
+
+📦 Deploying SignMessageLib...
+   Expected address: 0x9A5578B307ab490C7c45f7330F416E73C607bE94
+   ✅ Already deployed, reusing
+
+📦 Deploying SafeL2...
+   Expected address: 0xef911c6af5e7FA6CDc1392e4B9fb783328929967
+   Deploying...
+   TX: 0xc26dd18b1e42a36e94530bdc4af41d1542006dd624f712270a17a7a80fc99563
+   ✅ Deployed at: 0xef911c6af5e7FA6CDc1392e4B9fb783328929967
+   Gas used: 4998124
+
+📦 Deploying Safe...
+   Expected address: 0x6001A5A6a18E5D0d3BEdae2349cf0c6fB99856F6
+   Deploying...
+   TX: 0x41de1f41ebaf73c5fe80cc6b896795769b8471b16d82a6e695bd0b356cfca722
+   ✅ Deployed at: 0x6001A5A6a18E5D0d3BEdae2349cf0c6fB99856F6
+   Gas used: 4995168
+
+
+============================================================
+  ✅ Deployment Complete
+============================================================
+
+📋 Deployed Contracts:
+
+   SimulateTxAccessor                  0xeDd0ca2DD8E29885D27bdf80312730654B5E9C50
+   SafeProxyFactory                    0x523A58387ddbd3e735B63bE639057Cc5969Ad7c4
+   TokenCallbackHandler                0x757807d10fac3ed93Dd9894da13fE9B5B6a7F13E
+   CompatibilityFallbackHandler        0xEd91C9234AD8D8d9B15ef121B3F8047A8e08C39A
+   CreateCall                          0xef76497d5826f1A5b0d5B4180A55Eb63E8360dd8
+   MultiSend                           0x0beDfC60AA633c51F0eE17C2524B4c2261d13F58
+   MultiSendCallOnly                   0x7FEc2f134AcdBB8E5463375fD3C7232801643a74
+   SignMessageLib                      0x9A5578B307ab490C7c45f7330F416E73C607bE94
+   SafeL2                              0xef911c6af5e7FA6CDc1392e4B9fb783328929967
+   Safe                                0x6001A5A6a18E5D0d3BEdae2349cf0c6fB99856F6
+
+
+============================================================
+  ✅ Deployment Successful
+============================================================
+
+📋 Deployed Contract Addresses:
+
+
+📋 Next steps:
+  1. Copy the contract addresses above
+  2. Add them to your Safe Wallet Web config
+  3. Update config/chains/custom-chains.json
+
+💡 Deployment mode used: custom
+   Note: Addresses are deterministic (same across networks)
 ```
 
-### Step 5: Verify (Optional)
-
-If your chain has an Etherscan-compatible explorer:
-
-```bash
-# Add to .env
-ETHERSCAN_API_KEY="your-api-key"
-
-# Add to hardhat.config.ts
-customExplorers: {
-  custom: {
-    apiURL: "https://your-explorer.com/api",
-    browserURL: "https://your-explorer.com"
-  }
-}
-
-# Verify
-yarn sourcify custom
-yarn etherscan-verify custom
-```
-
----
-
-## Method 2: Standalone Hardhat Script
-
-### Setup
-
-```bash
-# Create project directory
-mkdir safe-deployment && cd safe-deployment
-npm init -y
-
-# Install dependencies
-npm install --save-dev hardhat @nomiclabs/hardhat-ethers ethers
-npm install @safe-global/safe-contracts@1.4.1
-npm install dotenv
-```
-
-### Create hardhat.config.js
-
-```javascript
-require("@nomiclabs/hardhat-ethers");
-require('dotenv').config();
-
-module.exports = {
-  solidity: {
-    version: "0.7.6",
-    settings: {
-      optimizer: {
-        enabled: true,
-        runs: 200
-      }
-    }
-  },
-  networks: {
-    custom: {
-      url: process.env.RPC_URL || "",
-      chainId: 957, // Your chain ID
-      accounts: [process.env.PRIVATE_KEY]
-    }
-  }
-};
-```
-
-### Create .env
-
-```bash
-RPC_URL=https://your-rpc-endpoint.com
-PRIVATE_KEY=0xyourprivatekeyhere
-```
-
-### Copy Deployment Script
-
-```bash
-# Copy the hardhat-deploy-safe.js script from this directory
-cp /path/to/utils/deploy-contracts/hardhat-deploy-safe.js ./
-```
-
-### Deploy
-
-```bash
-npx hardhat run hardhat-deploy-safe.js --network custom
-```
-
-The script will:
-- Deploy all 9 Safe 1.4.1 contracts
-- Display deployment progress and gas costs
-- Generate a configuration JSON file
-- Save deployment info to `safe-deployment-<chainId>.json`
-
----
-
-## Method 3: CreateX (Advanced)
-
-For users who need deterministic addresses across multiple chains.
-
-### Overview
-
-CreateX allows deploying contracts with the same address on multiple chains using CREATE2. This method requires deep understanding of both Safe and CreateX.
-
-### Key Steps
-
-1. **Configure Setup Function** - Prepare Safe initialization parameters
-2. **Encode Setup Call** - Use `cast` to encode the setup function
-3. **Generate Salt** - Create permissioned deployment salt
-4. **Get Proxy Code** - Query SafeProxyFactory for creation code
-5. **Construct InitCode** - Combine proxy code with singleton address
-6. **Deploy via CreateX** - Execute deployment through CreateX
-
-### Detailed Guide
-
-See the CreateX deployment gist: https://gist.github.com/pcaversaccio/0411f521eb923dd1159ed483e2d7d564
-
-⚠️ **Warning:** This method is complex and recommended only for advanced users who need cross-chain deterministic addresses.
-
----
-
-## Post-Deployment
-
-### 1. Verify Deployment
-
-Check that all 9 contracts are deployed:
-
-```bash
-# Verify contract has code
-cast code <contract-address> --rpc-url <your-rpc>
-
-# Should return bytecode, not 0x
-```
-
-**Required contracts:**
-- ✅ CompatibilityFallbackHandler
-- ✅ CreateCall
-- ✅ Safe (L1)
-- ✅ SafeL2
-- ✅ MultiSend
-- ✅ MultiSendCallOnly
-- ✅ SafeProxyFactory
-- ✅ SignMessageLib
-- ✅ SimulateTxAccessor
-
-### 2. Update Configuration
-
-Add deployed addresses to `config/chains/custom-chains.json`:
-
-```json
-{
-  "chainId": "957",
-  "name": "Your Chain",
-  "contracts": {
-    "1.4.1": {
-      "compatibilityFallbackHandler": {
-        "address": "0x..."
-      },
-      "createCall": {
-        "address": "0x..."
-      },
-      "safe": {
-        "address": "0x..."
-      },
-      "safeL2": {
-        "address": "0x..."
-      },
-      "multiSend": {
-        "address": "0x..."
-      },
-      "multiSendCallOnly": {
-        "address": "0x..."
-      },
-      "safeProxyFactory": {
-        "address": "0x..."
-      },
-      "signMessageLib": {
-        "address": "0x..."
-      },
-      "simulateTxAccessor": {
-        "address": "0x..."
-      }
-    }
-  }
-}
-```
-
-### 3. Test Safe Creation
-
-Try creating a Safe using the Safe Wallet Web interface to verify the deployment works correctly.
-
-### 4. Commit Changes
-
-```bash
-git add config/chains/custom-chains.json
-git commit -m "Add Safe 1.4.1 contracts for chain <chain-id>"
-git push
-```
-
-### 5. Deploy Application
-
-```bash
-# Rebuild Docker
-docker build -t safe-wallet-web .
-
-# Or just restart with volume mount (no rebuild)
-docker restart safe-wallet-web
-```
-
----
-
-## Helper Scripts
-
-This directory contains helper scripts to assist with deployment:
-
-### `deploy-safe-141.js`
-Interactive helper for official repo deployment
-
-```bash
-node utils/deploy-contracts/deploy-safe-141.js custom
-```
-
-### `hardhat-deploy-safe.js`
-Standalone Hardhat deployment script
-
-```bash
-npx hardhat run utils/deploy-contracts/hardhat-deploy-safe.js --network custom
-```
-
----
-
-## Troubleshooting
-
-### Compilation Errors
-
-**Problem:** Contracts fail to compile
-
-**Solutions:**
-- Ensure Solidity version is exactly 0.7.6
-- Enable optimizer with 200 runs
-- Verify all dependencies are installed
-- Try `yarn install --force` or `npm install --force`
-
-### Deployment Fails
-
-**Problem:** Transaction reverts or fails
-
-**Solutions:**
-- Verify RPC endpoint is accessible and responding
-- Check deployer account has sufficient funds
-- Ensure chain ID matches in config
-- Try increasing gas limit/price
-- Check if contracts are already deployed
-
-### Gas Estimation Errors
-
-**Problem:** Gas estimation fails
-
-**Solutions:**
-- Manually set gas limit: `--gas-limit 3000000`
-- Check RPC endpoint supports gas estimation
-- Verify account has sufficient balance
-
-### Verification Fails
-
-**Problem:** Block explorer verification fails
-
-**Solutions:**
-- Ensure exact source code matches (no comments changed)
-- Verify compiler version (0.7.6) and settings
-- Check optimizer runs = 200
-- Ensure API key is correct
-- Try manual verification with flattened source
-
-### Different Addresses Than Expected
-
-**Problem:** Deployed addresses don't match other chains
-
-**Solutions:**
-- Use Method 1 (Official Repo) for deterministic deployments
-- Ensure deploying from same account with same nonce
-- For cross-chain matching, use CreateX method
-- Check that contract source code is identical
-
----
-
-## Important Notes
-
-⚠️ **Gas Costs:** Deploying all Safe contracts costs approximately 0.05-0.1 ETH equivalent in gas
-
-⚠️ **Version Locking:** Do NOT modify contract source files - any change results in different addresses
-
-⚠️ **Testnet First:** Always test on testnet before mainnet deployment
-
-⚠️ **Key Security:** Keep deployment private keys/mnemonics secure and never commit to git
-
-⚠️ **Nonce Management:** If deployment fails partway, some contracts may be deployed - check before retrying
-
----
-
-## References
-
-- **Safe Contracts Repository:** https://github.com/safe-global/safe-smart-account
-- **Safe Deployments:** https://github.com/safe-global/safe-deployments
-- **Safe Documentation:** https://docs.safe.global
-- **CreateX Documentation:** https://github.com/pcaversaccio/createx
-- **Adding Custom Chains:** `../../docs/CUSTOM_CHAINS.md`
-
----
-
-## Contract Details
-
-### Safe v1.4.1 Contracts
-
-| Contract | Purpose |
-|----------|---------|
-| **Safe** | Main Safe singleton for L1 chains |
-| **SafeL2** | Main Safe singleton optimized for L2 chains |
-| **SafeProxyFactory** | Creates Safe proxy instances |
-| **CompatibilityFallbackHandler** | Handles fallback function calls |
-| **CreateCall** | Allows Safe to deploy contracts |
-| **MultiSend** | Batches multiple transactions |
-| **MultiSendCallOnly** | Batches multiple calls (no delegatecalls) |
-| **SignMessageLib** | EIP-1271 message signing library |
-| **SimulateTxAccessor** | Simulates transactions for gas estimation |
-
-### Solidity Version
-- **Version:** 0.7.6
-- **Optimizer:** Enabled
-- **Runs:** 200
-
----
-
-## Need Help?
-
-1. Check the troubleshooting section above
-2. Review Safe documentation: https://docs.safe.global
-3. Check existing deployments: https://github.com/safe-global/safe-deployments
-4. Review custom chains guide: `../../docs/CUSTOM_CHAINS.md`
+## Resources
+
+- [Safe Contracts Repository](https://github.com/safe-global/safe-smart-account)
+- [Safe Singleton Factory](https://github.com/safe-global/safe-singleton-factory)
+- [Deterministic Deployment Proxy](https://github.com/Arachnid/deterministic-deployment-proxy)
+- [Safe Documentation](https://docs.safe.global/)
