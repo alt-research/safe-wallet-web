@@ -1,16 +1,27 @@
-FROM node:20-alpine
+# ============================================
+# Build Stage: Install dependencies and build
+# ============================================
+FROM node:20-alpine AS builder
+
+# Install build dependencies
 RUN apk add --no-cache libc6-compat git python3 py3-pip make g++ libusb-dev eudev-dev linux-headers
+
 WORKDIR /app
-COPY . .
+
+# Copy package files first for better layer caching
+COPY package.json yarn.lock ./
 
 # Fix arm64 timeouts and add retry logic for public npm packages
 RUN yarn config set network-timeout 300000 && \
     yarn config set network-concurrency 1
 
-# install deps with retry
-RUN yarn install || \
-    (sleep 10 && yarn install) || \
-    (sleep 30 && yarn install)
+# Install dependencies with retry logic
+RUN yarn install --frozen-lockfile || \
+    (sleep 10 && yarn install --frozen-lockfile) || \
+    (sleep 30 && yarn install --frozen-lockfile)
+
+# Copy source code
+COPY . .
 
 # Remove deprecated @types/minimatch that causes build failures
 RUN rm -rf node_modules/@types/minimatch
@@ -19,39 +30,48 @@ RUN rm -rf node_modules/@types/minimatch
 RUN yarn after-install
 
 # Copy custom chain configuration
-# This file can be overridden via volume mount without rebuilding the image
 COPY config/chains/custom-chains.json /app/config/chains/custom-chains.json
 
-# Install serve globally during build
-RUN yarn global add serve
-
+# Set build-time environment variables
 ENV NODE_ENV=production
-
-# Next.js collects completely anonymous telemetry data about general usage.
-# Learn more here: https://nextjs.org/telemetry
-# Uncomment the following line in case you want to disable telemetry during the build.
 ENV NEXT_TELEMETRY_DISABLED=1
-
-# Set Next.js public environment variables for build
-# These get baked into the static export and cannot be changed at runtime
 ENV NEXT_PUBLIC_GATEWAY_URL_PRODUCTION=/cgw
 ENV NEXT_PUBLIC_IS_PRODUCTION=true
 ENV NEXT_PUBLIC_SAFE_VERSION=1.3.0
 ENV NEXT_PUBLIC_WC_PROJECT_ID=dce8b76eeca269d6a63782777c1972d9
-
-# Optional environment variables (set to empty to disable features)
 ENV NEXT_PUBLIC_BEAMER_ID=
 ENV NEXT_PUBLIC_INFURA_TOKEN=
 ENV NEXT_PUBLIC_SAFE_APPS_INFURA_TOKEN=
 ENV NEXT_PUBLIC_SENTRY_DSN=
 
-# Build the Next.js app during Docker build (not at runtime)
+# Build the Next.js app
 RUN yarn build
+
+# ============================================
+# Runtime Stage: Minimal production image
+# ============================================
+FROM node:20-alpine AS runner
+
+WORKDIR /app
+
+# Install only production dependencies (serve)
+RUN npm install -g serve
+
+# Copy only the built static files from builder
+COPY --from=builder /app/out ./out
+
+# Add non-root user for security
+RUN addgroup --system --gid 1001 nodejs && \
+    adduser --system --uid 1001 nextjs && \
+    chown -R nextjs:nodejs /app
+
+USER nextjs
 
 EXPOSE 8080
 
 ENV PORT=8080
 ENV REVERSE_PROXY_UI_PORT=8080
+ENV NODE_ENV=production
 
-# Just serve the pre-built files using globally installed serve
+# Serve the pre-built static files
 CMD ["serve", "out", "-p", "8080", "-n"]
