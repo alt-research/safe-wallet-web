@@ -24,12 +24,10 @@ const initLoader = async () => {
   }
 }
 
-// Start loading immediately if running on server
-if (typeof window === 'undefined') {
-  initLoader().catch((error) => {
-    console.error('Failed to initialize custom deployment loader:', error)
-  })
-}
+// Start loading immediately (both server and client)
+initLoader().catch((error) => {
+  console.error('Failed to initialize custom deployment loader:', error)
+})
 
 export const _tryDeploymentVersions = (
   getDeployment: (filter?: DeploymentFilter) => SingletonDeployment | undefined,
