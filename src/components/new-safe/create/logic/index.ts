@@ -90,6 +90,13 @@ export const computeNewSafeAddress = async (
 ): Promise<string> => {
   const ethAdapter = await createEthersAdapter(ethersProvider)
 
+  // Get custom deployments for this chain
+  const safeDeployment = getSafeContractDeployment({ chainId } as ChainInfo, LATEST_SAFE_VERSION)
+  const proxyFactoryDeployment = getProxyFactoryContractDeployment(chainId, LATEST_SAFE_VERSION)
+
+  console.log('computeNewSafeAddress - Safe deployment:', safeDeployment?.defaultAddress)
+  console.log('computeNewSafeAddress - ProxyFactory deployment:', proxyFactoryDeployment?.defaultAddress)
+
   return predictSafeAddress({
     ethAdapter,
     chainId: BigInt(chainId),
@@ -97,6 +104,8 @@ export const computeNewSafeAddress = async (
     safeDeploymentConfig: {
       saltNonce: props.saltNonce,
       safeVersion: LATEST_SAFE_VERSION as SafeVersion,
+      ...(safeDeployment && { safeSingletonL2Deployment: safeDeployment }),
+      ...(proxyFactoryDeployment && { safeProxyFactoryDeployment: proxyFactoryDeployment }),
     },
   })
 }
