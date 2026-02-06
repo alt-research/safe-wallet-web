@@ -162,6 +162,10 @@ const ReviewStep = ({ data, onSubmit, onBack, setStep }: StepRenderProps<NewSafe
     setIsCreating(true)
 
     try {
+      // Wait for custom deployments to load before proceeding
+      const { customDeploymentsReady } = await import('@/services/contracts/deployments')
+      await customDeploymentsReady
+
       const readOnlyFallbackHandlerContract = await getReadOnlyFallbackHandlerContract(
         chain.chainId,
         LATEST_SAFE_VERSION,

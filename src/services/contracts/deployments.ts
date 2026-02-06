@@ -14,20 +14,9 @@ import type { ChainInfo, SafeInfo } from '@safe-global/safe-gateway-typescript-s
 import { LATEST_SAFE_VERSION } from '@/config/constants'
 import { customDeploymentLoader } from './custom-deployment-loader'
 
-// Initialize custom deployment loader
-// This is a promise that resolves when custom deployments are loaded
-let loaderInitialized = false
-const initLoader = async () => {
-  if (!loaderInitialized) {
-    await customDeploymentLoader.load()
-    loaderInitialized = true
-  }
-}
-
-// Start loading immediately (both server and client)
-initLoader().catch((error) => {
-  console.error('Failed to initialize custom deployment loader:', error)
-})
+// Initialize custom deployment loader eagerly
+// This promise resolves when custom deployments are loaded
+export const customDeploymentsReady = customDeploymentLoader.load()
 
 export const _tryDeploymentVersions = (
   getDeployment: (filter?: DeploymentFilter) => SingletonDeployment | undefined,
@@ -35,7 +24,9 @@ export const _tryDeploymentVersions = (
   version: SafeInfo['version'],
   contractName?: string,
 ): SingletonDeployment | undefined => {
-  // Check custom deployments first if contract name is provided
+  // Ensure loader is initialized before checking custom deployments
+  // Note: initLoader() is called at module load time, so it should be done by now
+  // But we check synchronously without awaiting to avoid breaking existing sync API
   if (contractName && version) {
     const customDeployment = customDeploymentLoader.getDeployment(network, contractName, version)
     if (customDeployment) {
