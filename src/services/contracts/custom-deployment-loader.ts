@@ -167,14 +167,18 @@ class CustomDeploymentLoader {
     // Get the version-specific contracts
     const versionContracts = chain.contracts[version as '1.3.0' | '1.4.1']
     if (!versionContracts) {
+      console.log(`No contracts found for version: ${version}`)
       return undefined
     }
 
     // Map contract names to our internal naming
     const contractKey = this.mapContractName(contractName, version) as keyof typeof versionContracts
+    console.log(`Mapped contract name '${contractName}' to key '${contractKey}'`)
     const deployment = versionContracts[contractKey] as CustomContractDeployment | undefined
 
     if (!deployment) {
+      console.log(`No deployment found for contract key: ${contractKey}`)
+      console.log(`Available contracts:`, Object.keys(versionContracts))
       return undefined
     }
 
