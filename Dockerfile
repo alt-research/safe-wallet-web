@@ -48,6 +48,9 @@ ENV NEXT_PUBLIC_SENTRY_DSN=
 # Build the Next.js app
 RUN yarn build
 
+# Create config directory in output for runtime config files
+RUN mkdir -p /app/out/config
+
 # ============================================
 # Runtime Stage: Minimal production image
 # ============================================
@@ -55,11 +58,14 @@ FROM node:20-alpine AS runner
 
 WORKDIR /app
 
-# Install only production dependencies (serve)
-RUN npm install -g serve
-
 # Copy only the built static files from builder
 COPY --from=builder /app/out ./out
+
+# Copy custom serve script for header support
+COPY serve-with-headers.js ./
+
+# Create config directory for runtime-mounted files
+RUN mkdir -p /app/out/config
 
 # Add non-root user for security
 RUN addgroup --system --gid 1001 nodejs && \
@@ -74,5 +80,5 @@ ENV PORT=8080
 ENV REVERSE_PROXY_UI_PORT=8080
 ENV NODE_ENV=production
 
-# Serve the pre-built static files
-CMD ["serve", "out", "-p", "8080", "-n"]
+# Serve the pre-built static files with custom headers
+CMD ["node", "serve-with-headers.js"]

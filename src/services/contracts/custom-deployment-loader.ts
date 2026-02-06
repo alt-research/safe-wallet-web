@@ -12,37 +12,106 @@ import type { CustomDeploymentsConfig, CustomChainConfig, CustomContractDeployme
 
 /**
  * Custom deployment loader for Safe contracts
- * Loads custom chain configurations from JSON files or environment variables
+ * Supports client-side runtime loading with integrity checking
  */
 class CustomDeploymentLoader {
   private customChains: Map<string, CustomChainConfig> = new Map()
   private loaded = false
+  private loading = false
+  private loadPromise: Promise<void> | null = null
 
   /**
    * Load custom deployments from configuration
-   * This runs on the server side during build or SSR
+   * In browser: fetches from /config/custom-chains.json endpoint
+   * During build: uses environment variable if available
    */
   async load(): Promise<void> {
     if (this.loaded) {
       return
     }
 
+    // If already loading, wait for that promise
+    if (this.loading && this.loadPromise) {
+      return this.loadPromise
+    }
+
+    this.loading = true
+    this.loadPromise = this._doLoad()
+
     try {
-      // Load from environment variable (primary method)
+      await this.loadPromise
+    } finally {
+      this.loading = false
+    }
+  }
+
+  private async _doLoad(): Promise<void> {
+    try {
+      // Client-side: fetch from runtime endpoint
+      if (typeof window !== 'undefined') {
+        try {
+          const response = await fetch('/config/custom-chains.json', {
+            cache: 'no-cache',
+            headers: {
+              'Accept': 'application/json',
+            },
+          })
+
+          if (!response.ok) {
+            throw new Error(`Failed to fetch custom chains config: ${response.status}`)
+          }
+
+          const data = await response.json()
+
+          // Verify integrity if hash is provided
+          const expectedHash = response.headers.get('X-Config-Hash')
+          if (expectedHash) {
+            const actualHash = await this.computeHash(JSON.stringify(data))
+            if (actualHash !== expectedHash) {
+              console.error('Custom chains config integrity check failed!')
+              throw new Error('Config integrity verification failed')
+            }
+            console.log('Custom chains config integrity verified')
+          }
+
+          this.loadFromConfig(data)
+          this.loaded = true
+          console.log('Custom chain deployments loaded from runtime endpoint')
+          return
+        } catch (error) {
+          console.warn('Failed to fetch custom chains config, using package defaults:', error)
+          // Fall through to use defaults
+        }
+      }
+
+      // Build-time: use environment variable if available
       const envConfig = process.env.CUSTOM_CHAINS_CONFIG
       if (envConfig) {
         this.loadFromString(envConfig)
         this.loaded = true
-        console.log('Custom chain deployments loaded from CUSTOM_CHAINS_CONFIG environment variable')
+        console.log('Custom chain deployments loaded from build-time environment variable')
         return
       }
 
       // No custom configuration found - use package defaults only
-      console.debug('No CUSTOM_CHAINS_CONFIG environment variable found, using package defaults only')
+      console.debug('No custom chain configuration found, using package defaults only')
+      this.loaded = true
     } catch (error) {
       console.error('Failed to load custom deployments:', error)
+      this.loaded = true // Mark as loaded to prevent infinite retries
       // Don't throw - fail gracefully and use package defaults
     }
+  }
+
+  /**
+   * Compute SHA-256 hash of a string for integrity checking
+   */
+  private async computeHash(data: string): Promise<string> {
+    const encoder = new TextEncoder()
+    const dataBuffer = encoder.encode(data)
+    const hashBuffer = await crypto.subtle.digest('SHA-256', dataBuffer)
+    const hashArray = Array.from(new Uint8Array(hashBuffer))
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('')
   }
 
   /**
