@@ -50,7 +50,9 @@ class CustomDeploymentLoader {
       // Client-side: fetch from runtime endpoint
       if (typeof window !== 'undefined') {
         try {
-          const response = await fetch('/config/custom-chains.json', {
+          // Add timestamp to bust any caching
+          const cacheBuster = `?t=${Date.now()}`
+          const response = await fetch(`/config/custom-chains.json${cacheBuster}`, {
             cache: 'no-cache',
             headers: {
               'Accept': 'application/json',
@@ -77,6 +79,7 @@ class CustomDeploymentLoader {
           this.loadFromConfig(data)
           this.loaded = true
           console.log('Custom chain deployments loaded from runtime endpoint')
+          console.log('Loaded data:', JSON.stringify(data, null, 2))
           return
         } catch (error) {
           console.warn('Failed to fetch custom chains config, using package defaults:', error)
