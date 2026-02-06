@@ -186,7 +186,7 @@ class CustomDeploymentLoader {
     }
 
     // Convert to SingletonDeployment format, using package ABI
-    return {
+    const result = {
       defaultAddress: deployment.address,
       released: true,
       contractName: contractName,
@@ -204,6 +204,8 @@ class CustomDeploymentLoader {
         },
       }),
     }
+    console.log(`Returning custom deployment for ${contractName}:`, deployment.address)
+    return result
   }
 
   /**

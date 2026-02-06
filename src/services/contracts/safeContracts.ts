@@ -107,10 +107,13 @@ export const getReadOnlyMultiSendCallOnlyContract = async (chainId: string, safe
 // GnosisSafeProxyFactory
 
 export const getReadOnlyProxyFactoryContract = (chainId: string, safeVersion: SafeInfo['version']) => {
+  console.log(`getReadOnlyProxyFactoryContract: chainId=${chainId}, version=${safeVersion}`)
   const ethAdapter = createReadOnlyEthersAdapter()
+  const deployment = getProxyFactoryContractDeployment(chainId, safeVersion)
+  console.log('ProxyFactory deployment:', deployment)
 
   return ethAdapter.getSafeProxyFactoryContract({
-    singletonDeployment: getProxyFactoryContractDeployment(chainId, safeVersion),
+    singletonDeployment: deployment,
     ..._getValidatedGetContractProps(safeVersion),
   })
 }
@@ -121,10 +124,13 @@ export const getReadOnlyFallbackHandlerContract = async (
   chainId: string,
   safeVersion: SafeInfo['version'],
 ): Promise<CompatibilityFallbackHandlerEthersContract> => {
+  console.log(`getReadOnlyFallbackHandlerContract: chainId=${chainId}, version=${safeVersion}`)
   const ethAdapter = createReadOnlyEthersAdapter()
+  const deployment = getFallbackHandlerContractDeployment(chainId, safeVersion)
+  console.log('FallbackHandler deployment:', deployment)
 
   return ethAdapter.getCompatibilityFallbackHandlerContract({
-    singletonDeployment: getFallbackHandlerContractDeployment(chainId, safeVersion),
+    singletonDeployment: deployment,
     ..._getValidatedGetContractProps(safeVersion),
   })
 }

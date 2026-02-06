@@ -163,13 +163,17 @@ const ReviewStep = ({ data, onSubmit, onBack, setStep }: StepRenderProps<NewSafe
 
     try {
       // Wait for custom deployments to load before proceeding
+      console.log('Waiting for custom deployments to load...')
       const { customDeploymentsReady } = await import('@/services/contracts/deployments')
       await customDeploymentsReady
+      console.log('Custom deployments ready')
 
+      console.log(`Getting fallback handler for chain ${chain.chainId}, version ${LATEST_SAFE_VERSION}`)
       const readOnlyFallbackHandlerContract = await getReadOnlyFallbackHandlerContract(
         chain.chainId,
         LATEST_SAFE_VERSION,
       )
+      console.log('Got fallback handler contract:', readOnlyFallbackHandlerContract)
 
       const props: DeploySafeProps = {
         safeAccountConfig: {
