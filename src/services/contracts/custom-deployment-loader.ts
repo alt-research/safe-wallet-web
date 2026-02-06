@@ -109,7 +109,8 @@ class CustomDeploymentLoader {
   private async computeHash(data: string): Promise<string> {
     const encoder = new TextEncoder()
     const dataBuffer = encoder.encode(data)
-    const hashBuffer = await crypto.subtle.digest('SHA-256', dataBuffer.buffer)
+    // Type assertion: Uint8Array is a valid BufferSource but TS types are strict
+    const hashBuffer = await crypto.subtle.digest('SHA-256', dataBuffer as BufferSource)
     const hashArray = Array.from(new Uint8Array(hashBuffer))
     return hashArray.map(b => b.toString(16).padStart(2, '0')).join('')
   }
