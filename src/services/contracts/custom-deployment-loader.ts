@@ -28,24 +28,17 @@ class CustomDeploymentLoader {
     }
 
     try {
-      // Try to load from environment variable first
+      // Load from environment variable (primary method)
       const envConfig = process.env.CUSTOM_CHAINS_CONFIG
       if (envConfig) {
         this.loadFromString(envConfig)
         this.loaded = true
+        console.log('Custom chain deployments loaded from CUSTOM_CHAINS_CONFIG environment variable')
         return
       }
 
-      // Try to load from file (using dynamic import with relative path from project root)
-      try {
-        const configModule = await import('../../../config/chains/custom-chains.json')
-        const config = configModule.default as CustomDeploymentsConfig
-        this.loadFromConfig(config)
-        this.loaded = true
-      } catch (error) {
-        // Config file doesn't exist, that's okay - just use defaults from package
-        console.debug('No custom chain configuration file found, using package defaults only')
-      }
+      // No custom configuration found - use package defaults only
+      console.debug('No CUSTOM_CHAINS_CONFIG environment variable found, using package defaults only')
     } catch (error) {
       console.error('Failed to load custom deployments:', error)
       // Don't throw - fail gracefully and use package defaults
