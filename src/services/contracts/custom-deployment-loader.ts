@@ -156,10 +156,13 @@ class CustomDeploymentLoader {
     contractName: string,
     version: string,
   ): SingletonDeployment | undefined {
+    console.log(`getDeployment called: chainId=${chainId}, contract=${contractName}, version=${version}`)
     const chain = this.customChains.get(chainId)
     if (!chain) {
+      console.log(`No custom chain found for chainId: ${chainId}`)
       return undefined
     }
+    console.log(`Found custom chain: ${chain.name}`)
 
     // Get the version-specific contracts
     const versionContracts = chain.contracts[version as '1.3.0' | '1.4.1']
