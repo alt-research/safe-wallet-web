@@ -29,8 +29,9 @@ RUN rm -rf node_modules/@types/minimatch
 # Run after-install (generates types and applies any remaining patches)
 RUN yarn after-install
 
-# Copy custom chain configuration
-COPY config/chains/custom-chains.json /app/config/chains/custom-chains.json
+# Accept custom chains config as build argument
+ARG CUSTOM_CHAINS_CONFIG
+ENV CUSTOM_CHAINS_CONFIG=${CUSTOM_CHAINS_CONFIG}
 
 # Set build-time environment variables
 ENV NODE_ENV=production
