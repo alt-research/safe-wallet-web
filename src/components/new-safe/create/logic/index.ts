@@ -7,6 +7,10 @@ import {
   getReadOnlyGnosisSafeContract,
   getReadOnlyProxyFactoryContract,
 } from '@/services/contracts/safeContracts'
+import {
+  getSafeContractDeployment,
+  getProxyFactoryContractDeployment,
+} from '@/services/contracts/deployments'
 import type { ConnectedWallet } from '@/hooks/wallets/useOnboard'
 import { SafeCreationStatus } from '@/components/new-safe/create/steps/StatusStep/useSafeCreation'
 import { didRevert, type EthersError } from '@/utils/ethers-utils'
