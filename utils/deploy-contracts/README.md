@@ -22,16 +22,17 @@ There are 3 `DEPLOYMENT_MODE` options:
 ### 2. Singleton Factory Mode
 
 **Characteristics:**
-- ✅ Deterministic addresses (same across all networks)
+- ✅ Deterministic addresses (same across networks using the same factory)
 - ✅ Addresses can be predicted before deployment
-- ✅ Follows Safe's standard deployment pattern
 - ⚠️ Requires ~0.01 ETH for factory deployment (one-time cost)
 - ⚠️ Two-step process (factory deployment + Safe contracts)
 - ⚠️ **May not work on all networks** - some custom chains have EVM modifications that are incompatible with the singleton factory
+- ⚠️ **Addresses differ from official Safe canonical addresses** - due to using different factory addresses (networks may have ERC-2470 factory instead of Safe's Singleton Factory)
 
 **Notes**:
 1. How it works: Deploys (if not present) then uses the [Deterministic Deployment Proxy](https://github.com/Arachnid/deterministic-deployment-proxy) (singleton factory) at `0xce0042B868300000d44A59004Da54A005ffdcf9f`
 1. For Arbitrum Orbit, the singleton factory uses a different interface than the standard Arachnid factory. It has a `deploy(bytes _initCode, bytes32 _salt)` function instead of just accepting raw calldata. See https://github.com/OffchainLabs/ERCs/blob/892a55cb81f43afeafcfe4e887bf48d400558630/ERCS/erc-2470.md
+1. Official Safe deployments use the Safe Singleton Factory at `0x914d7Fec6aaC8cd542e72Bca78B30650d45643d7`, which produces different addresses than the ERC-2470 factory. If customer wants to have same Safe canonical addresses, the chain must be on chainlist.org and we need to contact Safe team to help sign the Safe Singleton Factory deployment transaction
 1. If singleton mode fails with "execution reverted" or gas estimation errors, your network may not support the deterministic deployment proxy. Use standard mode instead
  
 ### 3. Custom Factory Mode
