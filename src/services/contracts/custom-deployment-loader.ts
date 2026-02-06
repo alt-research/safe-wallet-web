@@ -141,12 +141,10 @@ class CustomDeploymentLoader {
         console.warn('Invalid chain config: missing chainId or contracts', chain)
         continue
       }
-      console.log(`Loading custom chain: ${chain.chainId} (${chain.name})`)
       this.customChains.set(chain.chainId, chain)
     }
 
     console.log(`Loaded custom deployments for ${this.customChains.size} chain(s)`)
-    console.log('Custom chain IDs:', Array.from(this.customChains.keys()))
   }
 
   /**
@@ -158,13 +156,10 @@ class CustomDeploymentLoader {
     contractName: string,
     version: string,
   ): SingletonDeployment | undefined {
-    console.log(`getDeployment called: chainId=${chainId}, contract=${contractName}, version=${version}`)
     const chain = this.customChains.get(chainId)
     if (!chain) {
-      console.log(`No custom chain found for chainId: ${chainId}`)
       return undefined
     }
-    console.log(`Found custom chain: ${chain.name}`)
 
     // Get the version-specific contracts
     const versionContracts = chain.contracts[version as '1.3.0' | '1.4.1']
