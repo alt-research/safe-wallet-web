@@ -32,7 +32,9 @@ const mimeTypes = {
 };
 
 const server = http.createServer((req, res) => {
-  let filePath = path.join(STATIC_DIR, req.url === '/' ? 'index.html' : req.url);
+  // Strip query parameters from URL
+  const urlPath = req.url.split('?')[0];
+  let filePath = path.join(STATIC_DIR, urlPath === '/' ? 'index.html' : urlPath);
 
   // Security: prevent directory traversal
   const normalizedPath = path.normalize(filePath);
@@ -74,7 +76,7 @@ const server = http.createServer((req, res) => {
         const headers = { 'Content-Type': contentType };
 
         // Add integrity hash header for config files
-        if (req.url === '/config/custom-chains.json' && CONFIG_HASH) {
+        if (urlPath === '/config/custom-chains.json' && CONFIG_HASH) {
           headers['X-Config-Hash'] = CONFIG_HASH;
           headers['Cache-Control'] = 'no-cache, no-store, must-revalidate';
         }
