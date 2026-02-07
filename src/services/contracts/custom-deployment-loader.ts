@@ -79,7 +79,6 @@ class CustomDeploymentLoader {
           this.loadFromConfig(data)
           this.loaded = true
           console.log('Custom chain deployments loaded from runtime endpoint')
-          console.log('Loaded data:', JSON.stringify(data, null, 2))
           return
         } catch (error) {
           console.warn('Failed to fetch custom chains config, using package defaults:', error)
@@ -159,29 +158,22 @@ class CustomDeploymentLoader {
     contractName: string,
     version: string,
   ): SingletonDeployment | undefined {
-    console.log(`getDeployment called: chainId=${chainId}, contract=${contractName}, version=${version}`)
     const chain = this.customChains.get(chainId)
     if (!chain) {
-      console.log(`No custom chain found for chainId: ${chainId}`)
       return undefined
     }
-    console.log(`Found custom chain: ${chain.name}`)
 
     // Get the version-specific contracts
     const versionContracts = chain.contracts[version as '1.3.0' | '1.4.1']
     if (!versionContracts) {
-      console.log(`No contracts found for version: ${version}`)
       return undefined
     }
 
     // Map contract names to our internal naming
     const contractKey = this.mapContractName(contractName, version) as keyof typeof versionContracts
-    console.log(`Mapped contract name '${contractName}' to key '${contractKey}'`)
     const deployment = versionContracts[contractKey] as CustomContractDeployment | undefined
 
     if (!deployment) {
-      console.log(`No deployment found for contract key: ${contractKey}`)
-      console.log(`Available contracts:`, Object.keys(versionContracts))
       return undefined
     }
 

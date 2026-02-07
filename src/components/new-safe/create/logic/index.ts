@@ -98,19 +98,26 @@ export const computeNewSafeAddress = async (
   const safeDeployment = getSafeContractDeployment({ chainId } as ChainInfo, LATEST_SAFE_VERSION)
   const proxyFactoryDeployment = getProxyFactoryContractDeployment(chainId, LATEST_SAFE_VERSION)
 
-  console.log('computeNewSafeAddress - Safe deployment:', safeDeployment?.defaultAddress)
-  console.log('computeNewSafeAddress - ProxyFactory deployment:', proxyFactoryDeployment?.defaultAddress)
+  const deploymentConfig = {
+    saltNonce: props.saltNonce,
+    safeVersion: LATEST_SAFE_VERSION as SafeVersion,
+    ...(safeDeployment && { safeSingletonL2Deployment: safeDeployment }),
+    ...(proxyFactoryDeployment && { safeProxyFactoryDeployment: proxyFactoryDeployment }),
+  }
+
+  console.log('predictSafeAddress config:', JSON.stringify({
+    chainId,
+    hasSafeDeployment: !!safeDeployment,
+    hasProxyFactoryDeployment: !!proxyFactoryDeployment,
+    safeAddress: safeDeployment?.defaultAddress,
+    proxyFactoryAddress: proxyFactoryDeployment?.defaultAddress,
+  }))
 
   return predictSafeAddress({
     ethAdapter,
     chainId: BigInt(chainId),
     safeAccountConfig: props.safeAccountConfig,
-    safeDeploymentConfig: {
-      saltNonce: props.saltNonce,
-      safeVersion: LATEST_SAFE_VERSION as SafeVersion,
-      ...(safeDeployment && { safeSingletonL2Deployment: safeDeployment }),
-      ...(proxyFactoryDeployment && { safeProxyFactoryDeployment: proxyFactoryDeployment }),
-    },
+    safeDeploymentConfig: deploymentConfig,
   })
 }
 
