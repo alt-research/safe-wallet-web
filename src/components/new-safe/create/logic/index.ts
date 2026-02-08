@@ -98,11 +98,20 @@ export const computeNewSafeAddress = async (
   const safeDeployment = getSafeContractDeployment({ chainId } as ChainInfo, LATEST_SAFE_VERSION)
   const proxyFactoryDeployment = getProxyFactoryContractDeployment(chainId, LATEST_SAFE_VERSION)
 
-  const deploymentConfig = {
+  // Build deployment config with custom addresses
+  const deploymentConfig: any = {
     saltNonce: props.saltNonce,
     safeVersion: LATEST_SAFE_VERSION as SafeVersion,
-    ...(safeDeployment && { safeSingletonL2Deployment: safeDeployment }),
-    ...(proxyFactoryDeployment && { safeProxyFactoryDeployment: proxyFactoryDeployment }),
+  }
+
+  // Add custom safe singleton address if available
+  if (safeDeployment?.defaultAddress) {
+    deploymentConfig.customContractAddress = safeDeployment.defaultAddress
+  }
+
+  // Add custom proxy factory address if available
+  if (proxyFactoryDeployment?.defaultAddress) {
+    deploymentConfig.safeProxyFactoryAddress = proxyFactoryDeployment.defaultAddress
   }
 
   console.log('predictSafeAddress config:', JSON.stringify({
