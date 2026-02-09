@@ -62,13 +62,35 @@ export const getSafeDeployProps = async (
 
 const getSafeFactory = async (
   ethersProvider: BrowserProvider,
+  chainId: string,
   safeVersion = LATEST_SAFE_VERSION,
 ): Promise<SafeFactory> => {
   if (!isValidSafeVersion(safeVersion)) {
     throw new Error('Invalid Safe version')
   }
   const ethAdapter = await createEthersAdapter(ethersProvider)
-  const safeFactory = await SafeFactory.create({ ethAdapter, safeVersion })
+
+  // Get custom deployments for this chain if they exist
+  const safeDeployment = getSafeContractDeployment({ chainId } as ChainInfo, safeVersion)
+  const proxyFactoryDeployment = getProxyFactoryContractDeployment(chainId, safeVersion)
+
+  const config: any = {
+    ethAdapter,
+    safeVersion,
+  }
+
+  // If we have custom deployments, provide them via customContracts
+  if (safeDeployment && proxyFactoryDeployment) {
+    const fallbackHandlerAddress = await (await getReadOnlyFallbackHandlerContract(chainId, safeVersion)).getAddress()
+
+    config.customContracts = {
+      safeSingletonAddress: safeDeployment.defaultAddress,
+      safeProxyFactoryAddress: proxyFactoryDeployment.defaultAddress,
+      fallbackHandlerAddress,
+    }
+  }
+
+  const safeFactory = await SafeFactory.create(config)
   return safeFactory
 }
 
@@ -78,9 +100,10 @@ const getSafeFactory = async (
 export const createNewSafe = async (
   ethersProvider: BrowserProvider,
   props: DeploySafeProps,
+  chainId: string,
   safeVersion?: SafeVersion,
 ): Promise<Safe> => {
-  const safeFactory = await getSafeFactory(ethersProvider, safeVersion)
+  const safeFactory = await getSafeFactory(ethersProvider, chainId, safeVersion)
   return safeFactory.deploySafe(props)
 }
 
@@ -92,40 +115,15 @@ export const computeNewSafeAddress = async (
   props: DeploySafeProps,
   chainId: string,
 ): Promise<string> => {
-  // Get custom deployments for this chain
+  // Always use the SDK's predictSafeAddress, but we need to provide custom contract addresses
+  // The SDK will use them if we pass them via the SafeProvider configuration
+  const ethAdapter = await createEthersAdapter(ethersProvider)
+
+  // Get custom deployments for this chain if they exist
   const safeDeployment = getSafeContractDeployment({ chainId } as ChainInfo, LATEST_SAFE_VERSION)
   const proxyFactoryDeployment = getProxyFactoryContractDeployment(chainId, LATEST_SAFE_VERSION)
 
-  // If we have custom deployments, skip SDK's predictSafeAddress and compute manually
-  // This avoids the SDK's on-chain validation which fails for custom chains
-  if (safeDeployment && proxyFactoryDeployment) {
-    const { getProxyCreationCode, encodeSetupCallData } = await import('@safe-global/protocol-kit/dist/src/utils')
-    const { keccak256, getCreate2Address, concat } = await import('ethers')
-
-    const readOnlySafeContract = await getReadOnlyGnosisSafeContract({ chainId } as ChainInfo, LATEST_SAFE_VERSION)
-    const setupData = encodeSetupCallData({
-      safeContract: readOnlySafeContract as any,
-      safeAccountConfig: props.safeAccountConfig,
-      customContracts: undefined,
-      customSafeVersion: LATEST_SAFE_VERSION,
-    })
-
-    const proxyCreationCode = getProxyCreationCode(safeDeployment.defaultAddress)
-    const salt = keccak256(concat([keccak256(setupData), props.saltNonce || '0']))
-
-    const constructorData = setupData
-    const initCode = concat([proxyCreationCode, constructorData])
-
-    return getCreate2Address(
-      proxyFactoryDeployment.defaultAddress,
-      salt,
-      keccak256(initCode)
-    )
-  }
-
-  // Fall back to SDK's predictSafeAddress for standard chains
-  const ethAdapter = await createEthersAdapter(ethersProvider)
-  return predictSafeAddress({
+  const config: any = {
     ethAdapter,
     chainId: BigInt(chainId),
     safeAccountConfig: props.safeAccountConfig,
@@ -133,7 +131,17 @@ export const computeNewSafeAddress = async (
       saltNonce: props.saltNonce,
       safeVersion: LATEST_SAFE_VERSION as SafeVersion,
     },
-  })
+  }
+
+  // If we have custom deployments, provide them to the SDK
+  if (safeDeployment && proxyFactoryDeployment) {
+    config.customContracts = {
+      safeSingletonAddress: safeDeployment.defaultAddress,
+      safeProxyFactoryAddress: proxyFactoryDeployment.defaultAddress,
+    }
+  }
+
+  return predictSafeAddress(config)
 }
 
 /**
