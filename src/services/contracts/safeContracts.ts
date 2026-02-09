@@ -87,9 +87,11 @@ export const getMultiSendCallOnlyContract = async (
 ) => {
   const ethAdapter = await createEthersAdapter(provider)
   const multiSendVersion = _getMinimumMultiSendCallOnlyVersion(safeVersion)
+  const deployment = getMultiSendCallOnlyContractDeployment(chainId, multiSendVersion)
 
   return ethAdapter.getMultiSendCallOnlyContract({
-    singletonDeployment: getMultiSendCallOnlyContractDeployment(chainId, multiSendVersion),
+    singletonDeployment: deployment,
+    customContractAddress: deployment?.defaultAddress,
     ..._getValidatedGetContractProps(safeVersion),
   })
 }
@@ -97,9 +99,11 @@ export const getMultiSendCallOnlyContract = async (
 export const getReadOnlyMultiSendCallOnlyContract = async (chainId: string, safeVersion: SafeInfo['version']) => {
   const ethAdapter = createReadOnlyEthersAdapter()
   const multiSendVersion = _getMinimumMultiSendCallOnlyVersion(safeVersion)
+  const deployment = getMultiSendCallOnlyContractDeployment(chainId, multiSendVersion)
 
   return ethAdapter.getMultiSendCallOnlyContract({
-    singletonDeployment: getMultiSendCallOnlyContractDeployment(chainId, multiSendVersion),
+    singletonDeployment: deployment,
+    customContractAddress: deployment?.defaultAddress,
     ..._getValidatedGetContractProps(safeVersion),
   })
 }
@@ -112,6 +116,7 @@ export const getReadOnlyProxyFactoryContract = (chainId: string, safeVersion: Sa
 
   return ethAdapter.getSafeProxyFactoryContract({
     singletonDeployment: deployment,
+    customContractAddress: deployment?.defaultAddress,
     ..._getValidatedGetContractProps(safeVersion),
   })
 }
@@ -127,6 +132,7 @@ export const getReadOnlyFallbackHandlerContract = async (
 
   return ethAdapter.getCompatibilityFallbackHandlerContract({
     singletonDeployment: deployment,
+    customContractAddress: deployment?.defaultAddress,
     ..._getValidatedGetContractProps(safeVersion),
   })
 }
