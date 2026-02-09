@@ -124,7 +124,7 @@ export const useSafeCreation = (
         await createNewSafe(provider, {
           ...safeDeployProps,
           options,
-        }, chain.chainId)
+        }, chain)
         setStatus(SafeCreationStatus.SUCCESS)
       }
     } catch (err) {

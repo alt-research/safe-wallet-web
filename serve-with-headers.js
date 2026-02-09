@@ -44,18 +44,19 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  // Check if file exists
-  fs.access(filePath, fs.constants.F_OK, (err) => {
-    if (err) {
-      // If not found and not a file with extension, try adding .html or serve index.html
+  // Check if file exists and is a file (not directory)
+  fs.stat(filePath, (err, stats) => {
+    if (err || stats.isDirectory()) {
+      // If not found or is a directory, try different approaches
       if (!path.extname(filePath)) {
-        filePath = path.join(filePath, 'index.html');
+        // Try appending .html first
+        filePath = filePath + '.html';
       }
     }
 
     fs.readFile(filePath, (err, content) => {
       if (err) {
-        if (err.code === 'ENOENT') {
+        if (err.code === 'ENOENT' || err.code === 'EISDIR') {
           // Try index.html for client-side routing
           fs.readFile(path.join(STATIC_DIR, 'index.html'), (err, content) => {
             if (err) {
@@ -67,7 +68,7 @@ const server = http.createServer((req, res) => {
             }
           });
         } else {
-          res.writeHead(500);
+          res.writeHead(500, { 'Content-Type': 'text/plain' });
           res.end('500 Internal Server Error: ' + err.code);
         }
       } else {

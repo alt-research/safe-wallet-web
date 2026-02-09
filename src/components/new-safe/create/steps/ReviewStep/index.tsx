@@ -179,8 +179,8 @@ const ReviewStep = ({ data, onSubmit, onBack, setStep }: StepRenderProps<NewSafe
         },
       }
 
-      const saltNonce = await getAvailableSaltNonce(provider, { ...props, saltNonce: '0' }, chain.chainId)
-      const safeAddress = await computeNewSafeAddress(provider, { ...props, saltNonce }, chain.chainId)
+      const saltNonce = await getAvailableSaltNonce(provider, { ...props, saltNonce: '0' }, chain)
+      const safeAddress = await computeNewSafeAddress(provider, { ...props, saltNonce }, chain)
 
       if (isCounterfactual && payMethod === PayMethod.PayLater) {
         gtmSetSafeAddress(safeAddress)

@@ -203,7 +203,6 @@ class CustomDeploymentLoader {
         },
       }),
     }
-    console.log(`Returning custom deployment for ${contractName}:`, deployment.address)
     return result
   }
 
