@@ -89,11 +89,17 @@ export const getMultiSendCallOnlyContract = async (
   const multiSendVersion = _getMinimumMultiSendCallOnlyVersion(safeVersion)
   const deployment = getMultiSendCallOnlyContractDeployment(chainId, multiSendVersion)
 
-  return ethAdapter.getMultiSendCallOnlyContract({
-    singletonDeployment: deployment,
-    customContractAddress: deployment?.defaultAddress,
-    ..._getValidatedGetContractProps(safeVersion),
-  })
+  const config: any = deployment?.defaultAddress
+    ? {
+        customContractAddress: deployment.defaultAddress,
+        ..._getValidatedGetContractProps(safeVersion),
+      }
+    : {
+        singletonDeployment: deployment,
+        ..._getValidatedGetContractProps(safeVersion),
+      }
+
+  return ethAdapter.getMultiSendCallOnlyContract(config)
 }
 
 export const getReadOnlyMultiSendCallOnlyContract = async (chainId: string, safeVersion: SafeInfo['version']) => {
@@ -101,11 +107,17 @@ export const getReadOnlyMultiSendCallOnlyContract = async (chainId: string, safe
   const multiSendVersion = _getMinimumMultiSendCallOnlyVersion(safeVersion)
   const deployment = getMultiSendCallOnlyContractDeployment(chainId, multiSendVersion)
 
-  return ethAdapter.getMultiSendCallOnlyContract({
-    singletonDeployment: deployment,
-    customContractAddress: deployment?.defaultAddress,
-    ..._getValidatedGetContractProps(safeVersion),
-  })
+  const config: any = deployment?.defaultAddress
+    ? {
+        customContractAddress: deployment.defaultAddress,
+        ..._getValidatedGetContractProps(safeVersion),
+      }
+    : {
+        singletonDeployment: deployment,
+        ..._getValidatedGetContractProps(safeVersion),
+      }
+
+  return ethAdapter.getMultiSendCallOnlyContract(config)
 }
 
 // GnosisSafeProxyFactory
@@ -114,11 +126,17 @@ export const getReadOnlyProxyFactoryContract = (chainId: string, safeVersion: Sa
   const ethAdapter = createReadOnlyEthersAdapter()
   const deployment = getProxyFactoryContractDeployment(chainId, safeVersion)
 
-  return ethAdapter.getSafeProxyFactoryContract({
-    singletonDeployment: deployment,
-    customContractAddress: deployment?.defaultAddress,
-    ..._getValidatedGetContractProps(safeVersion),
-  })
+  const config: any = deployment?.defaultAddress
+    ? {
+        customContractAddress: deployment.defaultAddress,
+        ..._getValidatedGetContractProps(safeVersion),
+      }
+    : {
+        singletonDeployment: deployment,
+        ..._getValidatedGetContractProps(safeVersion),
+      }
+
+  return ethAdapter.getSafeProxyFactoryContract(config)
 }
 
 // Fallback handler
@@ -130,11 +148,19 @@ export const getReadOnlyFallbackHandlerContract = async (
   const ethAdapter = createReadOnlyEthersAdapter()
   const deployment = getFallbackHandlerContractDeployment(chainId, safeVersion)
 
-  return ethAdapter.getCompatibilityFallbackHandlerContract({
-    singletonDeployment: deployment,
-    customContractAddress: deployment?.defaultAddress,
-    ..._getValidatedGetContractProps(safeVersion),
-  })
+  // If we have a custom deployment with an address, only pass customContractAddress
+  // Otherwise pass singletonDeployment for package defaults
+  const config: any = deployment?.defaultAddress
+    ? {
+        customContractAddress: deployment.defaultAddress,
+        ..._getValidatedGetContractProps(safeVersion),
+      }
+    : {
+        singletonDeployment: deployment,
+        ..._getValidatedGetContractProps(safeVersion),
+      }
+
+  return ethAdapter.getCompatibilityFallbackHandlerContract(config)
 }
 
 // Sign messages deployment
