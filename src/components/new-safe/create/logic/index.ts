@@ -92,41 +92,47 @@ export const computeNewSafeAddress = async (
   props: DeploySafeProps,
   chainId: string,
 ): Promise<string> => {
-  const ethAdapter = await createEthersAdapter(ethersProvider)
-
   // Get custom deployments for this chain
   const safeDeployment = getSafeContractDeployment({ chainId } as ChainInfo, LATEST_SAFE_VERSION)
   const proxyFactoryDeployment = getProxyFactoryContractDeployment(chainId, LATEST_SAFE_VERSION)
 
-  // Build deployment config with custom addresses
-  const deploymentConfig: any = {
-    saltNonce: props.saltNonce,
-    safeVersion: LATEST_SAFE_VERSION as SafeVersion,
+  // If we have custom deployments, skip SDK's predictSafeAddress and compute manually
+  // This avoids the SDK's on-chain validation which fails for custom chains
+  if (safeDeployment && proxyFactoryDeployment) {
+    const { getProxyCreationCode, encodeSetupCallData } = await import('@safe-global/protocol-kit/dist/src/utils')
+    const { keccak256, getCreate2Address, concat } = await import('ethers')
+
+    const readOnlySafeContract = await getReadOnlyGnosisSafeContract({ chainId } as ChainInfo, LATEST_SAFE_VERSION)
+    const setupData = encodeSetupCallData({
+      safeContract: readOnlySafeContract as any,
+      safeAccountConfig: props.safeAccountConfig,
+      customContracts: undefined,
+      customSafeVersion: LATEST_SAFE_VERSION,
+    })
+
+    const proxyCreationCode = getProxyCreationCode(safeDeployment.defaultAddress)
+    const salt = keccak256(concat([keccak256(setupData), props.saltNonce || '0']))
+
+    const constructorData = setupData
+    const initCode = concat([proxyCreationCode, constructorData])
+
+    return getCreate2Address(
+      proxyFactoryDeployment.defaultAddress,
+      salt,
+      keccak256(initCode)
+    )
   }
 
-  // Add custom safe singleton address if available
-  if (safeDeployment?.defaultAddress) {
-    deploymentConfig.customContractAddress = safeDeployment.defaultAddress
-  }
-
-  // Add custom proxy factory address if available
-  if (proxyFactoryDeployment?.defaultAddress) {
-    deploymentConfig.safeProxyFactoryAddress = proxyFactoryDeployment.defaultAddress
-  }
-
-  console.log('predictSafeAddress config:', JSON.stringify({
-    chainId,
-    hasSafeDeployment: !!safeDeployment,
-    hasProxyFactoryDeployment: !!proxyFactoryDeployment,
-    safeAddress: safeDeployment?.defaultAddress,
-    proxyFactoryAddress: proxyFactoryDeployment?.defaultAddress,
-  }))
-
+  // Fall back to SDK's predictSafeAddress for standard chains
+  const ethAdapter = await createEthersAdapter(ethersProvider)
   return predictSafeAddress({
     ethAdapter,
     chainId: BigInt(chainId),
     safeAccountConfig: props.safeAccountConfig,
-    safeDeploymentConfig: deploymentConfig,
+    safeDeploymentConfig: {
+      saltNonce: props.saltNonce,
+      safeVersion: LATEST_SAFE_VERSION as SafeVersion,
+    },
   })
 }
 
