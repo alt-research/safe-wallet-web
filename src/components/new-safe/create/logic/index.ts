@@ -7,10 +7,6 @@ import {
   getReadOnlyGnosisSafeContract,
   getReadOnlyProxyFactoryContract,
 } from '@/services/contracts/safeContracts'
-import {
-  getSafeContractDeployment,
-  getProxyFactoryContractDeployment,
-} from '@/services/contracts/deployments'
 import type { ConnectedWallet } from '@/hooks/wallets/useOnboard'
 import { SafeCreationStatus } from '@/components/new-safe/create/steps/StatusStep/useSafeCreation'
 import { didRevert, type EthersError } from '@/utils/ethers-utils'
@@ -62,35 +58,13 @@ export const getSafeDeployProps = async (
 
 const getSafeFactory = async (
   ethersProvider: BrowserProvider,
-  chain: ChainInfo,
   safeVersion = LATEST_SAFE_VERSION,
 ): Promise<SafeFactory> => {
   if (!isValidSafeVersion(safeVersion)) {
     throw new Error('Invalid Safe version')
   }
   const ethAdapter = await createEthersAdapter(ethersProvider)
-
-  // Get custom deployments for this chain if they exist
-  const safeDeployment = getSafeContractDeployment(chain, safeVersion)
-  const proxyFactoryDeployment = getProxyFactoryContractDeployment(chain.chainId, safeVersion)
-
-  const config: any = {
-    ethAdapter,
-    safeVersion,
-  }
-
-  // If we have custom deployments, provide them via customContracts
-  if (safeDeployment && proxyFactoryDeployment) {
-    const fallbackHandlerAddress = await (await getReadOnlyFallbackHandlerContract(chain.chainId, safeVersion)).getAddress()
-
-    config.customContracts = {
-      safeSingletonAddress: safeDeployment.defaultAddress,
-      safeProxyFactoryAddress: proxyFactoryDeployment.defaultAddress,
-      fallbackHandlerAddress,
-    }
-  }
-
-  const safeFactory = await SafeFactory.create(config)
+  const safeFactory = await SafeFactory.create({ ethAdapter, safeVersion })
   return safeFactory
 }
 
@@ -100,10 +74,9 @@ const getSafeFactory = async (
 export const createNewSafe = async (
   ethersProvider: BrowserProvider,
   props: DeploySafeProps,
-  chain: ChainInfo,
   safeVersion?: SafeVersion,
 ): Promise<Safe> => {
-  const safeFactory = await getSafeFactory(ethersProvider, chain, safeVersion)
+  const safeFactory = await getSafeFactory(ethersProvider, safeVersion)
   return safeFactory.deploySafe(props)
 }
 
@@ -113,35 +86,19 @@ export const createNewSafe = async (
 export const computeNewSafeAddress = async (
   ethersProvider: BrowserProvider,
   props: DeploySafeProps,
-  chain: ChainInfo,
+  chainId: string,
 ): Promise<string> => {
-  // Always use the SDK's predictSafeAddress, but we need to provide custom contract addresses
-  // The SDK will use them if we pass them via the SafeProvider configuration
   const ethAdapter = await createEthersAdapter(ethersProvider)
 
-  // Get custom deployments for this chain if they exist
-  const safeDeployment = getSafeContractDeployment(chain, LATEST_SAFE_VERSION)
-  const proxyFactoryDeployment = getProxyFactoryContractDeployment(chain.chainId, LATEST_SAFE_VERSION)
-
-  const config: any = {
+  return predictSafeAddress({
     ethAdapter,
-    chainId: BigInt(chain.chainId),
+    chainId: BigInt(chainId),
     safeAccountConfig: props.safeAccountConfig,
     safeDeploymentConfig: {
       saltNonce: props.saltNonce,
       safeVersion: LATEST_SAFE_VERSION as SafeVersion,
     },
-  }
-
-  // If we have custom deployments, provide them to the SDK
-  if (safeDeployment && proxyFactoryDeployment) {
-    config.customContracts = {
-      safeSingletonAddress: safeDeployment.defaultAddress,
-      safeProxyFactoryAddress: proxyFactoryDeployment.defaultAddress,
-    }
-  }
-
-  return predictSafeAddress(config)
+  })
 }
 
 /**

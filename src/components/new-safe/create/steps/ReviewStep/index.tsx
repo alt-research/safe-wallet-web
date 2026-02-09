@@ -162,10 +162,6 @@ const ReviewStep = ({ data, onSubmit, onBack, setStep }: StepRenderProps<NewSafe
     setIsCreating(true)
 
     try {
-      // Wait for custom deployments to load before proceeding
-      const { customDeploymentsReady } = await import('@/services/contracts/deployments')
-      await customDeploymentsReady
-
       const readOnlyFallbackHandlerContract = await getReadOnlyFallbackHandlerContract(
         chain.chainId,
         LATEST_SAFE_VERSION,
@@ -179,8 +175,8 @@ const ReviewStep = ({ data, onSubmit, onBack, setStep }: StepRenderProps<NewSafe
         },
       }
 
-      const saltNonce = await getAvailableSaltNonce(provider, { ...props, saltNonce: '0' }, chain)
-      const safeAddress = await computeNewSafeAddress(provider, { ...props, saltNonce }, chain)
+      const saltNonce = await getAvailableSaltNonce(provider, { ...props, saltNonce: '0' }, chain.chainId)
+      const safeAddress = await computeNewSafeAddress(provider, { ...props, saltNonce }, chain.chainId)
 
       if (isCounterfactual && payMethod === PayMethod.PayLater) {
         gtmSetSafeAddress(safeAddress)
@@ -203,7 +199,6 @@ const ReviewStep = ({ data, onSubmit, onBack, setStep }: StepRenderProps<NewSafe
       setPendingSafe(pendingSafe)
       onSubmit(pendingSafe)
     } catch (_err) {
-      console.error('Error creating Safe:', _err)
       setSubmitError('Error creating the Safe Account. Please try again later.')
     }
 
