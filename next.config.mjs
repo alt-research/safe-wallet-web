@@ -34,6 +34,10 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: ['@mui/material', '@mui/icons-material', 'lodash', 'date-fns', '@sentry/react', '@gnosis.pm/zodiac'],
   },
+  // Force cache busting in development
+  generateBuildId: async () => {
+    return `build-${Date.now()}`
+  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/i,
@@ -70,6 +74,12 @@ const nextConfig = {
   },
 }
 
+// TEMPORARILY DISABLE PWA FOR DEVELOPMENT - AGGRESSIVE CACHING ISSUE
+// export default withBundleAnalyzer({
+//   enabled: process.env.ANALYZE === 'true',
+// })(withPWA(nextConfig))
+
+// Use plain config without PWA wrapper during development
 export default withBundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
-})(withPWA(nextConfig))
+})(nextConfig)

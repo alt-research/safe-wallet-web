@@ -332,16 +332,22 @@ Nothing to compile
 📦 Deploying SafeL2...
    Expected address: 0xef911c6af5e7FA6CDc1392e4B9fb783328929967
    Deploying...
-   TX: 0xbcef2ef6062dd659e65457ec0eeb02c6e2bb31269b4335b16041a7304ce49878
+   Bytecode size: 24462 bytes
+   Gas limit: 35000000
+   TX: 0xf558b2e16ec8d5222babc8fb6ace1172c9053dc39ea7c5c7658c07683265efd7
+   Gas used: 9526755
    ✅ Deployed at: 0xef911c6af5e7FA6CDc1392e4B9fb783328929967
-   Gas used: 4998113
+   Deployed code size: 24421 bytes
 
 📦 Deploying Safe...
    Expected address: 0x6001A5A6a18E5D0d3BEdae2349cf0c6fB99856F6
    Deploying...
-   TX: 0x55c54f49207546d92501af28fa3e6358b1b92f535671c30c1bc5b7fccd57cdaf
+   Bytecode size: 23620 bytes
+   Gas limit: 35000000
+   TX: 0x8a61ca85679b63de7b855e59df70f8b2618809dc0f96bb13f54c267bde64653c
+   Gas used: 9178509
    ✅ Deployed at: 0x6001A5A6a18E5D0d3BEdae2349cf0c6fB99856F6
-   Gas used: 4995146
+   Deployed code size: 23579 bytes
 
 
 ============================================================

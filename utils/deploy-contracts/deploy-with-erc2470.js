@@ -93,17 +93,34 @@ async function deployWithERC2470() {
 
       // Deploy using factory
       console.log(`   Deploying...`);
+      console.log(`   Bytecode size: ${(bytecode.length - 2) / 2} bytes`);
+
+      // Calculate gas limit based on contract size
+      // Large contracts (>20KB) need ~35M gas on Arbitrum due to data posting costs
+      const bytecodeSize = (bytecode.length - 2) / 2;
+      const gasLimit = bytecodeSize > 20000 ? 35000000 : 5000000;
+      console.log(`   Gas limit: ${gasLimit}`);
+
       const tx = await factory.deploy(bytecode, salt, {
-        gasLimit: 5000000
+        gasLimit: gasLimit
       });
 
       console.log(`   TX: ${tx.hash}`);
       const receipt = await tx.wait();
 
       if (receipt.status === 1) {
-        console.log(`   ✅ Deployed at: ${expectedAddress}`);
         console.log(`   Gas used: ${receipt.gasUsed.toString()}`);
-        deployedAddresses[contractName] = expectedAddress;
+
+        // Verify the contract was actually deployed
+        const deployedCode = await provider.getCode(expectedAddress);
+        if (deployedCode !== '0x') {
+          console.log(`   ✅ Deployed at: ${expectedAddress}`);
+          console.log(`   Deployed code size: ${(deployedCode.length - 2) / 2} bytes`);
+          deployedAddresses[contractName] = expectedAddress;
+        } else {
+          console.log(`   ❌ Transaction succeeded but contract NOT deployed at: ${expectedAddress}`);
+          console.log(`   ⚠️  Likely ran out of gas during deployment. Increase gas limit.`);
+        }
       } else {
         console.log(`   ❌ Deployment failed`);
       }
