@@ -32,7 +32,7 @@ export const useLoadChains = (): AsyncResult<ChainInfo[]> => {
   }, [])
 
   // Pass undefined until the gateway URL is set by the custom-chains loader
-  const [data, error, loading] = useAsync<ChainInfo[]>(deploymentsReady ? getConfigs : undefined, [deploymentsReady])
+  const [data, error, loading] = useAsync<ChainInfo[]>(() => (deploymentsReady ? getConfigs() : undefined), [deploymentsReady])
 
   // Log errors
   useEffect(() => {
