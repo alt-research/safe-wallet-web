@@ -1,7 +1,8 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { getChainsConfig, type ChainInfo, FEATURES } from '@safe-global/safe-gateway-typescript-sdk'
 import useAsync, { type AsyncResult } from '../useAsync'
 import { logError, Errors } from '@/services/exceptions'
+import { customDeploymentsReady } from '@/services/contracts/deployments'
 
 const getConfigs = async (): Promise<ChainInfo[]> => {
   const data = await getChainsConfig()
@@ -24,7 +25,14 @@ const getConfigs = async (): Promise<ChainInfo[]> => {
 }
 
 export const useLoadChains = (): AsyncResult<ChainInfo[]> => {
-  const [data, error, loading] = useAsync<ChainInfo[]>(getConfigs, [])
+  const [deploymentsReady, setDeploymentsReady] = useState(false)
+
+  useEffect(() => {
+    customDeploymentsReady.then(() => setDeploymentsReady(true))
+  }, [])
+
+  // Pass undefined until the gateway URL is set by the custom-chains loader
+  const [data, error, loading] = useAsync<ChainInfo[]>(deploymentsReady ? getConfigs : undefined, [deploymentsReady])
 
   // Log errors
   useEffect(() => {
