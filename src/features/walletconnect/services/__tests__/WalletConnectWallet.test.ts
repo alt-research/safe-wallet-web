@@ -109,7 +109,7 @@ describe('WalletConnectWallet', () => {
         namespaces: {
           eip155: {},
         },
-      } as unknown as SessionTypes.Struct)
+      } as any)
 
       const proposal = {
         id: 123,
@@ -188,7 +188,7 @@ describe('WalletConnectWallet', () => {
         namespaces: {
           eip155: {},
         },
-      } as unknown as SessionTypes.Struct)
+      } as any)
 
       const proposal = {
         id: 123,
@@ -236,7 +236,7 @@ describe('WalletConnectWallet', () => {
         namespaces: {
           eip155: {},
         },
-      } as unknown as SessionTypes.Struct)
+      } as any)
 
       await wallet.approveSession(
         {
@@ -275,7 +275,7 @@ describe('WalletConnectWallet', () => {
         namespaces: {
           eip155: {},
         },
-      } as unknown as SessionTypes.Struct)
+      } as any)
 
       await wallet.approveSession(
         {

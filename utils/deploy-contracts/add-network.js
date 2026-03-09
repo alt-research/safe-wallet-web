@@ -1,16 +1,18 @@
 #!/usr/bin/env node
 
 /**
- * Script to add a network configuration to hardhat.config.ts
- * This handles the TypeScript syntax properly
+ * Patches the existing userConfig.networks!.custom block in hardhat.config.ts
+ * to add chainId and optional Blockscout verification config.
+ *
+ * The safe-smart-account repo already has a `userConfig.networks!.custom`
+ * block driven by NODE_URL — we extend it rather than adding a duplicate entry.
  */
 
 const fs = require('fs');
 const path = require('path');
 
-const networkName = process.env.NETWORK_NAME || 'custom';
 const chainId = process.env.CHAIN_ID;
-const rpcUrl = process.env.NODE_URL || process.env.RPC_URL;
+const blockscoutUrl = process.env.BLOCKSCOUT_URL;
 
 if (!chainId) {
   console.error('Error: CHAIN_ID environment variable is required');
@@ -18,53 +20,25 @@ if (!chainId) {
 }
 
 const configPath = path.join(process.cwd(), 'hardhat.config.ts');
-
-// Read the config file
 let content = fs.readFileSync(configPath, 'utf8');
 
-// Check if network already exists
-// Escape special regex characters in network name
-const escapedNetworkName = networkName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-const networkPattern = new RegExp(`['"]${escapedNetworkName}['"]\\s*:\\s*{`, 'g');
-if (networkPattern.test(content)) {
-  console.log(`⚠️  Network '${networkName}' already exists in hardhat.config.ts`);
-  console.log('ℹ️  Using existing configuration');
+if (content.includes('// Patched: network config')) {
   process.exit(0);
 }
 
-console.log(`📝 Adding network '${networkName}' to hardhat.config.ts...`);
+const verifyLine = blockscoutUrl
+  ? '\n        verify: { etherscan: { apiUrl: "' + blockscoutUrl.replace(/\/$/, '') + '/api", apiKey: "verifyContract" } },'
+  : '';
 
-// Backup original
-fs.writeFileSync(configPath + '.backup', content);
+const patched = content.replace(
+  /userConfig\.networks!\.custom\s*=\s*\{([\s\S]*?)\};/,
+  'userConfig.networks!.custom = {// Patched: network config\n        chainId: ' + chainId + ',' + verifyLine + '$1};'
+);
 
-// Network configuration to add
-// Always quote the network name to handle special characters like hyphens
-const networkConfig = `    "${networkName}": {
-      url: process.env.NODE_URL || "",
-      chainId: ${chainId},
-      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
-      gas: "auto",
-      gasPrice: "auto",
-      gasMultiplier: 1.5,
-      timeout: 60000,
-    },
-`;
-
-// Find the networks section and add our configuration
-// Look for "networks: {" and insert after it
-const networksPattern = /(\s*networks:\s*{)/;
-const match = content.match(networksPattern);
-
-if (!match) {
-  console.error('Error: Could not find "networks: {" section in hardhat.config.ts');
+if (patched === content) {
+  console.error('Error: Could not find userConfig.networks!.custom block in hardhat.config.ts');
   process.exit(1);
 }
 
-// Insert the network configuration right after "networks: {"
-const insertPosition = match.index + match[0].length;
-content = content.slice(0, insertPosition) + '\n' + networkConfig + content.slice(insertPosition);
-
-// Write the modified content back
-fs.writeFileSync(configPath, content);
-
-console.log('✅ Network configuration added successfully');
+fs.writeFileSync(configPath, patched);
+console.log('Network config patched (chainId: ' + chainId + (blockscoutUrl ? ', Blockscout: ' + blockscoutUrl : '') + ')');

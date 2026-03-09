@@ -24,38 +24,22 @@ export const _tryDeploymentVersions = (
   version: SafeInfo['version'],
   contractName?: string,
 ): SingletonDeployment | undefined => {
-  console.log('🟠 _tryDeploymentVersions called')
-  console.log('🟠   - network:', network)
-  console.log('🟠   - version:', version)
-  console.log('🟠   - contractName:', contractName)
-
-  // Ensure loader is initialized before checking custom deployments
-  // Note: initLoader() is called at module load time, so it should be done by now
-  // But we check synchronously without awaiting to avoid breaking existing sync API
+  // Check custom deployments first (synchronous — loader must be awaited before this runs)
   if (contractName && version) {
-    console.log('🟠   - Checking custom deployment loader...')
     const customDeployment = customDeploymentLoader.getDeployment(network, contractName, version)
-    console.log('🟠   - customDeployment:', customDeployment)
     if (customDeployment) {
-      console.log('🟠   - Returning custom deployment ✅')
       return customDeployment
     }
   }
 
-  console.log('🟠   - No custom deployment, checking package defaults...')
-
-  // Unsupported Safe version
+  // Unsupported Safe version — assume latest as fallback
   if (version === null) {
-    console.log('🟠   - version is null, using LATEST_SAFE_VERSION')
-    // Assume latest version as fallback
     return getDeployment({
       version: LATEST_SAFE_VERSION,
       network,
     })
   }
 
-  // Supported Safe version - fall back to package defaults
-  console.log('🟠   - Using package deployment for version:', version)
   return getDeployment({
     version,
     network,
@@ -100,21 +84,11 @@ export const getMultiSendCallOnlyContractDeployment = (chainId: string, safeVers
 }
 
 export const getFallbackHandlerContractDeployment = (chainId: string, safeVersion: SafeInfo['version']) => {
-  console.log('🟣 getFallbackHandlerContractDeployment called')
-  console.log('🟣   - chainId:', chainId)
-  console.log('🟣   - safeVersion:', safeVersion)
-  const result = _tryDeploymentVersions(getFallbackHandlerDeployment, chainId, safeVersion, 'CompatibilityFallbackHandler')
-  console.log('🟣   - result:', result)
-  return result
+  return _tryDeploymentVersions(getFallbackHandlerDeployment, chainId, safeVersion, 'CompatibilityFallbackHandler')
 }
 
 export const getProxyFactoryContractDeployment = (chainId: string, safeVersion: SafeInfo['version']) => {
-  console.log('🟣 getProxyFactoryContractDeployment called')
-  console.log('🟣   - chainId:', chainId)
-  console.log('🟣   - safeVersion:', safeVersion)
-  const result = _tryDeploymentVersions(getProxyFactoryDeployment, chainId, safeVersion, 'SafeProxyFactory')
-  console.log('🟣   - result:', result)
-  return result
+  return _tryDeploymentVersions(getProxyFactoryDeployment, chainId, safeVersion, 'SafeProxyFactory')
 }
 
 export const getSignMessageLibContractDeployment = (chainId: string, safeVersion: SafeInfo['version']) => {

@@ -52,22 +52,3 @@ export interface CustomDeploymentsConfig {
   chains: CustomChainConfig[]
 }
 
-/**
- * Contract name mapping between Safe versions
- */
-export const CONTRACT_NAME_MAPPING = {
-  // v1.3.0 names -> internal names
-  'compatibilityFallbackHandler': 'fallbackHandler',
-  'createCall': 'createCall',
-  'gnosisSafe': 'safe',
-  'gnosisSafeL2': 'safeL2',
-  'multiSend': 'multiSend',
-  'multiSendCallOnly': 'multiSendCallOnly',
-  'proxyFactory': 'proxyFactory',
-  'signMessageLib': 'signMessageLib',
-  'simulateTxAccessor': 'simulateTxAccessor',
-  // v1.4.1 names
-  'safe': 'safe',
-  'safeL2': 'safeL2',
-  'safeProxyFactory': 'proxyFactory',
-} as const

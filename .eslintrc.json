@@ -28,8 +28,7 @@
   "ignorePatterns": [
     "node_modules/",
     ".next/",
-    ".github/",
-    "src/components/address-book/ImportDialog/"
+    ".github/"
   ],
   "plugins": [
     "unused-imports",

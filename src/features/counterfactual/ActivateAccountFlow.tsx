@@ -116,7 +116,6 @@ const ActivateAccountFlow = () => {
             options,
             callback: onSubmit,
           },
-          chain,
           safeVersion,
         )
       }

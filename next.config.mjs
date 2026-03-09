@@ -34,10 +34,6 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: ['@mui/material', '@mui/icons-material', 'lodash', 'date-fns', '@sentry/react', '@gnosis.pm/zodiac'],
   },
-  // Force cache busting in development
-  generateBuildId: async () => {
-    return `build-${Date.now()}`
-  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/i,

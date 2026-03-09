@@ -145,15 +145,8 @@ export const getReadOnlyFallbackHandlerContract = async (
   chainId: string,
   safeVersion: SafeInfo['version'],
 ): Promise<CompatibilityFallbackHandlerEthersContract> => {
-  console.log('🔵 getReadOnlyFallbackHandlerContract called')
-  console.log('🔵   - chainId:', chainId)
-  console.log('🔵   - safeVersion:', safeVersion)
-
   const ethAdapter = createReadOnlyEthersAdapter()
   const deployment = getFallbackHandlerContractDeployment(chainId, safeVersion)
-
-  console.log('🔵   - deployment:', deployment)
-  console.log('🔵   - deployment?.defaultAddress:', deployment?.defaultAddress)
 
   // If we have a custom deployment with an address, only pass customContractAddress
   // Otherwise pass singletonDeployment for package defaults
@@ -166,8 +159,6 @@ export const getReadOnlyFallbackHandlerContract = async (
         singletonDeployment: deployment,
         ..._getValidatedGetContractProps(safeVersion),
       }
-
-  console.log('🔵   - config:', JSON.stringify(config, null, 2))
 
   return ethAdapter.getCompatibilityFallbackHandlerContract(config)
 }

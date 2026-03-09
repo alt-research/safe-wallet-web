@@ -41,7 +41,7 @@ describe('useOnboard', () => {
             },
           ],
         },
-      ] as WalletState[]
+      ] as unknown as WalletState[]
 
       expect(getConnectedWallet(wallets)).toEqual({
         label: 'Wallet 1',
@@ -69,7 +69,7 @@ describe('useOnboard', () => {
             },
           ],
         },
-      ] as WalletState[]
+      ] as unknown as WalletState[]
 
       expect(getConnectedWallet(wallets)).toBeNull()
     })

@@ -8,7 +8,6 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
-const crypto = require('crypto');
 
 const PORT = process.env.PORT || 8080;
 const STATIC_DIR = path.join(__dirname, 'out');
@@ -38,7 +37,7 @@ const server = http.createServer((req, res) => {
 
   // Security: prevent directory traversal
   const normalizedPath = path.normalize(filePath);
-  if (!normalizedPath.startsWith(STATIC_DIR)) {
+  if (!normalizedPath.startsWith(STATIC_DIR + path.sep)) {
     res.writeHead(403, { 'Content-Type': 'text/plain' });
     res.end('403 Forbidden');
     return;

@@ -1,4 +1,3 @@
-/* eslint-disable unused-imports/no-unused-imports-ts */
 import { type ReactElement, useState, useMemo } from 'react'
 import { Controller, useFormContext, useWatch } from 'react-hook-form'
 import { SvgIcon, Typography } from '@mui/material'
@@ -12,7 +11,6 @@ import css from './styles.module.css'
 import inputCss from '@/styles/inputs.module.css'
 import { isValidAddress } from '@/utils/validation'
 import { sameAddress } from '@/utils/addresses'
-/* eslint-enable unused-imports/no-unused-imports-ts */
 
 const abFilterOptions = createFilterOptions({
   stringify: (option: { label: string; name: string }) => option.name + ' ' + option.label,

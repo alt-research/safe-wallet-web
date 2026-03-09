@@ -1,69 +1,42 @@
-# Safe 1.4.1 Contract Deployment Docker Image
+# Safe 1.4.1 Contract Deployment
 #
-# Usage:
-#   docker build -t safe-deployer .
+# Deploys Safe contracts using the official Safe Singleton Factory
+# at 0x914d7Fec6aaC8cd542e72Bca78B30650d45643d7 (pre-deployed by the Safe team).
 #
-# Deployment Modes:
+# Build:
+#   docker build -t safe-deployer . -f Dockerfile --platform=linux/amd64
 #
-# 1. Standard Mode (default) - Non-deterministic addresses:
+# Run (basic):
 #   docker run --rm \
 #     -e PRIVATE_KEY="0xyourprivatekeyhere" \
 #     -e RPC_URL="https://your-rpc-endpoint.com" \
 #     -e CHAIN_ID="957" \
-#     -e NETWORK_NAME="custom" \
 #     safe-deployer
 #
-# 2. Singleton Mode - Deploy and use singleton factory (deterministic addresses):
+# Run (with Blockscout verification):
 #   docker run --rm \
 #     -e PRIVATE_KEY="0xyourprivatekeyhere" \
 #     -e RPC_URL="https://your-rpc-endpoint.com" \
 #     -e CHAIN_ID="957" \
-#     -e NETWORK_NAME="custom" \
-#     -e DEPLOYMENT_MODE="singleton" \
+#     -e BLOCKSCOUT_URL="https://your-blockscout-explorer.com" \
+#     -e ETHERSCAN_API_KEY="any" \
 #     safe-deployer
-#
-# 3. Custom Factory Mode - Use existing factory (deterministic addresses):
-#   docker run --rm \
-#     -e PRIVATE_KEY="0xyourprivatekeyhere" \
-#     -e RPC_URL="https://your-rpc-endpoint.com" \
-#     -e CHAIN_ID="957" \
-#     -e NETWORK_NAME="custom" \
-#     -e DEPLOYMENT_MODE="custom" \
-#     -e FACTORY_ADDRESS="0xYourFactoryAddress" \
-#     safe-deployer
-#
-# Optional environment variables:
-#   -e GAS_PRICE="1000000000" (in wei)
-#   -e GAS_LIMIT="8000000"
 
 FROM node:18-alpine
 
-# Install git and other dependencies
 RUN apk add --no-cache git python3 make g++
 
-# Set working directory
 WORKDIR /app
 
-# Clone Safe Smart Account repository and checkout v1.4.1
 RUN git clone https://github.com/safe-global/safe-smart-account.git . && \
     git checkout v1.4.1
 
-# Install dependencies
 RUN yarn install --frozen-lockfile
 
-# Compile contracts to generate artifacts
 RUN yarn hardhat compile
 
-# Copy the deployment scripts
-COPY deploy-wrapper.sh /app/deploy-wrapper.sh
-COPY add-network.js /app/add-network.js
-COPY patch-hardhat-config.js /app/patch-hardhat-config.js
-COPY deploy-singleton-factory.js /app/deploy-singleton-factory.js
-COPY deploy-alternative-factory.js /app/deploy-alternative-factory.js
-COPY deploy-with-erc2470.js /app/deploy-with-erc2470.js
-COPY patch-deploy-task.js /app/patch-deploy-task.js
-COPY diagnose-singleton.js /app/diagnose-singleton.js
-RUN chmod +x /app/deploy-wrapper.sh /app/add-network.js /app/patch-hardhat-config.js /app/deploy-singleton-factory.js /app/deploy-alternative-factory.js /app/deploy-with-erc2470.js /app/patch-deploy-task.js /app/diagnose-singleton.js
+ARG CACHE_BUST=1
+COPY deploy-wrapper.sh add-network.js patch-hardhat-config.js patch-deploy-task.js /app/
+RUN chmod +x /app/deploy-wrapper.sh
 
-# Set the entrypoint
 ENTRYPOINT ["/app/deploy-wrapper.sh"]
