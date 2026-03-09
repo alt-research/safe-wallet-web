@@ -23,7 +23,7 @@ class CustomDeploymentLoader {
 
   /**
    * Load custom deployments from configuration
-   * In browser: fetches from /config/custom-chains.json endpoint
+   * In browser: fetches from /config/custom-chain.json endpoint
    * During build: uses environment variable if available
    */
   async load(): Promise<void> {
@@ -53,7 +53,7 @@ class CustomDeploymentLoader {
         try {
           // Add timestamp to bust any caching
           const cacheBuster = `?t=${Date.now()}`
-          const response = await fetch(`/config/custom-chains.json${cacheBuster}`, {
+          const response = await fetch(`/config/custom-chain.json${cacheBuster}`, {
             cache: 'no-cache',
             headers: {
               'Accept': 'application/json',
@@ -137,19 +137,13 @@ class CustomDeploymentLoader {
    * Load configuration from a config object
    */
   private loadFromConfig(config: CustomDeploymentsConfig): void {
-    if (!config.chains || !Array.isArray(config.chains)) {
-      console.warn('Invalid custom deployments config: missing or invalid chains array')
+    const chain = config.chain
+    if (!chain || !chain.chainId || !chain.contracts) {
+      console.warn('Invalid custom deployments config: missing or invalid chain entry')
       return
     }
 
-    for (const chain of config.chains) {
-      if (!chain.chainId || !chain.contracts) {
-        console.warn('Invalid chain config: missing chainId or contracts', chain)
-        continue
-      }
-      this.customChains.set(chain.chainId, chain)
-    }
-
+    this.customChains.set(chain.chainId, chain)
     console.log(`Loaded custom deployments for ${this.customChains.size} chain(s)`)
   }
 

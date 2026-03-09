@@ -3,10 +3,18 @@ import { getChainsConfig, type ChainInfo, FEATURES } from '@safe-global/safe-gat
 import useAsync, { type AsyncResult } from '../useAsync'
 import { logError, Errors } from '@/services/exceptions'
 import { customDeploymentsReady } from '@/services/contracts/deployments'
+import { customDeploymentLoader } from '@/services/contracts/custom-deployment-loader'
 
 const getConfigs = async (): Promise<ChainInfo[]> => {
   const data = await getChainsConfig()
-  const chains = data.results || []
+  let chains = data.results || []
+
+  // If custom chains are configured, only show those chains
+  const customChainIds = customDeploymentLoader.getCustomChainIds()
+  if (customChainIds.length > 0) {
+    const customChainIdSet = new Set(customChainIds)
+    chains = chains.filter((chain) => customChainIdSet.has(chain.chainId))
+  }
 
   // Add missing features for self-hosted chains
   return chains.map((chain) => {

@@ -51,7 +51,7 @@ const GATEWAY_URL_DEFAULT = IS_PRODUCTION || cgwDebugStorage.get() ? GATEWAY_URL
 // The custom-chains loader may override this once it finishes fetching.
 setGatewayBaseUrl(GATEWAY_URL_DEFAULT)
 
-// Override with runtime gateway URL from custom-chains.json if provided.
+// Override with runtime gateway URL from custom-chain.json if provided.
 if (typeof window !== 'undefined') {
   customDeploymentsReady.then(() => {
     if (customDeploymentLoader.gatewayUrl) {
