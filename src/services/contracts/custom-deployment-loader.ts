@@ -19,6 +19,7 @@ class CustomDeploymentLoader {
   private loaded = false
   private loading = false
   private loadPromise: Promise<void> | null = null
+  gatewayUrl: string | undefined = undefined
 
   /**
    * Load custom deployments from configuration
@@ -79,6 +80,9 @@ class CustomDeploymentLoader {
           this.loadFromConfig(data)
           this.loaded = true
           console.log('Custom chain deployments loaded from runtime endpoint')
+          if (data.gatewayUrl) {
+            this.gatewayUrl = data.gatewayUrl
+          }
           return
         } catch (error) {
           console.warn('Failed to fetch custom chains config, using package defaults:', error)

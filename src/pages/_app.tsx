@@ -12,6 +12,8 @@ import { CacheProvider, type EmotionCache } from '@emotion/react'
 import SafeThemeProvider from '@/components/theme/SafeThemeProvider'
 import '@/styles/globals.css'
 import { IS_PRODUCTION, GATEWAY_URL_STAGING, GATEWAY_URL_PRODUCTION } from '@/config/constants'
+import { customDeploymentsReady } from '@/services/contracts/deployments'
+import { customDeploymentLoader } from '@/services/contracts/custom-deployment-loader'
 import { makeStore, useHydrateStore } from '@/store'
 import PageLayout from '@/components/common/PageLayout'
 import useLoadableStores from '@/hooks/useLoadableStores'
@@ -43,12 +45,24 @@ import Recovery from '@/features/recovery/components/Recovery'
 import WalletProvider from '@/components/common/WalletProvider'
 import CounterfactualHooks from '@/features/counterfactual/CounterfactualHooks'
 
-const GATEWAY_URL = IS_PRODUCTION || cgwDebugStorage.get() ? GATEWAY_URL_PRODUCTION : GATEWAY_URL_STAGING
+const GATEWAY_URL_DEFAULT = IS_PRODUCTION || cgwDebugStorage.get() ? GATEWAY_URL_PRODUCTION : GATEWAY_URL_STAGING
+
+// Set the default immediately so any synchronous SDK calls have a valid URL.
+// The custom-chains loader may override this once it finishes fetching.
+setGatewayBaseUrl(GATEWAY_URL_DEFAULT)
+
+// Override with runtime gateway URL from custom-chains.json if provided.
+if (typeof window !== 'undefined') {
+  customDeploymentsReady.then(() => {
+    if (customDeploymentLoader.gatewayUrl) {
+      setGatewayBaseUrl(customDeploymentLoader.gatewayUrl)
+    }
+  })
+}
 
 const reduxStore = makeStore()
 
 const InitApp = (): null => {
-  setGatewayBaseUrl(GATEWAY_URL)
   useHydrateStore(reduxStore)
   useAdjustUrl()
   useGtm()
@@ -108,7 +122,7 @@ const WebCoreApp = ({
     <Provider store={reduxStore}>
       <Head>
         <title key="default-title">{'Safe{Wallet}'}</title>
-        <MetaTags prefetchUrl={GATEWAY_URL} />
+        <MetaTags prefetchUrl={GATEWAY_URL_DEFAULT} />
       </Head>
 
       <CacheProvider value={emotionCache}>

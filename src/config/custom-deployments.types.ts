@@ -50,5 +50,7 @@ export interface CustomDeploymentsConfig {
   version: string
   /** Custom chain configurations */
   chains: CustomChainConfig[]
+  /** Optional: runtime gateway (CGW) base URL — overrides the build-time constant */
+  gatewayUrl?: string
 }
 
