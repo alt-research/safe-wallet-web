@@ -138,7 +138,7 @@ class CustomDeploymentLoader {
    */
   private loadFromConfig(config: CustomDeploymentsConfig): void {
     const chain = config.chain
-    if (!chain || !chain.chainId || !chain.contracts) {
+    if (!chain || !chain.chainId) {
       console.warn('Invalid custom deployments config: missing or invalid chain entry')
       return
     }
@@ -162,7 +162,7 @@ class CustomDeploymentLoader {
     }
 
     // Get the version-specific contracts
-    const versionContracts = chain.contracts[version as '1.3.0' | '1.4.1']
+    const versionContracts = chain.contracts?.[version as '1.3.0' | '1.4.1']
     if (!versionContracts) {
       return undefined
     }

@@ -34,16 +34,14 @@ export const _tryDeploymentVersions = (
 
   // Unsupported Safe version — assume latest as fallback
   if (version === null) {
-    return getDeployment({
-      version: LATEST_SAFE_VERSION,
-      network,
-    })
+    return (
+      getDeployment({ version: LATEST_SAFE_VERSION, network }) ??
+      getDeployment({ version: LATEST_SAFE_VERSION })
+    )
   }
 
-  return getDeployment({
-    version,
-    network,
-  })
+  // Fall back to default addresses (deterministic deployer) if chain isn't in the registry
+  return getDeployment({ version, network }) ?? getDeployment({ version })
 }
 
 export const _isLegacy = (safeVersion: SafeInfo['version']): boolean => {

@@ -41,8 +41,8 @@ export interface CustomChainConfig {
   chainId: string
   /** Optional: Chain name for documentation */
   name?: string
-  /** Contract deployments by version */
-  contracts: CustomChainContracts
+  /** Optional: contract deployments by version — only needed for non-standard addresses */
+  contracts?: CustomChainContracts
 }
 
 export interface CustomDeploymentsConfig {
