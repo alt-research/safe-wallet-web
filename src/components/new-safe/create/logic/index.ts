@@ -23,6 +23,7 @@ import { predictSafeAddress, SafeFactory } from '@safe-global/protocol-kit'
 import type Safe from '@safe-global/protocol-kit'
 import type { DeploySafeProps } from '@safe-global/protocol-kit'
 import { createEthersAdapter, isValidSafeVersion } from '@/hooks/coreSDK/safeCoreSDK'
+import { customDeploymentLoader } from '@/services/contracts/custom-deployment-loader'
 
 import { backOff } from 'exponential-backoff'
 import { LATEST_SAFE_VERSION } from '@/config/constants'
@@ -90,14 +91,32 @@ export const computeNewSafeAddress = async (
 ): Promise<string> => {
   const ethAdapter = await createEthersAdapter(ethersProvider)
 
+  const safeVersion = LATEST_SAFE_VERSION as SafeVersion
+  const proxyFactoryDeployment = customDeploymentLoader.getDeployment(chainId, 'SafeProxyFactory', safeVersion)
+  const fallbackHandlerDeployment = customDeploymentLoader.getDeployment(
+    chainId,
+    'CompatibilityFallbackHandler',
+    safeVersion,
+  )
+  const safeDeployment = customDeploymentLoader.getDeployment(chainId, 'SafeL2', safeVersion)
+  const customContracts =
+    proxyFactoryDeployment && fallbackHandlerDeployment && safeDeployment
+      ? {
+          safeProxyFactoryAddress: proxyFactoryDeployment.defaultAddress,
+          fallbackHandlerAddress: fallbackHandlerDeployment.defaultAddress,
+          safeSingletonAddress: safeDeployment.defaultAddress,
+        }
+      : undefined
+
   return predictSafeAddress({
     ethAdapter,
     chainId: BigInt(chainId),
     safeAccountConfig: props.safeAccountConfig,
     safeDeploymentConfig: {
       saltNonce: props.saltNonce,
-      safeVersion: LATEST_SAFE_VERSION as SafeVersion,
+      safeVersion,
     },
+    customContracts,
   })
 }
 
