@@ -214,21 +214,27 @@ export const getContractNetworks = (chainId: string, safeVersion: string) => {
   const getAddr = (name: string, getDefault: () => string | undefined) =>
     customDeploymentLoader.getDeployment(chainId, name, v)?.defaultAddress ?? getDefault()
 
-  return {
-    [chainId]: {
-      safeSingletonAddress: getAddr('SafeL2', () => _getDefaultAddr(getSafeL2SingletonDeployment, v)),
-      safeProxyFactoryAddress: getAddr('SafeProxyFactory', () => _getDefaultAddr(getProxyFactoryDeployment, v)),
-      multiSendAddress: getAddr('MultiSend', () => _getDefaultAddr(getMultiSendDeployment, v)),
-      multiSendCallOnlyAddress: getAddr('MultiSendCallOnly', () => _getDefaultAddr(getMultiSendCallOnlyDeployment, v)),
-      fallbackHandlerAddress: getAddr(
-        'CompatibilityFallbackHandler',
-        () => _getDefaultAddr(getFallbackHandlerDeployment, v),
-      ),
-      signMessageLibAddress: getAddr('SignMessageLib', () => _getDefaultAddr(getSignMessageLibDeployment, v)),
-      createCallAddress: getAddr('CreateCall', () => _getDefaultAddr(getCreateCallDeployment, v)),
-      simulateTxAccessorAddress:
-        customDeploymentLoader.getDeployment(chainId, 'SimulateTxAccessor', v)?.defaultAddress ??
-        '0x0000000000000000000000000000000000000000',
-    },
+  const addresses = {
+    safeSingletonAddress: getAddr('SafeL2', () => _getDefaultAddr(getSafeL2SingletonDeployment, v)),
+    safeProxyFactoryAddress: getAddr('SafeProxyFactory', () => _getDefaultAddr(getProxyFactoryDeployment, v)),
+    multiSendAddress: getAddr('MultiSend', () => _getDefaultAddr(getMultiSendDeployment, v)),
+    multiSendCallOnlyAddress: getAddr('MultiSendCallOnly', () => _getDefaultAddr(getMultiSendCallOnlyDeployment, v)),
+    fallbackHandlerAddress: getAddr(
+      'CompatibilityFallbackHandler',
+      () => _getDefaultAddr(getFallbackHandlerDeployment, v),
+    ),
+    signMessageLibAddress: getAddr('SignMessageLib', () => _getDefaultAddr(getSignMessageLibDeployment, v)),
+    createCallAddress: getAddr('CreateCall', () => _getDefaultAddr(getCreateCallDeployment, v)),
+    simulateTxAccessorAddress:
+      customDeploymentLoader.getDeployment(chainId, 'SimulateTxAccessor', v)?.defaultAddress ??
+      '0x0000000000000000000000000000000000000000',
   }
+
+  // ContractNetworksConfig requires string (not string | undefined) for each field
+  const defined = Object.fromEntries(Object.entries(addresses).filter(([, v]) => v !== undefined)) as Record<
+    string,
+    string
+  >
+
+  return { [chainId]: defined }
 }

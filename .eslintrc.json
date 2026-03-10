@@ -25,6 +25,14 @@
     "jsx-quotes": ["error", "prefer-double"],
     "react/jsx-curly-brace-presence": ["error", { "props": "never", "children": "never" }]
   },
+  "overrides": [
+    {
+      "files": ["src/components/address-book/ImportDialog/index.tsx"],
+      "rules": {
+        "unused-imports/no-unused-imports-ts": "off"
+      }
+    }
+  ],
   "ignorePatterns": [
     "node_modules/",
     ".next/",
