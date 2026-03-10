@@ -11,7 +11,7 @@ import useSafeInfo from '../useSafeInfo'
 import { Errors, logError } from '@/services/exceptions'
 import { POLLING_INTERVAL } from '@/config/constants'
 import { selectAddedSafes } from '@/store/addedSafesSlice'
-import { defaultSafeInfo } from '@/store/safeInfoSlice'
+import { defaultSafeInfo, type ExtendedSafeInfo } from '@/store/safeInfoSlice'
 
 export const useLoadSafeInfo = (): AsyncResult<SafeInfo> => {
   const address = useSafeAddress()
@@ -51,7 +51,7 @@ export const useLoadSafeInfo = (): AsyncResult<SafeInfo> => {
 
   // Fall back to locally stored safe data when CGW is unavailable
   const addedSafeData = addedSafesOnChain?.[address]
-  const fallbackSafeInfo: SafeInfo | undefined =
+  const fallbackSafeInfo: ExtendedSafeInfo | undefined =
     !data && error && addedSafeData
       ? {
           ...defaultSafeInfo,

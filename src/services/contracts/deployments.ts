@@ -34,10 +34,7 @@ export const _tryDeploymentVersions = (
 
   // Unsupported Safe version — assume latest as fallback
   if (version === null) {
-    return (
-      getDeployment({ version: LATEST_SAFE_VERSION, network }) ??
-      getDeployment({ version: LATEST_SAFE_VERSION })
-    )
+    return getDeployment({ version: LATEST_SAFE_VERSION, network }) ?? getDeployment({ version: LATEST_SAFE_VERSION })
   }
 
   // Fall back to default addresses (deterministic deployer) if chain isn't in the registry

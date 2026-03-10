@@ -94,7 +94,16 @@ const PaginatedSafeList = ({ safes, title, action, noSafesMessage, onLinkClick }
       {safes.length > 0 ? (
         <AllSafeListPages safes={safes} onLinkClick={onLinkClick} />
       ) : (
-        <Typography variant="body2" component="div" color="text.secondary" textAlign="center" py={3} mx="auto" width={250} suppressHydrationWarning>
+        <Typography
+          variant="body2"
+          component="div"
+          color="text.secondary"
+          textAlign="center"
+          py={3}
+          mx="auto"
+          width={250}
+          suppressHydrationWarning
+        >
           {noSafesMessage}
         </Typography>
       )}

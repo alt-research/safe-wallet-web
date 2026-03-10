@@ -8,7 +8,11 @@ import {
   getSignMessageLibDeployment,
   getCreateCallDeployment,
 } from '@safe-global/safe-deployments'
-import type { CustomDeploymentsConfig, CustomChainConfig, CustomContractDeployment } from '@/config/custom-deployments.types'
+import type {
+  CustomDeploymentsConfig,
+  CustomChainConfig,
+  CustomContractDeployment,
+} from '@/config/custom-deployments.types'
 
 /**
  * Custom deployment loader for Safe contracts
@@ -56,7 +60,7 @@ class CustomDeploymentLoader {
           const response = await fetch(`/config/custom-chain.json${cacheBuster}`, {
             cache: 'no-cache',
             headers: {
-              'Accept': 'application/json',
+              Accept: 'application/json',
             },
           })
 
@@ -118,7 +122,7 @@ class CustomDeploymentLoader {
     // Type assertion: Uint8Array is a valid BufferSource but TS types are strict
     const hashBuffer = await crypto.subtle.digest('SHA-256', dataBuffer as BufferSource)
     const hashArray = Array.from(new Uint8Array(hashBuffer))
-    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('')
+    return hashArray.map((b) => b.toString(16).padStart(2, '0')).join('')
   }
 
   /**
@@ -151,11 +155,7 @@ class CustomDeploymentLoader {
    * Get a custom deployment for a specific chain and contract
    * Returns undefined if no custom deployment is configured
    */
-  getDeployment(
-    chainId: string,
-    contractName: string,
-    version: string,
-  ): SingletonDeployment | undefined {
+  getDeployment(chainId: string, contractName: string, version: string): SingletonDeployment | undefined {
     const chain = this.customChains.get(chainId)
     if (!chain) {
       return undefined
@@ -186,8 +186,8 @@ class CustomDeploymentLoader {
     const result = {
       defaultAddress: deployment.address,
       released: true,
-      contractName: contractName,
-      version: version,
+      contractName,
+      version,
       networkAddresses: {
         [chainId]: deployment.address,
       },
@@ -260,30 +260,30 @@ class CustomDeploymentLoader {
     // For v1.4.1, the names are different
     if (version === '1.4.1') {
       const nameMap: Record<string, string> = {
-        'CompatibilityFallbackHandler': 'compatibilityFallbackHandler',
-        'CreateCall': 'createCall',
-        'Safe': 'safe',
-        'SafeL2': 'safeL2',
-        'MultiSend': 'multiSend',
-        'MultiSendCallOnly': 'multiSendCallOnly',
-        'SafeProxyFactory': 'safeProxyFactory',
-        'SignMessageLib': 'signMessageLib',
-        'SimulateTxAccessor': 'simulateTxAccessor',
+        CompatibilityFallbackHandler: 'compatibilityFallbackHandler',
+        CreateCall: 'createCall',
+        Safe: 'safe',
+        SafeL2: 'safeL2',
+        MultiSend: 'multiSend',
+        MultiSendCallOnly: 'multiSendCallOnly',
+        SafeProxyFactory: 'safeProxyFactory',
+        SignMessageLib: 'signMessageLib',
+        SimulateTxAccessor: 'simulateTxAccessor',
       }
       return nameMap[contractName] || contractName.toLowerCase()
     }
 
     // For v1.3.0
     const nameMap: Record<string, string> = {
-      'CompatibilityFallbackHandler': 'compatibilityFallbackHandler',
-      'CreateCall': 'createCall',
-      'GnosisSafe': 'gnosisSafe',
-      'GnosisSafeL2': 'gnosisSafeL2',
-      'MultiSend': 'multiSend',
-      'MultiSendCallOnly': 'multiSendCallOnly',
-      'ProxyFactory': 'proxyFactory',
-      'SignMessageLib': 'signMessageLib',
-      'SimulateTxAccessor': 'simulateTxAccessor',
+      CompatibilityFallbackHandler: 'compatibilityFallbackHandler',
+      CreateCall: 'createCall',
+      GnosisSafe: 'gnosisSafe',
+      GnosisSafeL2: 'gnosisSafeL2',
+      MultiSend: 'multiSend',
+      MultiSendCallOnly: 'multiSendCallOnly',
+      ProxyFactory: 'proxyFactory',
+      SignMessageLib: 'signMessageLib',
+      SimulateTxAccessor: 'simulateTxAccessor',
     }
     return nameMap[contractName] || contractName.toLowerCase()
   }

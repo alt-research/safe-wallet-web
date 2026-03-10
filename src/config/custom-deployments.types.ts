@@ -53,4 +53,3 @@ export interface CustomDeploymentsConfig {
   /** Optional: runtime gateway (CGW) base URL — overrides the build-time constant */
   gatewayUrl?: string
 }
-

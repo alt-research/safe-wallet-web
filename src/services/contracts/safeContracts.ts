@@ -23,6 +23,8 @@ import type { GetContractProps, SafeVersion } from '@safe-global/safe-core-sdk-t
 import { assertValidSafeVersion, createEthersAdapter, createReadOnlyEthersAdapter } from '@/hooks/coreSDK/safeCoreSDK'
 import type { BrowserProvider } from 'ethers'
 import type { EthersAdapter, SafeContractEthers, SignMessageLibEthersContract } from '@safe-global/protocol-kit'
+import type { ContractNetworksConfig } from '@safe-global/protocol-kit'
+import type { ContractNetworkConfig } from '@safe-global/protocol-kit/dist/src/types'
 import semver from 'semver'
 
 import type CompatibilityFallbackHandlerEthersContract from '@safe-global/protocol-kit/dist/src/adapters/ethers/contracts/CompatibilityFallbackHandler/CompatibilityFallbackHandlerEthersContract'
@@ -219,9 +221,8 @@ export const getContractNetworks = (chainId: string, safeVersion: string) => {
     safeProxyFactoryAddress: getAddr('SafeProxyFactory', () => _getDefaultAddr(getProxyFactoryDeployment, v)),
     multiSendAddress: getAddr('MultiSend', () => _getDefaultAddr(getMultiSendDeployment, v)),
     multiSendCallOnlyAddress: getAddr('MultiSendCallOnly', () => _getDefaultAddr(getMultiSendCallOnlyDeployment, v)),
-    fallbackHandlerAddress: getAddr(
-      'CompatibilityFallbackHandler',
-      () => _getDefaultAddr(getFallbackHandlerDeployment, v),
+    fallbackHandlerAddress: getAddr('CompatibilityFallbackHandler', () =>
+      _getDefaultAddr(getFallbackHandlerDeployment, v),
     ),
     signMessageLibAddress: getAddr('SignMessageLib', () => _getDefaultAddr(getSignMessageLibDeployment, v)),
     createCallAddress: getAddr('CreateCall', () => _getDefaultAddr(getCreateCallDeployment, v)),
@@ -231,10 +232,9 @@ export const getContractNetworks = (chainId: string, safeVersion: string) => {
   }
 
   // ContractNetworksConfig requires string (not string | undefined) for each field
-  const defined = Object.fromEntries(Object.entries(addresses).filter(([, v]) => v !== undefined)) as Record<
-    string,
-    string
-  >
+  const defined = Object.fromEntries(
+    Object.entries(addresses).filter(([, val]) => val !== undefined),
+  ) as unknown as ContractNetworkConfig
 
-  return { [chainId]: defined }
+  return { [chainId]: defined } as ContractNetworksConfig
 }

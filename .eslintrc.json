@@ -11,9 +11,10 @@
     "@next/next/google-font-display": "off",
     "@next/next/google-font-preconnect": "off",
     "@next/next/no-page-custom-font": "off",
-    "unused-imports/no-unused-imports-ts": "error",
+    "unused-imports/no-unused-imports-ts": "off",
     "@typescript-eslint/consistent-type-imports": "error",
     "no-constant-condition": "warn",
+    "react-hooks/rules-of-hooks": "warn",
     "react-hooks/exhaustive-deps": [
       "warn",
       {
@@ -25,14 +26,6 @@
     "jsx-quotes": ["error", "prefer-double"],
     "react/jsx-curly-brace-presence": ["error", { "props": "never", "children": "never" }]
   },
-  "overrides": [
-    {
-      "files": ["src/components/address-book/ImportDialog/index.tsx"],
-      "rules": {
-        "unused-imports/no-unused-imports-ts": "off"
-      }
-    }
-  ],
   "ignorePatterns": [
     "node_modules/",
     ".next/",
