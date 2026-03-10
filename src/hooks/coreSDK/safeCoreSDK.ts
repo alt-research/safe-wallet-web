@@ -2,6 +2,7 @@ import chains from '@/config/chains'
 import type { UndeployedSafe } from '@/features/counterfactual/store/undeployedSafesSlice'
 import { getWeb3ReadOnly } from '@/hooks/wallets/web3'
 import { getSafeSingletonDeployment, getSafeL2SingletonDeployment } from '@safe-global/safe-deployments'
+import { getContractNetworks } from '@/services/contracts/safeContracts'
 import ExternalStore from '@/services/ExternalStore'
 import { Gnosis_safe__factory } from '@/types/contracts'
 import { invariant } from '@/utils/helpers'
@@ -74,15 +75,24 @@ export const initSafeSDK = async ({
   const safeVersion = version ?? (await Gnosis_safe__factory.connect(address, provider).VERSION())
   let isL1SafeSingleton = chainId === chains.eth
 
+  const contractNetworks = getContractNetworks(chainId, safeVersion)
+
   // If it is an official deployment we should still initiate the safeSDK
   if (!isValidMasterCopy(implementationVersionState)) {
     const masterCopy = implementation
 
+    // Check against network-specific addresses first, then fall back to default addresses
     const safeL1Deployment = getSafeSingletonDeployment({ network: chainId, version: safeVersion })
     const safeL2Deployment = getSafeL2SingletonDeployment({ network: chainId, version: safeVersion })
 
-    isL1SafeSingleton = masterCopy === safeL1Deployment?.networkAddresses[chainId]
-    const isL2SafeMasterCopy = masterCopy === safeL2Deployment?.networkAddresses[chainId]
+    const l1Address = safeL1Deployment?.networkAddresses[chainId] ?? safeL1Deployment?.defaultAddress
+    const l2Address = safeL2Deployment?.networkAddresses[chainId] ?? safeL2Deployment?.defaultAddress
+    // Also check against our contractNetworks singleton address (covers custom chains)
+    const contractNetworkSingleton = contractNetworks[chainId]?.safeSingletonAddress
+
+    isL1SafeSingleton = masterCopy === l1Address
+    const isL2SafeMasterCopy =
+      masterCopy === l2Address || masterCopy?.toLowerCase() === contractNetworkSingleton?.toLowerCase()
 
     // Unknown deployment, which we do not want to support
     if (!isL1SafeSingleton && !isL2SafeMasterCopy) {
@@ -98,6 +108,7 @@ export const initSafeSDK = async ({
     return Safe.create({
       ethAdapter: createReadOnlyEthersAdapter(provider),
       isL1SafeSingleton,
+      contractNetworks,
       predictedSafe: undeployedSafe.props,
     })
   }
@@ -106,6 +117,7 @@ export const initSafeSDK = async ({
     ethAdapter: createReadOnlyEthersAdapter(provider),
     safeAddress: address,
     isL1SafeSingleton,
+    contractNetworks,
   })
 }
 

@@ -29,7 +29,7 @@ export const getRpcServiceUrl = (rpcUri: RpcUri): string => {
 export const createWeb3ReadOnly = (chain: ChainInfo, customRpc?: string): JsonRpcProvider | undefined => {
   const url = customRpc || getRpcServiceUrl(chain.rpcUri)
   if (!url) return
-  return new JsonRpcProvider(url, undefined, {
+  return new JsonRpcProvider(url, Number(chain.chainId), {
     staticNetwork: true,
     batchMaxCount: BATCH_MAX_COUNT,
   })
@@ -42,7 +42,7 @@ export const createWeb3 = (walletProvider: Eip1193Provider): BrowserProvider => 
 export const createSafeAppsWeb3Provider = (chain: ChainInfo, customRpc?: string): JsonRpcProvider | undefined => {
   const url = customRpc || formatRpcServiceUrl(chain.rpcUri, SAFE_APPS_INFURA_TOKEN)
   if (!url) return
-  return new JsonRpcProvider(url, undefined, {
+  return new JsonRpcProvider(url, Number(chain.chainId), {
     staticNetwork: true,
     batchMaxCount: BATCH_MAX_COUNT,
   })

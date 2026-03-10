@@ -23,7 +23,7 @@ import { predictSafeAddress, SafeFactory } from '@safe-global/protocol-kit'
 import type Safe from '@safe-global/protocol-kit'
 import type { DeploySafeProps } from '@safe-global/protocol-kit'
 import { createEthersAdapter, isValidSafeVersion } from '@/hooks/coreSDK/safeCoreSDK'
-import { customDeploymentLoader } from '@/services/contracts/custom-deployment-loader'
+import { getContractNetworks } from '@/services/contracts/safeContracts'
 
 import { backOff } from 'exponential-backoff'
 import { LATEST_SAFE_VERSION } from '@/config/constants'
@@ -65,7 +65,9 @@ const getSafeFactory = async (
     throw new Error('Invalid Safe version')
   }
   const ethAdapter = await createEthersAdapter(ethersProvider)
-  const safeFactory = await SafeFactory.create({ ethAdapter, safeVersion })
+  const chainId = (await ethersProvider.getNetwork()).chainId.toString()
+  const contractNetworks = getContractNetworks(chainId, safeVersion)
+  const safeFactory = await SafeFactory.create({ ethAdapter, safeVersion, contractNetworks })
   return safeFactory
 }
 
@@ -92,21 +94,7 @@ export const computeNewSafeAddress = async (
   const ethAdapter = await createEthersAdapter(ethersProvider)
 
   const safeVersion = LATEST_SAFE_VERSION as SafeVersion
-  const proxyFactoryDeployment = customDeploymentLoader.getDeployment(chainId, 'SafeProxyFactory', safeVersion)
-  const fallbackHandlerDeployment = customDeploymentLoader.getDeployment(
-    chainId,
-    'CompatibilityFallbackHandler',
-    safeVersion,
-  )
-  const safeDeployment = customDeploymentLoader.getDeployment(chainId, 'SafeL2', safeVersion)
-  const customContracts =
-    proxyFactoryDeployment && fallbackHandlerDeployment && safeDeployment
-      ? {
-          safeProxyFactoryAddress: proxyFactoryDeployment.defaultAddress,
-          fallbackHandlerAddress: fallbackHandlerDeployment.defaultAddress,
-          safeSingletonAddress: safeDeployment.defaultAddress,
-        }
-      : undefined
+  const customContracts = getContractNetworks(chainId, safeVersion)[chainId]
 
   return predictSafeAddress({
     ethAdapter,
@@ -208,6 +196,9 @@ export const pollSafeInfo = async (chainId: string, safeAddress: string): Promis
     numOfAttempts: 19,
     retry: (e) => {
       console.info('waiting for client-gateway to provide safe information', e)
+      // Only retry on "not found yet" (404) — stop immediately on server errors (5xx)
+      const status = (e as { response?: { status?: number } }).response?.status
+      if (status !== undefined && status !== 404) return false
       return true
     },
   })

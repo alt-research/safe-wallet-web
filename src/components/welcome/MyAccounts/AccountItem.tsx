@@ -28,10 +28,11 @@ import QueueActions from './QueueActions'
 type AccountItemProps = {
   safeItem: SafeItem
   safeOverview?: SafeOverview
+  overviewLoading?: boolean
   onLinkClick?: () => void
 }
 
-const AccountItem = ({ onLinkClick, safeItem, safeOverview }: AccountItemProps) => {
+const AccountItem = ({ onLinkClick, safeItem, safeOverview, overviewLoading }: AccountItemProps) => {
   const { chainId, address } = safeItem
   const chain = useAppSelector((state) => selectChainById(state, chainId))
   const undeployedSafe = useAppSelector((state) => selectUndeployedSafe(state, chainId, address))
@@ -74,7 +75,7 @@ const AccountItem = ({ onLinkClick, safeItem, safeOverview }: AccountItemProps) 
       className={classnames(css.listItem, { [css.currentListItem]: isCurrentSafe })}
     >
       <Track {...OVERVIEW_EVENTS.OPEN_SAFE} label={trackingLabel}>
-        <Link onClick={onLinkClick} href={href} className={css.safeLink}>
+        <Link onClick={onLinkClick} href={href} className={css.safeLink} style={!safeOverview && !overviewLoading ? { gridTemplateColumns: 'auto 3fr 0 auto' } : undefined}>
           <Box pr={2.5}>
             <SafeIcon address={address} owners={safeOverview?.owners.length} threshold={safeOverview?.threshold} />
           </Box>
@@ -110,7 +111,7 @@ const AccountItem = ({ onLinkClick, safeItem, safeOverview }: AccountItemProps) 
           </Typography>
 
           <Typography variant="body2" fontWeight="bold" textAlign="right" pr={5}>
-            {safeOverview ? <FiatValue value={safeOverview.fiatTotal} /> : <Skeleton variant="text" />}
+            {safeOverview ? <FiatValue value={safeOverview.fiatTotal} /> : overviewLoading ? <Skeleton variant="text" /> : null}
           </Typography>
 
           <ChainIndicator chainId={chainId} responsive />

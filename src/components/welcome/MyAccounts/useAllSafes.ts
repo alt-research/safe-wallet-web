@@ -43,7 +43,9 @@ const useAllSafes = (): SafeItems | undefined => {
   const undeployedSafes = useAppSelector(selectUndeployedSafes)
 
   return useMemo<SafeItems | undefined>(() => {
-    if (walletAddress && (allOwned === undefined || allOwnedLoading)) {
+    // If owned safes are still loading but we already have added safes, don't block on the fetch
+    const hasAdded = !isEmpty(allAdded)
+    if (walletAddress && (allOwned === undefined || allOwnedLoading) && !hasAdded) {
       return undefined
     }
     const chains = uniq(Object.keys(allAdded).concat(Object.keys(allOwned || {})))

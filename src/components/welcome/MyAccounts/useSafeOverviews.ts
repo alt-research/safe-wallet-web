@@ -26,12 +26,18 @@ function useSafeOverviews(safes: Array<SafeParams>): AsyncResult<SafeOverview[]>
   const safesIds = useMemo(() => safes.filter(validateSafeParams).map(makeSafeId), [safes])
 
   const [data, error, isLoading] = useAsync(async () => {
-    return await getSafeOverviews(safesIds, {
-      trusted: true,
-      exclude_spam: excludeSpam,
-      currency,
-      wallet_address: walletAddress,
-    })
+    try {
+      return await getSafeOverviews(safesIds, {
+        trusted: true,
+        exclude_spam: excludeSpam,
+        currency,
+        wallet_address: walletAddress,
+      })
+    } catch {
+      // getSafeOverviews requires CGW v1.29+; older deployments return 404.
+      // Return an empty array so the account list renders without overview data.
+      return []
+    }
   }, [safesIds, excludeSpam, currency, walletAddress])
 
   const cacheKey = safesIds.join()

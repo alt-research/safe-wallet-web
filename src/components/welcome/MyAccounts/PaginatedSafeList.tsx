@@ -23,7 +23,7 @@ type SafeListPageProps = {
 const PAGE_SIZE = 10
 
 const SafeListPage = ({ safes, onLinkClick }: SafeListPageProps) => {
-  const [overviews] = useSafeOverviews(safes)
+  const [overviews, , overviewsLoading] = useSafeOverviews(safes)
 
   const findOverview = (item: SafeItem) => {
     return overviews?.find(
@@ -38,6 +38,7 @@ const SafeListPage = ({ safes, onLinkClick }: SafeListPageProps) => {
           onLinkClick={onLinkClick}
           safeItem={item}
           safeOverview={findOverview(item)}
+          overviewLoading={overviewsLoading}
           key={item.chainId + item.address}
         />
       ))}
@@ -93,7 +94,7 @@ const PaginatedSafeList = ({ safes, title, action, noSafesMessage, onLinkClick }
       {safes.length > 0 ? (
         <AllSafeListPages safes={safes} onLinkClick={onLinkClick} />
       ) : (
-        <Typography variant="body2" color="text.secondary" textAlign="center" py={3} mx="auto" width={250}>
+        <Typography variant="body2" component="div" color="text.secondary" textAlign="center" py={3} mx="auto" width={250} suppressHydrationWarning>
           {noSafesMessage}
         </Typography>
       )}

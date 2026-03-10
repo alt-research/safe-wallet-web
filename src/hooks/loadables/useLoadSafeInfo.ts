@@ -10,6 +10,8 @@ import useIntervalCounter from '../useIntervalCounter'
 import useSafeInfo from '../useSafeInfo'
 import { Errors, logError } from '@/services/exceptions'
 import { POLLING_INTERVAL } from '@/config/constants'
+import { selectAddedSafes } from '@/store/addedSafesSlice'
+import { defaultSafeInfo } from '@/store/safeInfoSlice'
 
 export const useLoadSafeInfo = (): AsyncResult<SafeInfo> => {
   const address = useSafeAddress()
@@ -18,6 +20,7 @@ export const useLoadSafeInfo = (): AsyncResult<SafeInfo> => {
   const { safe } = useSafeInfo()
   const isStoredSafeValid = safe.chainId === chainId && safe.address.value === address
   const undeployedSafe = useAppSelector((state) => selectUndeployedSafe(state, chainId, address))
+  const addedSafesOnChain = useAppSelector((state) => selectAddedSafes(state, chainId))
 
   const [data, error, loading] = useAsync<SafeInfo | undefined>(async () => {
     if (!chainId || !address) return
@@ -46,9 +49,23 @@ export const useLoadSafeInfo = (): AsyncResult<SafeInfo> => {
     }
   }, [error])
 
+  // Fall back to locally stored safe data when CGW is unavailable
+  const addedSafeData = addedSafesOnChain?.[address]
+  const fallbackSafeInfo: SafeInfo | undefined =
+    !data && error && addedSafeData
+      ? {
+          ...defaultSafeInfo,
+          address: { value: address },
+          chainId,
+          owners: addedSafeData.owners,
+          threshold: addedSafeData.threshold,
+          deployed: true,
+        }
+      : undefined
+
   return [
-    // Return stored SafeInfo between polls
-    data ?? (isStoredSafeValid ? safe : data),
+    // Return stored SafeInfo between polls, or fall back to addedSafes data when CGW is down
+    data ?? (isStoredSafeValid ? safe : fallbackSafeInfo),
     error,
     loading,
   ]

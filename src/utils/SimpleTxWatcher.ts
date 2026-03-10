@@ -34,8 +34,14 @@ export class SimpleTxWatcher {
    */
   watchTxHash(txHash: string, walletAddress: string, walletNonce: number, provider: JsonRpcProvider) {
     return new Promise<TransactionReceipt>((resolve, reject) => {
+      let intervalId: ReturnType<typeof setInterval> | undefined
+
       const unsubscribe = () => {
         provider.off('block', checkTx)
+        if (intervalId !== undefined) {
+          clearInterval(intervalId)
+          intervalId = undefined
+        }
       }
 
       let replacedBlockCount = 0
@@ -59,8 +65,10 @@ export class SimpleTxWatcher {
         }
       }
 
-      // Subscribe
+      // Subscribe to block events (fires when new blocks are produced)
       provider.on('block', checkTx)
+      // Also poll on an interval for chains that only produce blocks on-demand
+      intervalId = setInterval(checkTx, 4_000)
       this.unsubFunctions[txHash] = unsubscribe
     })
   }

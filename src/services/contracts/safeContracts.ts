@@ -4,7 +4,18 @@ import {
   getProxyFactoryContractDeployment,
   getSafeContractDeployment,
   getSignMessageLibContractDeployment,
+  getCreateCallContractDeployment,
 } from './deployments'
+import {
+  getSafeL2SingletonDeployment,
+  getProxyFactoryDeployment,
+  getMultiSendDeployment,
+  getMultiSendCallOnlyDeployment,
+  getFallbackHandlerDeployment,
+  getSignMessageLibDeployment,
+  getCreateCallDeployment,
+} from '@safe-global/safe-deployments'
+import { customDeploymentLoader } from './custom-deployment-loader'
 import { LATEST_SAFE_VERSION } from '@/config/constants'
 import { ImplementationVersionState } from '@safe-global/safe-gateway-typescript-sdk'
 import type { ChainInfo, SafeInfo } from '@safe-global/safe-gateway-typescript-sdk'
@@ -61,11 +72,19 @@ export const getCurrentGnosisSafeContract = async (
 
 export const getReadOnlyGnosisSafeContract = async (chain: ChainInfo, safeVersion: string = LATEST_SAFE_VERSION) => {
   const ethAdapter = createReadOnlyEthersAdapter()
+  const deployment = getSafeContractDeployment(chain, safeVersion)
 
-  return ethAdapter.getSafeContract({
-    singletonDeployment: getSafeContractDeployment(chain, safeVersion),
-    ..._getValidatedGetContractProps(safeVersion),
-  })
+  const config: any = deployment?.defaultAddress
+    ? {
+        customContractAddress: deployment.defaultAddress,
+        ..._getValidatedGetContractProps(safeVersion),
+      }
+    : {
+        singletonDeployment: deployment,
+        ..._getValidatedGetContractProps(safeVersion),
+      }
+
+  return ethAdapter.getSafeContract(config)
 }
 
 // MultiSend
@@ -170,9 +189,46 @@ export const getReadOnlySignMessageLibContract = async (
   safeVersion: SafeInfo['version'],
 ): Promise<SignMessageLibEthersContract> => {
   const ethAdapter = createReadOnlyEthersAdapter()
+  const deployment = getSignMessageLibContractDeployment(chainId, safeVersion)
 
-  return ethAdapter.getSignMessageLibContract({
-    singletonDeployment: getSignMessageLibContractDeployment(chainId, safeVersion),
-    ..._getValidatedGetContractProps(safeVersion),
-  })
+  const config: any = deployment?.defaultAddress
+    ? {
+        customContractAddress: deployment.defaultAddress,
+        ..._getValidatedGetContractProps(safeVersion),
+      }
+    : {
+        singletonDeployment: deployment,
+        ..._getValidatedGetContractProps(safeVersion),
+      }
+
+  return ethAdapter.getSignMessageLibContract(config)
+}
+
+const _getDefaultAddr = (
+  getDeployment: (filter: { version: string }) => { defaultAddress?: string } | undefined,
+  version: string,
+) => getDeployment({ version })?.defaultAddress
+
+export const getContractNetworks = (chainId: string, safeVersion: string) => {
+  const v = safeVersion
+  const getAddr = (name: string, getDefault: () => string | undefined) =>
+    customDeploymentLoader.getDeployment(chainId, name, v)?.defaultAddress ?? getDefault()
+
+  return {
+    [chainId]: {
+      safeSingletonAddress: getAddr('SafeL2', () => _getDefaultAddr(getSafeL2SingletonDeployment, v)),
+      safeProxyFactoryAddress: getAddr('SafeProxyFactory', () => _getDefaultAddr(getProxyFactoryDeployment, v)),
+      multiSendAddress: getAddr('MultiSend', () => _getDefaultAddr(getMultiSendDeployment, v)),
+      multiSendCallOnlyAddress: getAddr('MultiSendCallOnly', () => _getDefaultAddr(getMultiSendCallOnlyDeployment, v)),
+      fallbackHandlerAddress: getAddr(
+        'CompatibilityFallbackHandler',
+        () => _getDefaultAddr(getFallbackHandlerDeployment, v),
+      ),
+      signMessageLibAddress: getAddr('SignMessageLib', () => _getDefaultAddr(getSignMessageLibDeployment, v)),
+      createCallAddress: getAddr('CreateCall', () => _getDefaultAddr(getCreateCallDeployment, v)),
+      simulateTxAccessorAddress:
+        customDeploymentLoader.getDeployment(chainId, 'SimulateTxAccessor', v)?.defaultAddress ??
+        '0x0000000000000000000000000000000000000000',
+    },
+  }
 }
